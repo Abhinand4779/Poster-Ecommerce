@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | Klaiz Designs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=3">
+    <style>
+        .checkout-page {
+            padding: 60px 0;
+            background: #0a0a0a;
+            min-height: 100vh;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2.5rem;
+        }
+
+        .checkout-section {
+            background: #0f0f0f;
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid #1a1a1a;
+            margin-bottom: 2rem;
+        }
+
+        .checkout-section h2 {
+            margin-bottom: 2rem;
+            font-family: 'Outfit';
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #fff;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #777;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        /* Order Summary */
+        .order-summary-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-card {
+            background: #0f0f0f;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .summary-items-list {
+            margin-bottom: 2rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Custom Scrollbar */
+        .summary-items-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .summary-items-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .summary-items-list::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+
+        .checkout-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .checkout-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .checkout-item img {
+            width: 50px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #222;
+        }
+
+        .checkout-item-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+            color: #fff;
+        }
+
+        .checkout-item-info p {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .total-box {
+            background: #161616;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .total-line.grand-total {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #222;
+            color: var(--accent-color);
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+
+        .btn-complete {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: 0.3s;
+        }
+
+        .btn-complete:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(46, 167, 215, 0.3);
+        }
+
+        @media (max-width: 992px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links" style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item custom">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="checkout-page">
+        <div class="container">
+            <div class="checkout-grid">
+                <!-- LEFT: Information -->
+                <div class="checkout-main">
+                    <div class="checkout-section">
+                        <h2><i data-lucide="truck"></i> Shipping Information</h2>
+                        <form id="checkout-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" id="fname" class="form-control" required placeholder="abc">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" id="lname" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="email" class="form-control" required
+                                    placeholder="abc@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Street Address</label>
+                                <input type="text" id="address" class="form-control"
+                                    placeholder="House No, Street, Landmark" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" id="city" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Pincode</label>
+                                    <input type="text" id="pincode" class="form-control" required>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="checkout-section">
+                        <h2><i data-lucide="credit-card"></i> Payment Method</h2>
+                        <p style="color: #666; margin-bottom: 1rem;">Choose your preferred payment option:</p>
+                        <div class="form-group"
+                            style="padding: 1rem; background: #1a1a1a; border-radius: 10px; border: 1px solid #333;">
+                            <label
+                                style="display: flex; align-items: center; gap: 10px; color: #fff; cursor: pointer; text-transform: none; letter-spacing: 0;">
+                                <input type="radio" name="payment" value="upi" checked>
+                                PhonePe / Google Pay / UPI
+                            </label>
+                        </div>
+                        <div class="form-group"
+                            style="padding: 1rem; background: #1a1a1a; border-radius: 10px; border: 1px solid #333;">
+                            <label
+                                style="display: flex; align-items: center; gap: 10px; color: #fff; cursor: pointer; text-transform: none; letter-spacing: 0;">
+                                <input type="radio" name="payment" value="cod">
+                                Cash on Delivery (COD)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Summary -->
+                <aside class="order-summary-sidebar">
+                    <div class="summary-card">
+                        <h3 style="font-family: 'Outfit'; color: #fff; margin-bottom: 1.5rem;">Order Summary</h3>
+
+                        <div class="summary-items-list" id="checkout-items">
+                            <!-- Items will be injected here -->
+                        </div>
+
+                        <div class="total-box">
+                            <div class="total-line">
+                                <span>Subtotal</span>
+                                <span id="subtotal">₹0</span>
+                            </div>
+                            <div class="total-line">
+                                <span>Shipping</span>
+                                <span id="shipping">₹0</span>
+                            </div>
+                            <div class="total-line grand-total">
+                                <span>Total</span>
+                                <span id="total-amount">₹0</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-complete" id="submit-btn">COMPLETE PURCHASE</button>
+
+                        <p style="text-align: center; color: #555; font-size: 0.75rem; margin-top: 1.5rem;">
+                            By clicking "Complete Purchase", you agree to our terms and conditions.
+                        </p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="cms.js"></script>
+    <script>
+        lucide.createIcons();
+
+        function loadCheckout() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const user = JSON.parse(localStorage.getItem('klaiz_user') || 'null');
+            const itemsContainer = document.getElementById('checkout-items');
+
+            if (cart.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+
+            // Pre-fill user data
+            if (user) {
+                if (user.name) {
+                    const names = user.name.split(' ');
+                    document.getElementById('fname').value = names[0] || '';
+                    document.getElementById('lname').value = names.slice(1).join(' ') || '';
+                }
+                document.getElementById('email').value = user.email || '';
+            }
+
+            let subtotal = 0;
+            itemsContainer.innerHTML = cart.map(item => {
+                const total = item.price * item.quantity;
+                subtotal += total;
+                return `
+                    <div class="checkout-item">
+                        <img src="${item.image}" alt="">
+                        <div class="checkout-item-info">
+                            <h4>${item.name}</h4>
+                            <p>Size: ${item.size} | Qty: ${item.quantity}</p>
+                            <p style="color: #fff; font-weight: 700; margin-top: 2px;">₹${total}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const shipping = subtotal > 499 ? 0 : 50;
+            const finalTotal = subtotal + shipping;
+
+            document.getElementById('subtotal').textContent = `₹${subtotal}`;
+            document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : `₹${shipping}`;
+            document.getElementById('total-amount').textContent = `₹${finalTotal}`;
+
+            return finalTotal;
+        }
+
+        const finalAmount = loadCheckout();
+
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            const fname = document.getElementById('fname').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const pincode = document.getElementById('pincode').value;
+
+            if (!fname || !address || !city || !pincode) {
+                alert("Please fill in all shipping details.");
+                return;
+            }
+
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+            if (paymentMethod === 'cod') {
+                processOrder("COD_SUCCESS");
+            } else {
+                startRazorpay();
+            }
+        });
+
+        function startRazorpay() {
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.textContent = "INITIALIZING PAYMENT...";
+
+            // Check if Razorpay script is loaded
+            if (typeof Razorpay === 'undefined') {
+                alert("Razorpay SDK could not be loaded. Please check your internet connection.");
+                btn.disabled = false;
+                btn.textContent = "COMPLETE PURCHASE";
+                return;
+            }
+
+            try {
+                const options = {
+                    "key": "rzp_test_your_real_key_here", // REPLACE WITH REAL KEY
+                    "amount": finalAmount * 100,
+                    "currency": "INR",
+                    "name": "Klaiz Designs",
+                    "description": "Poster Purchase",
+                    "image": "photos/black blue.png",
+                    "handler": function (response) {
+                        processOrder(response.razorpay_payment_id);
+                    },
+                    "prefill": {
+                        "name": document.getElementById('fname').value,
+                        "email": document.getElementById('email').value
+                    },
+                    "theme": { "color": "#2EA7D7" },
+                    "modal": {
+                        "ondismiss": function () {
+                            btn.disabled = false;
+                            btn.textContent = "COMPLETE PURCHASE";
+                        }
+                    }
+                };
+
+                const rzp = new Razorpay(options);
+
+                // If it's the example key, let's offer a simulation so the user isn't stuck
+                if (options.key === "rzp_test_your_real_key_here") {
+                    if (confirm("You haven't added your real Razorpay Key yet.\n\nWould you like to SIMULATE a successful payment to test your store flow?")) {
+                        setTimeout(() => processOrder("SIMULATED_PAYMENT_" + Date.now()), 1000);
+                        return;
+                    } else {
+                        btn.disabled = false;
+                        btn.textContent = "COMPLETE PURCHASE";
+                        return;
+                    }
+                }
+
+                rzp.open();
+            } catch (err) {
+                console.error("Razorpay Error:", err);
+                alert("There was an error starting the payment. Please use COD or add your real Razorpay key.");
+                btn.disabled = false;
+                btn.textContent = "COMPLETE PURCHASE";
+            }
+        }
+
+        function processOrder(paymentId) {
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.textContent = "PLACING ORDER...";
+
+            // Capture all form details
+            const firstName = document.getElementById('fname').value;
+            const lastName = document.getElementById('lname').value || '';
+            const fullName = (firstName + ' ' + lastName).trim();
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const pincode = document.getElementById('pincode').value;
+
+            // Save Order to History
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const total = document.getElementById('total-amount').textContent;
+            const orderId = 'ORD' + Date.now();
+
+            const orders = JSON.parse(localStorage.getItem('klaiz_orders') || '[]');
+            orders.push({
+                id: orderId,
+                paymentId: paymentId,
+                customerName: fullName,
+                email: email,
+                address: address,
+                city: city,
+                pincode: pincode,
+                date: new Date().toISOString(),
+                items: cart,
+                total: total,
+                status: 'Paid'
+            });
+            localStorage.setItem('klaiz_orders', JSON.stringify(orders));
+
+            // WHATSAPP REDIRECTION LOGIC
+            const hasCustom = cart.some(item => item.type === 'custom');
+            let whatsappMsg = `Hi Klaiz Designs! I've just placed an order.\n\n`;
+            whatsappMsg += `*Order ID:* ${orderId}\n`;
+            whatsappMsg += `*Name:* ${fullName}\n`;
+            whatsappMsg += `*Total:* ${total}\n`;
+            whatsappMsg += `*Address:* ${address}, ${city} - ${pincode}\n\n`;
+            
+            if (hasCustom) {
+                whatsappMsg += `*NOTE:* This order includes a CUSTOM POSTER. I am sending the image details below. Please check.`;
+            } else {
+                whatsappMsg += `Please confirm my order. Thank you!`;
+            }
+
+            const encodedMsg = encodeURIComponent(whatsappMsg);
+            const whatsappUrl = `https://wa.me/917034219758?text=${encodedMsg}`;
+
+            // Clear Cart
+            localStorage.removeItem('cart');
+
+            alert("Order Placed Successfully! Redirecting to WhatsApp for confirmation...");
+            window.location.href = whatsappUrl;
+        }
+
+    </script>
+</body>
+
+</html>

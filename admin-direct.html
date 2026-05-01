@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Admin | Klaiz Designs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --admin-bg: #0a0a0a;
+            --admin-card: #151515;
+            --admin-accent: #2EA7D7;
+            --admin-text: #ffffff;
+            --admin-text-dim: #a0a0a0;
+            --admin-border: #222;
+        }
+
+        body {
+            background: var(--admin-bg);
+            color: var(--admin-text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .admin-card {
+            background: var(--admin-card);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--admin-accent);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--admin-text-dim);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .btn-save {
+            background: var(--admin-accent);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            width: 100%;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-save:hover {
+            background: #2689b1;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--admin-text-dim);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. MOBILE MENU DRAWER -->
+    
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR -->
+    
+
+    <!-- 3. BOTTOM SHEET OVERLAY -->
+    
+
+    <div class="admin-card">
+        <h1>Add New Poster</h1>
+        <form id="directAddForm">
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" id="pName" class="form-input" placeholder="e.g. Spider-Man Noir" required>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="pCategory" class="form-input">
+                    <option value="Superhero">Superhero</option>
+                    <option value="Cars">Cars</option>
+                    <option value="Bikes">Bikes</option>
+                    <option value="Football">Football</option>
+                    <option value="F1">F1 Racing</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Price (₹)</label>
+                <input type="number" id="pPrice" class="form-input" value="499" required>
+            </div>
+            <div class="form-group">
+                <label>Poster Image</label>
+                <input type="file" id="pImage" class="form-input" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn-save" id="saveBtn">
+                <i data-lucide="plus-circle"></i> Save to Shop
+            </button>
+        </form>
+        <a href="index.html" class="back-link">← Go to User Website</a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        document.getElementById('directAddForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('saveBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Saving to Database...';
+            btn.disabled = true;
+
+            const file = document.getElementById('pImage').files[0];
+
+            // Resize image for demo
+            const getResizedBase64 = (file) => {
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = (event) => {
+                        const img = new Image();
+                        img.src = event.target.result;
+                        img.onload = () => {
+                            const canvas = document.createElement('canvas');
+                            const MAX_WIDTH = 400;
+                            const scaleSize = MAX_WIDTH / img.width;
+                            canvas.width = MAX_WIDTH;
+                            canvas.height = img.height * scaleSize;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                            resolve(canvas.toDataURL('image/jpeg', 0.7));
+                        };
+                    };
+                });
+            };
+
+            try {
+                const imageUrl = await getResizedBase64(file);
+
+                const newProduct = {
+                    name: document.getElementById('pName').value,
+                    category: document.getElementById('pCategory').value,
+                    price: document.getElementById('pPrice').value,
+                    image: imageUrl
+                };
+
+                const response = await fetch('http://localhost:8000/api/admin/products', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newProduct)
+                });
+
+                if (response.ok) {
+                    alert('SUCCESS! "' + newProduct.name + '" is now saved in the DATABASE and live on the website.');
+                    window.location.reload();
+                } else {
+                    throw new Error('Database Error');
+                }
+            } catch (err) {
+                alert('ERROR: Could not talk to the database. Make sure your Laravel server is running!');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

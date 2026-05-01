@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Klaiz Designs</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="icon" type="image/png" href="photos/black blue.png">
+</head>
+
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links" style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item custom">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <section class="help-hero">
+            <div class="container text-center">
+                <h1>Help Center</h1>
+                <div class="help-search-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search" style="display: block;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <input type="text" placeholder="Search for answers (e.g. shipping, custom posters)...">
+                </div>
+                <div class="filter-pills mt-2">
+                    <button class="pill active">All</button>
+                    <button class="pill">Orders</button>
+                    <button class="pill">Shipping</button>
+                    <button class="pill">Custom Posters</button>
+                    <button class="pill">Returns</button>
+                    <button class="pill">Payments</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section faq-section">
+            <div class="container narrow">
+                <div class="faq-list">
+                    <!-- Q1 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How long does delivery take?</span>
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We typically dispatch orders within 2 business days. Delivery takes 3–5 business days
+                                depending on your location. Metro cities usually receive orders faster.</p>
+                        </div>
+                    </div>
+                    <!-- Q2 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I track my order?</span>
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, once your order is dispatched, you will receive a tracking link via email and
+                                WhatsApp. You can also track it from your Account Dashboard.</p>
+                        </div>
+                    </div>
+                    <!-- Q3 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What paper quality do you use?</span>
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We use premium 300 GSM gallery-grade paper. You can choose between a Matte finish for a
+                                classic look or a Glossy finish for high-contrast, vibrant colors.</p>
+                        </div>
+                    </div>
+                    <!-- Q4 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I return a poster?</span>
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We accept returns for damaged or incorrect items within 7 days of delivery. Since custom
+                                posters are made to order, they are non-returnable unless defective.</p>
+                        </div>
+                    </div>
+                    <!-- Q5 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I upload a custom photo?</span>
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Go to our <a href="custom-builder.html">Custom Builder</a> page, upload your
+                                high-resolution image (JPG/PNG), select your size, and preview it on a virtual wall
+                                before ordering.</p>
+                        </div>
+                    </div>
+                    <!-- Q6 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I place a bulk order?</span>
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>For orders of 20+ posters, please contact our business team at bulk@klaizdesigns.com for
+                                special pricing and expedited shipping options.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="still-help mt-5 text-center">
+                    <h3>Still need help?</h3>
+                    <p>Our team is available Mon–Sat, 10 AM to 7 PM.</p>
+                    <a href="contact.html" class="btn btn-primary">CONTACT US</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col about">
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs"
+                        class="nav-logo-img"></a>
+                <p>Curating the finest wall art for the modern space. High-quality prints, custom designs, and worldwide
+                    shipping.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/klaizdesigns.in"><i data-lucide="instagram"></i></a>
+                    <a href="https://twitter.com"><i data-lucide="twitter"></i></a>
+                    <a href="https://facebook.com"><i data-lucide="facebook"></i></a>
+                    <a href="https://youtube.com"><i data-lucide="youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <a href="collection.html">Shop All</a>
+                <a href="collection.html">Best Sellers</a>
+                <a href="custom-builder.html">Custom Posters</a>
+                <a href="collection-new.html">New Arrivals</a>
+                <a href="collection.html">Sale</a>
+            </div>
+            <div class="footer-col">
+                <h3>Customer Policy</h3>
+                <a href="policies.html">Shipping Policy</a>
+                <a href="policies.html">Refund & Return</a>
+                <a href="policies.html">Privacy Policy</a>
+                <a href="policies.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: support@klaizdesigns.in</p>
+                <p>WhatsApp: +91 7034219758</p>
+                <p>Address: Kerala,India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; 2026 Klaiz Designs. All rights reserved.</p>
+                <div class="payment-icons">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/000000/upi.png" alt="UPI">
+                    <span class="razorpay-logo">Razorpay</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

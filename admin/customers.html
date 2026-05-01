@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Customers | Klaiz Designs Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="../photos/white blue.png" alt="Klaiz Designs" class="admin-logo">
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+                <a href="products.html" class="nav-item"><i data-lucide="package"></i> Products</a>
+                <a href="orders.html" class="nav-item"><i data-lucide="shopping-cart"></i> Orders</a>
+                <a href="customers.html" class="nav-item active"><i data-lucide="users"></i> Customers</a>
+                <a href="settings.html" class="nav-item"><i data-lucide="settings"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="page-header" style="margin-bottom: 2rem;">
+                <h1 class="section-title">Customer Directory</h1>
+            </div>
+
+            <div class="recent-orders-card">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>Email Address</th>
+                            <th>Total Orders</th>
+                            <th>Total Spent</th>
+                            <th>Last Active</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="profile-avatar" style="width: 32px; height: 32px; font-size: 0.75rem;">
+                                        RS</div>
+                                    <span style="font-weight: 600;">Rahul Sharma</span>
+                                </div>
+                            </td>
+                            <td>rahul@example.com</td>
+                            <td>3</td>
+                            <td>₹2,897</td>
+                            <td>Today</td>
+                            <td><button class="view-all" style="background:none; border:none; cursor:pointer;">View
+                                    Profile</button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="profile-avatar"
+                                        style="width: 32px; height: 32px; font-size: 0.75rem; background: #3b82f6;">PP
+                                    </div>
+                                    <span style="font-weight: 600;">Priya Patel</span>
+                                </div>
+                            </td>
+                            <td>priya@example.com</td>
+                            <td>1</td>
+                            <td>₹499</td>
+                            <td>Yesterday</td>
+                            <td><button class="view-all" style="background:none; border:none; cursor:pointer;">View
+                                    Profile</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>

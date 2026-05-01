@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Selection | Klaiz Designs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=2">
+    <style>
+        .payment-page { padding: 80px 0; background: #0a0a0a; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .payment-card { background: #111; width: 100%; max-width: 500px; padding: 3rem; border-radius: 25px; border: 1px solid rgba(255,255,255,0.05); text-align: center; }
+        .payment-card h1 { font-family: 'Outfit'; font-size: 2rem; margin-bottom: 2rem; }
+        .amount-display { font-size: 3rem; font-weight: 800; color: var(--accent-color); margin-bottom: 2rem; }
+        
+        .payment-options { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; text-align: left; }
+        .pay-opt { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+        .pay-opt:hover { border-color: var(--accent-color); background: rgba(46, 167, 215, 0.05); }
+        .pay-opt.active { border-color: var(--accent-color); background: rgba(46, 167, 215, 0.1); }
+        .pay-opt i { color: var(--accent-color); }
+        
+        .btn-confirm { width: 100%; padding: 1.2rem; background: var(--accent-color); color: #fff; border: none; border-radius: 12px; font-weight: 800; font-size: 1.1rem; cursor: pointer; margin-top: 1rem; }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links" style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item custom">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <main class="payment-page">
+        <div class="payment-card">
+            <h1>Select Payment</h1>
+            <div class="amount-display" id="pay-amount">₹0</div>
+            
+            <div class="payment-options">
+                <div class="pay-opt active" onclick="selectOpt(this)">
+                    <i data-lucide="smartphone"></i>
+                    <div>
+                        <strong>UPI (Google Pay, PhonePe)</strong>
+                        <p style="font-size: 0.8rem; color: #777;">Pay using your UPI ID</p>
+                    </div>
+                </div>
+                <div class="pay-opt" onclick="selectOpt(this)">
+                    <i data-lucide="credit-card"></i>
+                    <div>
+                        <strong>Credit / Debit Card</strong>
+                        <p style="font-size: 0.8rem; color: #777;">Visa, Mastercard, RuPay</p>
+                    </div>
+                </div>
+                <div class="pay-opt" onclick="selectOpt(this)">
+                    <i data-lucide="banknote"></i>
+                    <div>
+                        <strong>Cash on Delivery</strong>
+                        <p style="font-size: 0.8rem; color: #777;">Pay when you receive the art</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-confirm" onclick="finishPayment()">CONFIRM & PAY</button>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount') || '0';
+        document.getElementById('pay-amount').textContent = `₹${amount}`;
+
+        function selectOpt(el) {
+            document.querySelectorAll('.pay-opt').forEach(opt => opt.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function finishPayment() {
+            alert("Payment Successful! Thank you for shopping with Klaiz Designs.");
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

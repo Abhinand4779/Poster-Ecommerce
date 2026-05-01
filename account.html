@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Klaiz Designs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="icon" type="image/png" href="photos/black blue.png">
+</head>
+
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links" style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item custom">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="account-page" style="padding-top: 100px;">
+        <div class="container">
+            <div class="account-layout">
+                <!-- Sidebar -->
+                <aside class="account-sidebar">
+                    <div class="user-brief">
+                        <div class="user-avatar" id="user-initials">--</div>
+                        <div class="user-info">
+                            <h3 id="user-display-name">Loading...</h3>
+                            <p id="user-display-email">...</p>
+                        </div>
+                    </div>
+                    <nav class="account-nav">
+                        <button class="acc-nav-link active" data-target="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</button>
+                        <button class="acc-nav-link" data-target="orders"><i data-lucide="package"></i> My Orders</button>
+                        <button class="acc-nav-link" data-target="wishlist"><i data-lucide="heart"></i> Wishlist</button>
+                        <button class="acc-nav-link" data-target="addresses"><i data-lucide="map-pin"></i> Addresses</button>
+                        <div class="nav-divider"></div>
+                        <a href="#" class="acc-nav-link logout" id="logout-btn"><i data-lucide="log-out"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Content Area -->
+                <div class="account-content">
+                    <!-- Dashboard State -->
+                    <div class="account-state active" id="state-dashboard">
+                        <div class="welcome-banner">
+                            <h1 id="welcome-title">Hi there!</h1>
+                            <p>Welcome to your dashboard. Here is your recent activity.</p>
+                        </div>
+                        <div class="stat-cards">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i data-lucide="package"></i></div>
+                                <div class="stat-info">
+                                    <span class="stat-val" id="total-orders-count">00</span>
+                                    <span class="stat-label">Total Orders</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon wishlist"><i data-lucide="heart"></i></div>
+                                <div class="stat-info">
+                                    <span class="stat-val">00</span>
+                                    <span class="stat-label">Wishlist</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recent-orders-section" id="recent-orders-container">
+                            <div class="section-header-flex">
+                                <h2>Recent Orders</h2>
+                            </div>
+                            <div id="dashboard-orders-list">
+                                <!-- Real orders will load here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- My Orders State -->
+                    <div class="account-state" id="state-orders">
+                        <h1>My Orders</h1>
+                        <div class="orders-list" id="full-orders-list">
+                            <!-- Real orders will load here -->
+                        </div>
+                    </div>
+
+                    <!-- Wishlist State -->
+                    <div class="account-state" id="state-wishlist">
+                        <h1>My Wishlist</h1>
+                        <div class="wishlist-grid" id="wishlist-container">
+                            <p style="color:#666; padding:2rem;">Your wishlist is empty.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="cms.js"></script>
+    <script src="main.js"></script>
+    <script>
+        function initAccount() {
+            const user = JSON.parse(localStorage.getItem('klaiz_user') || 'null');
+            if (!user) {
+                window.location.href = 'login.html?redirect=account.html';
+                return;
+            }
+
+            // Update UI with real user details
+            document.getElementById('user-display-name').textContent = user.name;
+            document.getElementById('user-display-email').textContent = user.email;
+            document.getElementById('welcome-title').textContent = `Hi, ${user.name.split(' ')[0]}!`;
+            document.getElementById('user-initials').textContent = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+
+            // Load Real Orders
+            const orders = JSON.parse(localStorage.getItem('klaiz_orders') || '[]');
+            const dashboardList = document.getElementById('dashboard-orders-list');
+            const fullList = document.getElementById('full-orders-list');
+            const totalCount = document.getElementById('total-orders-count');
+
+            totalCount.textContent = orders.length.toString().padStart(2, '0');
+
+            if (orders.length === 0) {
+                const emptyMsg = '<p style="color:#666; padding:2rem;">No orders placed yet.</p>';
+                dashboardList.innerHTML = emptyMsg;
+                fullList.innerHTML = emptyMsg;
+            } else {
+                const ordersHtml = orders.reverse().map(o => {
+                    const firstItem = o.items[0] || {};
+                    return `
+                        <div class="order-row-card">
+                            <div class="order-main">
+                                <img src="${firstItem.image || 'photos/placeholder.png'}" alt="Order">
+                                <div class="order-details">
+                                    <h4>Order #${o.id.substring(3, 11)}</h4>
+                                    <span>${new Date(o.date).toLocaleDateString()}</span>
+                                    <p>${o.items.length} Item(s) | ${o.total}</p>
+                                </div>
+                            </div>
+                            <div class="order-status">
+                                <span class="status-badge shipped">${o.status}</span>
+                                <button class="btn btn-outline btn-sm">Details</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                fullList.innerHTML = ordersHtml;
+                dashboardList.innerHTML = orders.slice(0, 2).map(o => {
+                     const firstItem = o.items[0] || {};
+                     return `
+                        <div class="order-row-card">
+                            <div class="order-main">
+                                <img src="${firstItem.image || 'photos/placeholder.png'}" alt="Order">
+                                <div class="order-details">
+                                    <h4>Order #${o.id.substring(3, 11)}</h4>
+                                    <p>${o.items.length} Item(s) | ${o.total}</p>
+                                </div>
+                            </div>
+                        </div>
+                     `;
+                }).join('');
+            }
+
+            // Tab Switching
+            document.querySelectorAll('.acc-nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.id === 'logout-btn') {
+                        localStorage.removeItem('klaiz_user');
+                        window.location.href = 'index.html';
+                        return;
+                    }
+                    const target = link.getAttribute('data-target');
+                    if (!target) return;
+                    
+                    document.querySelectorAll('.acc-nav-link').forEach(l => l.classList.remove('active'));
+                    document.querySelectorAll('.account-state').forEach(s => s.classList.remove('active'));
+                    
+                    link.classList.add('active');
+                    document.getElementById('state-' + target).classList.add('active');
+                });
+            });
+
+            lucide.createIcons();
+        }
+
+        document.addEventListener('DOMContentLoaded', initAccount);
+    </script>
+</body>
+</html>

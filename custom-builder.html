@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Poster Builder | Klaiz Designs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="icon" type="image/png" href="photos/black blue.png">
+    <style>
+        :root {
+            --builder-accent: #2EA7D7;
+            --builder-bg: #0a0a0a;
+            --builder-card: #151515;
+            --builder-border: rgba(255,255,255,0.1);
+        }
+        .builder-page { padding: 40px 0 80px; background: var(--builder-bg); min-height: 80vh; }
+        .step-progress { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto 3rem; padding: 0 1rem; }
+        .step { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: #555; position: relative; z-index: 1; }
+        .step.active { color: var(--builder-accent); }
+        .step.completed { color: #fff; }
+        .step-num { width: 35px; height: 35px; border-radius: 50%; border: 2px solid currentColor; display: flex; align-items: center; justify-content: center; font-weight: 800; background: var(--builder-bg); }
+        .step.active .step-num { background: var(--builder-accent); color: #fff; border-color: var(--builder-accent); }
+        .step-line { flex: 1; height: 2px; background: #222; margin: 0 15px; margin-top: -25px; }
+        .builder-layout { display: grid; grid-template-columns: 1fr 350px; gap: 2rem; align-items: start; }
+        .builder-main { background: var(--builder-card); border-radius: 20px; border: 1px solid var(--builder-border); padding: 2rem; min-height: 500px; }
+        .builder-step { display: none; animation: fadeIn 0.4s ease; }
+        .builder-step.active { display: block; }
+        .upload-zone { border: 2px dashed var(--builder-border); border-radius: 15px; padding: 4rem 2rem; text-align: center; cursor: pointer; transition: 0.3s; }
+        .upload-zone:hover { border-color: var(--builder-accent); background: rgba(46, 167, 215, 0.05); }
+        .preview-img-box { max-height: 400px; border-radius: 10px; margin-top: 1rem; }
+        .mockup-container { position: relative; width: 100%; height: 450px; background: url('living_room_mockup_bg_1777444912918.png') center/cover; border-radius: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .wall-frame { width: 140px; height: 200px; background: #000; padding: 5px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(-40px); }
+        .wall-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .wall-frame.A4 { width: 100px; height: 140px; }
+        .wall-frame.A3 { width: 140px; height: 200px; }
+        .wall-frame.A2 { width: 200px; height: 280px; }
+        .size-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .size-card { background: #222; border: 1px solid var(--builder-border); padding: 1.5rem; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.3s; }
+        .size-card.active { border-color: var(--builder-accent); background: rgba(46, 167, 215, 0.1); }
+        .builder-sidebar { background: var(--builder-card); border: 1px solid var(--builder-border); border-radius: 20px; padding: 2rem; position: sticky; top: 100px; }
+        .live-price { font-size: 2rem; font-weight: 800; color: var(--builder-accent); margin-bottom: 1.5rem; display: block; }
+        .btn-nav { width: 100%; padding: 1.1rem; border-radius: 10px; font-weight: 700; cursor: pointer; margin-bottom: 0.75rem; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) {
+            .builder-page { padding: 20px 0 40px; }
+            .step-progress { margin-bottom: 2rem; }
+            .step span { font-size: 0.7rem; }
+            .builder-layout { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+            .builder-main { padding: 1.5rem !important; min-height: auto !important; }
+            .upload-zone { padding: 2.5rem 1rem !important; }
+            .upload-zone h2 { font-size: 1.2rem; }
+            .mockup-container { height: 300px !important; }
+            .size-grid { grid-template-columns: 1fr !important; }
+            .builder-sidebar { position: static !important; padding: 1.5rem !important; }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links" style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item active">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="builder-page">
+
+        <div class="container">
+            <div class="step-progress">
+                <div class="step active" id="s1"><div class="step-num">1</div><span>Upload</span></div>
+                <div class="step-line"></div>
+                <div class="step" id="s2"><div class="step-num">2</div><span>Size</span></div>
+                <div class="step-line"></div>
+                <div class="step" id="s3"><div class="step-num">3</div><span>Preview</span></div>
+            </div>
+
+            <div class="builder-layout">
+                <div class="builder-main">
+                    <div class="builder-step active" id="step1">
+                        <div class="upload-zone" onclick="document.getElementById('file-input').click()">
+                            <div class="upload-placeholder" id="upload-ui">
+                                <i data-lucide="upload-cloud" style="width: 48px; height: 48px; color: var(--builder-accent);"></i>
+                                <h2>Drag & drop your image</h2>
+                                <p>or click to browse your gallery</p>
+                            </div>
+                            <img id="image-preview" class="preview-img-box" style="display:none">
+                            <input type="file" id="file-input" hidden accept="image/*" onchange="handleFile(this)">
+                        </div>
+                    </div>
+                    <div class="builder-step" id="step2">
+                        <h2>Choose Your Poster Size</h2>
+                        <div class="size-grid">
+                            <div class="size-card" onclick="selectSize('A4', 299)"><h3>A4</h3><p>21 x 29.7 cm</p><span class="price">₹299</span></div>
+                            <div class="size-card active" onclick="selectSize('A3', 499)"><h3>A3</h3><p>29.7 x 42 cm</p><span class="price">₹499</span></div>
+                            <div class="size-card" onclick="selectSize('A2', 899)"><h3>A2</h3><p>42 x 59.4 cm</p><span class="price">₹899</span></div>
+                        </div>
+                    </div>
+                    <div class="builder-step" id="step3">
+                        <h2>Live Room Preview</h2>
+                        <div class="mockup-container">
+                            <div class="wall-frame" id="mockup-frame"><img src="" id="mockup-img"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="builder-sidebar">
+                    <span class="live-price" id="display-price">₹499</span>
+                    <div class="selection-list">
+                        <div class="selection-item" id="sum-img"><i data-lucide="image"></i> No image selected</div>
+                        <div class="selection-item" id="sum-size"><i data-lucide="maximize"></i> Size: A3</div>
+                        <input type="text" id="cust-name" class="form-control" placeholder="Your Name" style="width: 100%; padding: 0.8rem; margin-top: 1rem; background: #222; border: 1px solid #333; border-radius: 8px; color: white;">
+                        <input type="email" id="cust-email" class="form-control" placeholder="Email Address" style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; background: #222; border: 1px solid #333; border-radius: 8px; color: white;">
+                    </div>
+                    <button class="btn-nav btn-primary" id="next-btn" onclick="nextStep()">CONTINUE</button>
+                    <button class="btn-nav btn-outline" id="prev-btn" onclick="prevStep()" style="display:none">BACK</button>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- 9. FOOTER (EXACT COPY) -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col about">
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+                <p>Curating the finest wall art for the modern space. High-quality prints, custom designs, and worldwide
+                    shipping.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/klaizdesigns.in"><i data-lucide="instagram"></i></a>
+                    <a href="https://twitter.com"><i data-lucide="twitter"></i></a>
+                    <a href="https://facebook.com"><i data-lucide="facebook"></i></a>
+                    <a href="https://youtube.com"><i data-lucide="youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <a href="collection.html">Shop All</a>
+                <a href="collection.html">Best Sellers</a>
+                <a href="custom-builder.html">Custom Posters</a>
+                <a href="collection-new.html">New Arrivals</a>
+                <a href="collection.html">Sale</a>
+            </div>
+            <div class="footer-col">
+                <h3>Customer Policy</h3>
+                <a href="policies.html">Shipping Policy</a>
+                <a href="policies.html">Refund & Return</a>
+                <a href="policies.html">Privacy Policy</a>
+                <a href="policies.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: support@klaizdesigns.in</p>
+                <p>WhatsApp: +91 7034219758</p>
+                <p>Address: Kerala,India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; 2026 Klaiz Designs. All rights reserved.</p>
+                <div class="payment-icons">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/000000/upi.png" alt="UPI">
+                    <span class="razorpay-logo">Razorpay</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cms.js"></script>
+    <script src="main.js"></script>
+
+    <script>
+        let currentStep = 1;
+        let selectedFile = null;
+        let selectedSize = 'A3';
+        let price = 499;
+
+        // 1. CHECK LOGIN BEFORE UPLOAD
+        function checkLogin() {
+            const user = JSON.parse(localStorage.getItem('klaiz_user') || 'null');
+            if (!user) {
+                alert("Please log in first to create a custom poster!");
+                window.location.href = 'login.html?redirect=custom-builder.html';
+                return false;
+            }
+            return true;
+        }
+
+        function handleFile(input) {
+            if (!checkLogin()) {
+                input.value = ''; 
+                return;
+            }
+
+            if (input.files && input.files[0]) {
+                selectedFile = input.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('image-preview').src = e.target.result;
+                    document.getElementById('image-preview').style.display = 'block';
+                    document.getElementById('upload-ui').style.display = 'none';
+                    document.getElementById('sum-img').innerHTML = '<i data-lucide="check-circle"></i> Image Uploaded';
+                    document.getElementById('mockup-img').src = e.target.result;
+                    lucide.createIcons();
+                }
+                reader.readAsDataURL(selectedFile);
+            }
+        }
+
+        function selectSize(size, p) {
+            selectedSize = size;
+            price = p;
+            document.querySelectorAll('.size-card').forEach(c => c.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById('display-price').innerText = `₹${p}`;
+            document.getElementById('sum-size').innerText = `Size: ${size}`;
+            document.getElementById('mockup-frame').className = `wall-frame ${size}`;
+        }
+
+        // 2. MOVE TO CHECKOUT
+        function goToCheckout() {
+            const name = document.getElementById('cust-name').value;
+            const email = document.getElementById('cust-email').value;
+            
+            if (!name || !email) { 
+                alert("Please enter your name and email to proceed!"); 
+                return; 
+            }
+
+            const customOrder = {
+                id: 'custom-' + Date.now(),
+                name: 'Custom Poster (' + selectedSize + ')',
+                price: price,
+                size: selectedSize,
+                customerName: name,
+                customerEmail: email,
+                image: document.getElementById('image-preview').src,
+                type: 'custom',
+                quantity: 1
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.push(customOrder);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = 'checkout.html';
+        }
+
+        function nextStep() {
+            if (currentStep === 1 && !selectedFile) { alert("Please upload an image!"); return; }
+            if (currentStep < 3) {
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                document.getElementById(`s${currentStep}`).classList.add('completed');
+                currentStep++;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                document.getElementById(`s${currentStep}`).classList.add('active');
+                document.getElementById('prev-btn').style.display = 'block';
+                if (currentStep === 3) document.getElementById('next-btn').innerText = "GO TO CHECKOUT";
+            } else { 
+                goToCheckout(); 
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                document.getElementById(`s${currentStep}`).classList.remove('active');
+                currentStep--;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                document.getElementById('next-btn').innerText = "CONTINUE";
+                if (currentStep === 1) document.getElementById('prev-btn').style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>

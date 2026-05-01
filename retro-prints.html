@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Photo Prints | Klaiz Designs</title>
+    <meta name="description"
+        content="Turn your photos into vintage retro prints, photobooth strips, and mini pocket prints.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="icon" type="image/png" href="photos/black blue.png">
+</head>
+
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links" style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item custom">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-builder">
+        <div class="container">
+            <header class="retro-header">
+                <h1>Retro Photo Prints</h1>
+                <p>Give your photos a vintage, aesthetic look with our premium prints.</p>
+            </header>
+
+            <!-- Product Type Tabs -->
+            <div class="product-tabs">
+                <button class="tab-btn active" data-tab="retro">Retro Prints</button>
+                <button class="tab-btn" data-tab="pocket">Pocket/Mini Prints</button>
+                <button class="tab-btn" data-tab="booth">Photobooth Strip</button>
+            </div>
+
+            <div class="retro-layout">
+                <!-- Main Builder Area -->
+                <div class="builder-content">
+
+                    <!-- TAB 1: RETRO PRINTS -->
+                    <div class="tab-content active" id="tab-retro">
+                        <div class="builder-card">
+                            <div class="upload-section">
+                                <label>1. Upload Your Photo</label>
+                                <div class="mini-upload-zone" id="retro-upload">
+                                    <i data-lucide="image"></i>
+                                    <span>Browse Photo</span>
+                                    <input type="file" hidden id="retro-file">
+                                </div>
+                            </div>
+
+                            <div class="filter-section">
+                                <label>2. Choose Aesthetic Filter</label>
+                                <div class="filter-grid">
+                                    <div class="filter-option active" data-filter="none">
+                                        <div class="filter-preview none"></div>
+                                        <span>Original</span>
+                                    </div>
+                                    <div class="filter-option" data-filter="vintage">
+                                        <div class="filter-preview vintage"></div>
+                                        <span>Vintage</span>
+                                    </div>
+                                    <div class="filter-option" data-filter="fade">
+                                        <div class="filter-preview fade"></div>
+                                        <span>Fade</span>
+                                    </div>
+                                    <div class="filter-option" data-filter="warm">
+                                        <div class="filter-preview warm"></div>
+                                        <span>Warm</span>
+                                    </div>
+                                    <div class="filter-option" data-filter="cool">
+                                        <div class="filter-preview cool"></div>
+                                        <span>Cool</span>
+                                    </div>
+                                    <div class="filter-option" data-filter="bw">
+                                        <div class="filter-preview bw"></div>
+                                        <span>B&W</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="options-row">
+                                <div class="option-group">
+                                    <label>3. Select Size</label>
+                                    <div class="chip-group">
+                                        <button class="chip active">4x6"</button>
+                                        <button class="chip">5x7"</button>
+                                    </div>
+                                </div>
+                                <div class="option-group">
+                                    <label>4. Quantity</label>
+                                    <div class="chip-group qty-chips">
+                                        <button class="chip active">1</button>
+                                        <button class="chip">2</button>
+                                        <button class="chip">4</button>
+                                        <button class="chip">8</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Retro Preview Panel -->
+                        <div class="preview-panel">
+                            <div class="retro-frame-mockup">
+                                <div class="retro-photo-inner" id="retro-preview-img">
+                                    <img src="photos/hero_slide_2_1777291568402.png" alt="Preview">
+                                    <div class="photo-overlay"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: POCKET/MINI PRINTS -->
+                    <div class="tab-content" id="tab-pocket">
+                        <div class="builder-card">
+                            <div class="upload-section">
+                                <label>Upload Multiple Photos (Up to 12)</label>
+                                <div class="multi-upload-grid" id="pocket-upload">
+                                    <div class="upload-slot add-btn">
+                                        <i data-lucide="plus"></i>
+                                        <input type="file" multiple hidden id="pocket-files">
+                                    </div>
+                                    <!-- Uploaded thumbnails will appear here -->
+                                </div>
+                            </div>
+                            <div class="info-box">
+                                <i data-lucide="info"></i>
+                                <p>Pocket prints are printed at wallet size (2.5x3.5"). Each pack includes 12 premium
+                                    prints.</p>
+                            </div>
+                            <div class="option-group mt-2">
+                                <label>Number of Packs</label>
+                                <div class="quantity-selector">
+                                    <button class="qty-btn"><i data-lucide="minus"></i></button>
+                                    <input type="number" value="1" readonly>
+                                    <button class="qty-btn"><i data-lucide="plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: PHOTOBOOTH STRIP -->
+                    <div class="tab-content" id="tab-booth">
+                        <div class="builder-card">
+                            <div class="booth-slots">
+                                <label>Upload Photos for Strip</label>
+                                <div class="slots-grid">
+                                    <div class="booth-slot" data-slot="1"><span>1</span></div>
+                                    <div class="booth-slot" data-slot="2"><span>2</span></div>
+                                    <div class="booth-slot" data-slot="3"><span>3</span></div>
+                                    <div class="booth-slot" data-slot="4"><span>4</span></div>
+                                </div>
+                            </div>
+
+                            <div class="booth-options">
+                                <label>Choose Layout</label>
+                                <div class="layout-selector">
+                                    <button class="layout-btn active" data-layout="v3">3-Strip</button>
+                                    <button class="layout-btn" data-layout="v4">4-Strip</button>
+                                    <button class="layout-btn" data-layout="grid">2x2 Grid</button>
+                                </div>
+
+                                <label>Background Color</label>
+                                <div class="color-picker">
+                                    <div class="color-option active" style="background: white;" data-color="#ffffff">
+                                    </div>
+                                    <div class="color-option" style="background: #111;" data-color="#111111"></div>
+                                    <div class="color-option" style="background: #f8bbd0;" data-color="#f8bbd0"></div>
+                                    <div class="color-option" style="background: #fff9c4;" data-color="#fff9c4"></div>
+                                </div>
+
+                                <label>Add Text (Optional)</label>
+                                <input type="text" placeholder="e.g. Summer '26" id="booth-text">
+                            </div>
+                        </div>
+
+                        <!-- Booth Preview Panel -->
+                        <div class="preview-panel">
+                            <div class="booth-strip-mockup" id="booth-preview">
+                                <div class="booth-inner">
+                                    <div class="booth-img-placeholder"></div>
+                                    <div class="booth-img-placeholder"></div>
+                                    <div class="booth-img-placeholder"></div>
+                                    <div class="booth-caption" id="booth-preview-text"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ORDER SUMMARY SIDEBAR -->
+                <aside class="order-sidebar">
+                    <div class="summary-card">
+                        <h3>Order Summary</h3>
+                        <div class="summary-content">
+                            <div class="summary-line">
+                                <span id="summary-prod-name">Retro Photo Prints</span>
+                                <span id="summary-price">₹199</span>
+                            </div>
+                            <div class="summary-line sub">
+                                <span id="summary-details">4x6" · Single Print</span>
+                            </div>
+                            <div class="summary-line shipping">
+                                <span>Shipping</span>
+                                <span>₹50</span>
+                            </div>
+                            <div class="summary-total">
+                                <span>Total</span>
+                                <span id="summary-total-price">₹249</span>
+                            </div>
+                        </div>
+                        <div class="summary-actions">
+                            <button class="btn btn-primary full-width">ADD TO CART</button>
+                            <button class="btn btn-outline full-width mt-1">BUY NOW</button>
+                        </div>
+                        <p class="summary-info">Estimated Delivery: <strong>3–5 Days</strong></p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col about">
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs"
+                        class="nav-logo-img"></a>
+                <p>Curating the finest wall art for the modern space. High-quality prints, custom designs, and worldwide
+                    shipping.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/klaizdesigns.in"><i data-lucide="instagram"></i></a>
+                    <a href="https://twitter.com"><i data-lucide="twitter"></i></a>
+                    <a href="https://facebook.com"><i data-lucide="facebook"></i></a>
+                    <a href="https://youtube.com"><i data-lucide="youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <a href="collection.html">Shop All</a>
+                <a href="collection.html">Best Sellers</a>
+                <a href="custom-builder.html">Custom Posters</a>
+                <a href="collection-new.html">New Arrivals</a>
+                <a href="collection.html">Sale</a>
+            </div>
+            <div class="footer-col">
+                <h3>Customer Policy</h3>
+                <a href="policies.html">Shipping Policy</a>
+                <a href="policies.html">Refund & Return</a>
+                <a href="policies.html">Privacy Policy</a>
+                <a href="policies.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: support@klaizdesigns.in</p>
+                <p>WhatsApp: +91 7034219758</p>
+                <p>Address: Kerala,India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; 2026 Klaiz Designs. All rights reserved.</p>
+                <div class="payment-icons">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/000000/upi.png" alt="UPI">
+                    <span class="razorpay-logo">Razorpay</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

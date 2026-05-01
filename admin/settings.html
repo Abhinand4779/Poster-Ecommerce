@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Settings | Klaiz Designs Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../style.css?v=13">
+    <style>
+        :root { --sidebar-width: 300px; --accent-blue: #2EA7D7; }
+        body { background: #050505; color: #fff; display: flex; min-height: 100vh; font-family: 'Inter', sans-serif; margin: 0; }
+        
+        .admin-sidebar { width: var(--sidebar-width); background: #0a0a0a; border-right: 1px solid #1a1a1a; padding: 3rem 2rem; position: fixed; height: 100vh; z-index: 100; box-sizing: border-box; display: flex; flex-direction: column; }
+        .admin-logo img { width: 160px; height: auto; margin-bottom: 4rem; }
+        .admin-nav-item { display: flex; align-items: center; gap: 15px; padding: 14px 20px; color: #666; text-decoration: none; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; font-weight: 600; }
+        .admin-nav-item.active { background: var(--accent-blue); color: #fff; }
+
+        .admin-main { flex: 1; margin-left: var(--sidebar-width); padding: 3rem 5rem; box-sizing: border-box; }
+        
+        .settings-tabs { display: flex; gap: 10px; background: #0a0a0a; padding: 10px; border-radius: 15px; border: 1px solid #1a1a1a; margin-bottom: 3rem; overflow-x: auto; }
+        .tab-btn { background: none; border: none; color: #666; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: 700; transition: 0.3s; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+        .tab-btn.active { background: #1a1a1a; color: var(--accent-blue); }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .editor-card { background: #0f0f0f; border: 1px solid #1a1a1a; border-radius: 24px; padding: 2.5rem; max-width: 900px; margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-size: 0.7rem; font-weight: 800; color: #555; margin-bottom: 8px; text-transform: uppercase; }
+        .form-control { width: 100%; background: #050505; border: 1px solid #222; border-radius: 12px; padding: 14px 18px; color: #fff; font-family: inherit; }
+
+        .manager-item { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; position: relative; overflow: hidden; }
+        .manager-top { display: flex; gap: 20px; align-items: center; }
+        .manager-avatar { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid #222; flex-shrink: 0; background: #111; }
+        
+        .btn-upload-sm { background: #111; border: 1px solid #333; color: #aaa; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
+        .btn-upload-sm:hover { border-color: var(--accent-blue); color: #fff; }
+
+        .btn-save-large { background: var(--accent-blue); color: #fff; border: none; padding: 18px; border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; transition: 0.3s; margin-top: 1rem; }
+        .btn-remove { position: absolute; top: 15px; right: 15px; color: #ef4444; cursor: pointer; background: none; border: none; z-index: 10; }
+
+        @media (max-width: 1200px) {
+            .admin-sidebar { 
+                transform: translateX(-100%); 
+                transition: 0.4s;
+                box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+            }
+            .admin-sidebar.active { 
+                transform: translateX(0); 
+            }
+            .admin-main { 
+                margin-left: 0; 
+                padding: 2rem 1.5rem; 
+            }
+            .settings-tabs {
+                position: sticky;
+                top: 0;
+                z-index: 50;
+                background: #050505;
+                padding: 15px 0;
+            }
+            #mobile-admin-toggle {
+                display: flex !important;
+                position: fixed;
+                bottom: 25px;
+                right: 25px;
+                z-index: 1000;
+                background: var(--accent-blue);
+                color: white;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                align-items: center;
+                justify-content: center;
+                border: none;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                cursor: pointer;
+            }
+            .editor-card { padding: 1.5rem; }
+            .manager-item { padding: 1rem; }
+            .manager-top { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <button id="mobile-admin-toggle" style="display:none;"><i data-lucide="menu"></i></button>
+
+    <aside class="admin-sidebar">
+        <div class="admin-logo"><img src="../photos/white blue.png" alt="Klaiz Designs"></div>
+        <nav>
+            <a href="products.html" class="admin-nav-item"><i data-lucide="package"></i> Products</a>
+            <a href="orders.html" class="admin-nav-item"><i data-lucide="shopping-cart"></i> Orders</a>
+            <a href="customers.html" class="admin-nav-item"><i data-lucide="users"></i> Customers</a>
+            <a href="settings.html" class="admin-nav-item active"><i data-lucide="settings"></i> Settings</a>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        <header class="admin-header"><h1 style="font-family:'Outfit'; font-size:2.5rem; margin:0;">Site Configuration</h1></header>
+
+        <nav class="settings-tabs">
+            <button class="tab-btn active" data-tab="home"><i data-lucide="home"></i> Homepage</button>
+            <button class="tab-btn" data-tab="nav"><i data-lucide="menu"></i> Navigation</button>
+            <button class="tab-btn" data-tab="about"><i data-lucide="info"></i> About Us</button>
+            <button class="tab-btn" data-tab="team"><i data-lucide="users"></i> Our Team</button>
+            <button class="tab-btn" data-tab="contact"><i data-lucide="phone"></i> Contact</button>
+            <button class="tab-btn" data-tab="advanced"><i data-lucide="shield"></i> Advanced</button>
+        </nav>
+
+        <!-- Homepage Panel -->
+        <div class="tab-panel active" id="panel-home">
+            <div class="editor-card">
+                <div class="card-header"><h2 style="margin-bottom:2rem;"><i data-lucide="layout"></i> Homepage Banner</h2></div>
+                <form class="cms-form">
+                    <div class="form-group"><label>Announcement Bar</label><textarea name="marquee" class="form-control" rows="2"></textarea></div>
+                    <div class="form-group"><label>Hero Title</label><input type="text" name="heroTitle" class="form-control"></div>
+                    <div class="form-group"><label>Hero Subtitle</label><textarea name="heroSubtitle" class="form-control" rows="2"></textarea></div>
+                    <button type="submit" class="btn-save-large">Update Home Banners</button>
+                </form>
+            </div>
+
+            <div class="editor-card">
+                <div class="card-header" style="margin-bottom:2rem;"><h2><i data-lucide="circle"></i> Homepage Categories (Circles)</h2></div>
+                <div id="cat-list"></div>
+                <button class="btn-upload-sm" style="width:100%; padding:15px; margin-top:1rem;" onclick="addCategoryItem()">+ Add New Category Circle</button>
+                <button class="btn-save-large" onclick="saveCategories()">Save All Categories</button>
+            </div>
+        </div>
+
+        <!-- Navigation Panel -->
+        <div class="tab-panel" id="panel-nav">
+            <div class="editor-card">
+                <div class="card-header" style="margin-bottom:2rem;"><h2><i data-lucide="menu"></i> Header Navigation Bar</h2></div>
+                <p style="color:#666; margin-bottom:2rem; font-size:0.9rem;">The "Shop By Category" menu is automatically managed by your categories. Here you can add custom links like "Home," "Best Sellers," etc.</p>
+                <div id="nav-list"></div>
+                <button class="btn-upload-sm" style="width:100%; padding:15px; margin-top:1rem;" onclick="addNavItem()">+ Add New Header Link</button>
+                <button class="btn-save-large" onclick="saveNavbar()">Save Navigation Bar</button>
+            </div>
+        </div>
+
+        <!-- About Us Panel -->
+        <div class="tab-panel" id="panel-about">
+            <div class="editor-card">
+                <div class="card-header"><h2 style="margin-bottom:2rem;"><i data-lucide="info"></i> Brand Story</h2></div>
+                <form class="cms-form">
+                    <div class="form-group"><label>Mission</label><textarea name="aboutMission" class="form-control" rows="3"></textarea></div>
+                    <div class="form-group"><label>Story Title</label><input type="text" name="aboutStoryTitle" class="form-control"></div>
+                    <div class="form-group"><label>Story Text</label><textarea name="aboutStoryText" class="form-control" rows="5"></textarea></div>
+                    <button type="submit" class="btn-save-large">Update About Page</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Team Panel -->
+        <div class="tab-panel" id="panel-team">
+            <div class="editor-card">
+                <div class="card-header"><h2 style="margin-bottom:2rem;"><i data-lucide="users"></i> Team Directory</h2></div>
+                <div id="team-list"></div>
+                <button class="btn-upload-sm" style="width:100%; padding:15px; margin-top:1rem;" onclick="addTeamMember()">+ Add New Team Member</button>
+                <button class="btn-save-large" onclick="saveTeamData()">Save Team Changes</button>
+            </div>
+        </div>
+
+        <!-- Contact Panel -->
+        <div class="tab-panel" id="panel-contact">
+            <div class="editor-card">
+                <div class="card-header"><h2 style="margin-bottom:2rem;"><i data-lucide="phone"></i> Store Info</h2></div>
+                <form class="cms-form">
+                    <div class="form-group"><label>Support Email</label><input type="email" name="contactEmail" class="form-control"></div>
+                    <div class="form-group"><label>WhatsApp Number</label><input type="text" name="contactPhone" class="form-control"></div>
+                    <button type="submit" class="btn-save-large">Save Contact Details</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Advanced -->
+        <div class="tab-panel" id="panel-advanced">
+            <div class="editor-card" style="border-color:#311;">
+                <h2 style="color:#ef4444; margin-bottom:1.5rem;">Database Control</h2>
+                <button class="btn-save-large" style="background:#ef4444; margin-bottom:1rem;" onclick="if(confirm('Wipe orders?')) {localStorage.removeItem('klaiz_orders'); location.reload();}">Clear Order History</button>
+                <button class="btn-save-large" style="background:#333;" onclick="if(confirm('Reset products?')) {localStorage.removeItem('klaiz_products'); location.reload();}">Reset Products</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../cms.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Mobile Sidebar Toggle
+        const adminSidebar = document.querySelector('.admin-sidebar');
+        const adminToggle = document.getElementById('mobile-admin-toggle');
+        if(adminToggle) {
+            adminToggle.addEventListener('click', () => {
+                adminSidebar.classList.toggle('active');
+                const icon = adminToggle.querySelector('i');
+                if(adminSidebar.classList.contains('active')) {
+                    adminToggle.innerHTML = '<i data-lucide="x"></i>';
+                } else {
+                    adminToggle.innerHTML = '<i data-lucide="menu"></i>';
+                }
+                lucide.createIcons();
+            });
+        }
+
+        // Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn, .tab-panel').forEach(el => el.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('panel-' + btn.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+
+        // Image Helpers
+        async function handleImg(input, hiddenClass, previewClass) {
+            const file = input.files[0];
+            if (!file) return;
+            try {
+                const base64 = await KlaizCMS.compressImage(file);
+                const row = input.closest('.manager-item');
+                row.querySelector(hiddenClass).value = base64;
+                if(row.querySelector(previewClass)) row.querySelector(previewClass).src = base64;
+            } catch (e) { alert('Upload failed'); }
+        }
+
+        // Navigation Manager
+        function addNavItem(label = '', url = '') {
+            const container = document.getElementById('nav-list');
+            const div = document.createElement('div');
+            div.className = 'manager-item';
+            div.innerHTML = `
+                <button class="btn-remove" onclick="this.closest('.manager-item').remove()"><i data-lucide="trash-2"></i></button>
+                <div style="display:flex; gap:10px;">
+                    <input type="text" class="form-control nav-label" placeholder="Link Label (e.g. FAQ)" value="${label}" style="flex:1">
+                    <input type="text" class="form-control nav-url" placeholder="URL (e.g. faq.html)" value="${url}" style="flex:2">
+                </div>
+            `;
+            container.appendChild(div);
+            lucide.createIcons();
+        }
+
+        // Category Manager
+        function addCategoryItem(name = '', img = '') {
+            const container = document.getElementById('cat-list');
+            const id = 'cat-' + Date.now();
+            const div = document.createElement('div');
+            div.className = 'manager-item';
+            div.innerHTML = `
+                <button class="btn-remove" onclick="this.closest('.manager-item').remove()"><i data-lucide="x"></i></button>
+                <div class="manager-top">
+                    <img src="${img || '../photos/placeholder.png'}" class="manager-avatar" style="border-radius:50%">
+                    <div style="flex:1">
+                        <input type="text" class="form-control cat-name" placeholder="Name" value="${name}" style="margin-bottom:10px;">
+                        <input type="hidden" class="cat-img-data" value="${img}">
+                        <button type="button" class="btn-upload-sm" onclick="document.getElementById('file-${id}').click()"><i data-lucide="image"></i> Choose Photo</button>
+                        <input type="file" id="file-${id}" hidden onchange="handleImg(this, '.cat-img-data', '.manager-avatar')">
+                    </div>
+                </div>
+            `;
+            container.appendChild(div);
+            lucide.createIcons();
+        }
+
+        // Team Manager
+        function addTeamMember(name = '', role = '', img = '') {
+            const container = document.getElementById('team-list');
+            const id = 'tm-' + Date.now();
+            const div = document.createElement('div');
+            div.className = 'manager-item';
+            div.innerHTML = `
+                <button class="btn-remove" onclick="this.closest('.manager-item').remove()"><i data-lucide="trash-2"></i></button>
+                <div class="manager-top">
+                    <img src="${img || '../photos/placeholder.png'}" class="manager-avatar">
+                    <div style="flex:1">
+                        <div style="display:flex; gap:10px; margin-bottom:10px;">
+                            <input type="text" class="form-control tm-name" placeholder="Name" value="${name}" style="flex:1">
+                            <input type="text" class="form-control tm-role" placeholder="Role" value="${role}" style="flex:1">
+                        </div>
+                        <input type="hidden" class="tm-img-data" value="${img}">
+                        <button type="button" class="btn-upload-sm" onclick="document.getElementById('f-${id}').click()"><i data-lucide="camera"></i> Update Photo</button>
+                        <input type="file" id="f-${id}" hidden onchange="handleImg(this, '.tm-img-data', '.manager-avatar')">
+                    </div>
+                </div>
+            `;
+            container.appendChild(div);
+            lucide.createIcons();
+        }
+
+        function loadAll() {
+            const s = KlaizCMS.getSettings();
+            document.querySelectorAll('.cms-form').forEach(form => {
+                Object.keys(s).forEach(key => {
+                    const input = form.querySelector(`[name="${key}"]`);
+                    if (input) input.value = s[key];
+                });
+            });
+            document.getElementById('nav-list').innerHTML = '';
+            s.navbar.forEach(n => addNavItem(n.label, n.url));
+            document.getElementById('cat-list').innerHTML = '';
+            s.categories.forEach(c => addCategoryItem(c.name, c.img));
+            document.getElementById('team-list').innerHTML = '';
+            s.team.forEach(m => addTeamMember(m.name, m.role, m.img));
+        }
+
+        document.querySelectorAll('.cms-form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                KlaizCMS.updateSettings(Object.fromEntries(new FormData(form)));
+                alert('Saved!');
+            });
+        });
+
+        window.saveNavbar = () => {
+            const navbar = [];
+            document.querySelectorAll('#nav-list .manager-item').forEach(row => {
+                navbar.push({ label: row.querySelector('.nav-label').value, url: row.querySelector('.nav-url').value });
+            });
+            KlaizCMS.updateSettings({ navbar });
+            alert('Navigation Bar synchronized!');
+        };
+
+        window.saveCategories = () => {
+            const categories = [];
+            document.querySelectorAll('#cat-list .manager-item').forEach(row => {
+                const name = row.querySelector('.cat-name').value;
+                categories.push({ name, img: row.querySelector('.cat-img-data').value, url: `collection.html?cat=${name}` });
+            });
+            KlaizCMS.updateSettings({ categories });
+            alert('Categories saved!');
+        };
+
+        window.saveTeamData = () => {
+            const team = [];
+            document.querySelectorAll('#team-list .manager-item').forEach(row => {
+                team.push({ name: row.querySelector('.tm-name').value, role: row.querySelector('.tm-role').value, img: row.querySelector('.tm-img-data').value });
+            });
+            KlaizCMS.updateSettings({ team });
+            alert('Team saved!');
+        };
+
+        loadAll();
+    </script>
+</body>
+</html>

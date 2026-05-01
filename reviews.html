@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews | Klaiz Designs</title>
+    <meta name="description"
+        content="See what our 10,000+ happy customers are saying about Klaiz Designs. Real photos, real reviews, real transformation.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="icon" type="image/png" href="photos/black blue.png">
+</head>
+
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links" style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item custom">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <!-- Page Header -->
+        <section class="reviews-header section">
+            <div class="container">
+                <div class="header-grid">
+                    <div class="header-main">
+                        <h1 class="page-title">What Our Customers Say</h1>
+                        <div class="aggregate-box">
+                            <span class="big-rating">4.9</span>
+                            <div class="star-group large">
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                            </div>
+                            <p>Based on 5,000+ Verified Reviews</p>
+                        </div>
+                    </div>
+                    <div class="rating-breakdown">
+                        <div class="rating-bar-row">
+                            <span>5 ★</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 80%;"></div>
+                            </div>
+                            <span>80%</span>
+                        </div>
+                        <div class="rating-bar-row">
+                            <span>4 ★</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 15%;"></div>
+                            </div>
+                            <span>15%</span>
+                        </div>
+                        <div class="rating-bar-row">
+                            <span>3 ★</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 4%;"></div>
+                            </div>
+                            <span>4%</span>
+                        </div>
+                        <div class="rating-bar-row">
+                            <span>2 ★</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 1%;"></div>
+                            </div>
+                            <span>1%</span>
+                        </div>
+                        <div class="rating-bar-row">
+                            <span>1 ★</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 0%;"></div>
+                            </div>
+                            <span>0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Review Wall -->
+        <section class="section photo-wall-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Wall Inspirations</h2>
+                    <p class="section-subtitle">Real photos from real homes</p>
+                </div>
+                <div class="masonry-grid">
+                    <div class="masonry-item">
+                        <img src="photos/hero_slide_1_1777291339894.png" alt="Review">
+                        <div class="item-overlay">
+                            <strong>Arun D.</strong>
+                            <div class="star-group small"><i data-lucide="star" class="fill"></i> 5/5</div>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="photos/hero_slide_2_1777291568402.png" alt="Review">
+                        <div class="item-overlay">
+                            <strong>Priya S.</strong>
+                            <div class="star-group small"><i data-lucide="star" class="fill"></i> 5/5</div>
+                        </div>
+                    </div>
+                    <div class="masonry-item tall">
+                        <img src="photos/design_your_own_custom_1777291662169.png" alt="Review">
+                        <div class="item-overlay">
+                            <strong>Rahul K.</strong>
+                            <div class="star-group small"><i data-lucide="star" class="fill"></i> 5/5</div>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="photos/hero_slide_3_1777291582739.png" alt="Review">
+                        <div class="item-overlay">
+                            <strong>Anjali M.</strong>
+                            <div class="star-group small"><i data-lucide="star" class="fill"></i> 5/5</div>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="photos/product_poster_1_1777291679013.png" alt="Review">
+                        <div class="item-overlay">
+                            <strong>Vikram R.</strong>
+                            <div class="star-group small"><i data-lucide="star" class="fill"></i> 5/5</div>
+                        </div>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="photos/category_superhero_1777291640908.png" alt="Review">
+                        <div class="item-overlay">
+                            <strong>Sonia G.</strong>
+                            <div class="star-group small"><i data-lucide="star" class="fill"></i> 5/5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Reviews -->
+        <section class="section video-reviews-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Unboxing & Room Reveals</h2>
+                </div>
+                <div class="horizontal-scroll-container no-scrollbar">
+                    <div class="video-row">
+                        <div class="video-card">
+                            <div class="video-thumb">
+                                <img src="photos/hero_slide_2_1777291568402.png" alt="Video">
+                                <div class="play-btn"><i data-lucide="play"></i></div>
+                            </div>
+                            <span>Sumit's Gaming Den Setup</span>
+                        </div>
+                        <div class="video-card">
+                            <div class="video-thumb">
+                                <img src="photos/hero_slide_1_1777291339894.png" alt="Video">
+                                <div class="play-btn"><i data-lucide="play"></i></div>
+                            </div>
+                            <span>Sneha's Living Room Glow-up</span>
+                        </div>
+                        <div class="video-card">
+                            <div class="video-thumb">
+                                <img src="photos/hero_slide_3_1777291582739.png" alt="Video">
+                                <div class="play-btn"><i data-lucide="play"></i></div>
+                            </div>
+                            <span>Office Space Transformation</span>
+                        </div>
+                        <div class="video-card">
+                            <div class="video-thumb">
+                                <img src="photos/product_poster_1_1777291679013.png" alt="Video">
+                                <div class="play-btn"><i data-lucide="play"></i></div>
+                            </div>
+                            <span>Minimalist Room Reveal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Written Reviews -->
+        <section class="section written-reviews-section">
+            <div class="container">
+                <div class="reviews-filter-bar">
+                    <div class="filters-left">
+                        <button class="filter-btn active">All Reviews</button>
+                        <button class="filter-btn">With Photos</button>
+                        <button class="filter-btn">5 Stars</button>
+                    </div>
+                    <div class="filters-right">
+                        <select>
+                            <option>Most Recent</option>
+                            <option>Most Helpful</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="reviews-list">
+                    <!-- Review 1 -->
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="star-group small">
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                            </div>
+                            <span class="review-date">15 April 2026</span>
+                        </div>
+                        <div class="reviewer-info">
+                            <strong>Arun D.</strong>
+                            <span class="location">Mumbai</span>
+                            <span class="verified-badge"><i data-lucide="check-circle"></i> Verified Purchase</span>
+                        </div>
+                        <h3 class="review-title">Absolutely Stunning Quality!</h3>
+                        <p class="review-body">The print quality is beyond my expectations. The colors are vibrant and
+                            the matte finish looks very premium under warm lights. Highly recommended for any car
+                            enthusiast!</p>
+                        <div class="review-product">
+                            <img src="photos/hero_slide_1_1777291339894.png" alt="Product">
+                            <span>Purchased: <strong>BMW M4 Heritage Poster</strong></span>
+                        </div>
+                        <div class="review-footer">
+                            <span>Was this helpful?</span>
+                            <div class="helpful-btns">
+                                <button><i data-lucide="thumbs-up"></i> Yes (12)</button>
+                                <button><i data-lucide="thumbs-down"></i> No (0)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="star-group small">
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                                <i data-lucide="star" class="fill"></i>
+                            </div>
+                            <span class="review-date">10 April 2026</span>
+                        </div>
+                        <div class="reviewer-info">
+                            <strong>Priya S.</strong>
+                            <span class="location">Bangalore</span>
+                            <span class="verified-badge"><i data-lucide="check-circle"></i> Verified Purchase</span>
+                        </div>
+                        <h3 class="review-title">The Perfect Gift</h3>
+                        <p class="review-body">I ordered a custom split poster for my husband's birthday. The team was
+                            very helpful with the design. It arrived in perfect condition and he loves it!</p>
+                        <div class="review-product">
+                            <img src="photos/design_your_own_custom_1777291662169.png" alt="Product">
+                            <span>Purchased: <strong>Custom 3-Piece Split Art</strong></span>
+                        </div>
+                        <div class="review-footer">
+                            <span>Was this helpful?</span>
+                            <div class="helpful-btns">
+                                <button><i data-lucide="thumbs-up"></i> Yes (8)</button>
+                                <button><i data-lucide="thumbs-down"></i> No (0)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline full-width mt-4">LOAD MORE REVIEWS</button>
+            </div>
+        </section>
+
+        <!-- Instagram Feed -->
+        <section class="section ig-section">
+            <div class="container">
+                <div class="ig-header">
+                    <h2>Tag us <span>@posterized_in</span> for a feature</h2>
+                    <a href="#" class="btn btn-outline"><i data-lucide="instagram"></i> Follow on Instagram</a>
+                </div>
+                <div class="ig-grid">
+                    <div class="ig-item"><img src="photos/hero_slide_1_1777291339894.png" alt="IG"></div>
+                    <div class="ig-item"><img src="photos/hero_slide_2_1777291568402.png" alt="IG"></div>
+                    <div class="ig-item"><img src="photos/hero_slide_3_1777291582739.png" alt="IG"></div>
+                    <div class="ig-item"><img src="photos/product_poster_1_1777291679013.png" alt="IG"></div>
+                    <div class="ig-item"><img src="photos/category_superhero_1777291640908.png" alt="IG"></div>
+                    <div class="ig-item"><img src="photos/design_your_own_custom_1777291662169.png" alt="IG"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="modal" id="review-lightbox">
+        <div class="modal-overlay"></div>
+        <div class="modal-content large">
+            <button class="modal-close"><i data-lucide="x"></i></button>
+            <div class="modal-body p-0">
+                <div class="lightbox-layout">
+                    <div class="lightbox-img">
+                        <img src="" id="lightbox-main-img" alt="Full View">
+                    </div>
+                    <div class="lightbox-details">
+                        <div class="reviewer-meta">
+                            <strong id="lb-name">Arun D.</strong>
+                            <div class="star-group small"><i data-lucide="star" class="fill"></i> 5/5</div>
+                        </div>
+                        <p class="lb-text">"Absolutely stunning quality. The print looks amazing on my wall!"</p>
+                        <div class="lb-product">
+                            <img src="photos/hero_slide_1_1777291339894.png" alt="Product">
+                            <div class="mi-details">
+                                <h4>BMW M4 Heritage Poster</h4>
+                                <a href="product-detail.html" class="btn-text">View Product</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col about">
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs"
+                        class="nav-logo-img"></a>
+                <p>Curating the finest wall art for the modern space. High-quality prints, custom designs, and worldwide
+                    shipping.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/klaizdesigns.in"><i data-lucide="instagram"></i></a>
+                    <a href="https://twitter.com"><i data-lucide="twitter"></i></a>
+                    <a href="https://facebook.com"><i data-lucide="facebook"></i></a>
+                    <a href="https://youtube.com"><i data-lucide="youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <a href="collection.html">Shop All</a>
+                <a href="collection.html">Best Sellers</a>
+                <a href="custom-builder.html">Custom Posters</a>
+                <a href="collection-new.html">New Arrivals</a>
+                <a href="collection.html">Sale</a>
+            </div>
+            <div class="footer-col">
+                <h3>Customer Policy</h3>
+                <a href="policies.html">Shipping Policy</a>
+                <a href="policies.html">Refund & Return</a>
+                <a href="policies.html">Privacy Policy</a>
+                <a href="policies.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: support@klaizdesigns.in</p>
+                <p>WhatsApp: +91 7034219758</p>
+                <p>Address: Kerala,India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; 2026 Klaiz Designs. All rights reserved.</p>
+                <div class="payment-icons">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/000000/upi.png" alt="UPI">
+                    <span class="razorpay-logo">Razorpay</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

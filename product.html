@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Klaiz Designs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=3">
+    <style>
+        .product-detail-page {
+            padding: 60px 0;
+            background: #0a0a0a;
+            min-height: 100vh;
+        }
+
+        /* Renamed to avoid collision with CMS grid */
+        .product-detail-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .product-gallery {
+            position: sticky;
+            top: 120px;
+        }
+
+        .product-gallery img {
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            transition: 0.5s ease;
+        }
+
+        .product-info h1 {
+            font-family: 'Outfit';
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            color: #fff;
+        }
+
+        .product-category {
+            color: var(--accent-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        /* Size Selector Styling */
+        .selector-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .size-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .size-btn {
+            padding: 1rem;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .size-btn:hover {
+            border-color: var(--accent-color);
+        }
+
+        .size-btn.active {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .size-desc {
+            font-size: 0.8rem;
+            display: block;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        /* Quantity Selector */
+        .quantity-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            background: #111;
+            border-radius: 50px;
+            border: 1px solid #333;
+            padding: 5px;
+        }
+
+        .qty-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .qty-btn:hover {
+            background: #222;
+        }
+
+        #qty-val {
+            width: 40px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Buy Actions */
+        .buy-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-buy {
+            flex: 2;
+            padding: 1.5rem;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-cart {
+            flex: 1;
+            padding: 1.5rem;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #333;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-buy:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(46, 167, 215, 0.4);
+        }
+
+        .btn-cart:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .product-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 3rem;
+        }
+
+        .meta-card {
+            background: #111;
+            padding: 1.2rem;
+            border-radius: 15px;
+            border: 1px solid #222;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .meta-card i {
+            color: var(--accent-color);
+            width: 20px;
+        }
+
+        .meta-card span {
+            font-size: 0.85rem;
+            color: #aaa;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .product-detail-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-gallery {
+                position: static;
+            }
+
+            .product-info h1 {
+                font-size: 2.2rem;
+            }
+
+            .buy-actions {
+                flex-direction: column;
+            }
+
+            .product-meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links" style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item custom">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="product-detail-page">
+        <div class="container">
+            <div class="product-detail-layout">
+                <!-- Gallery Section -->
+                <div class="product-gallery">
+                    <img id="p-img" src="photos/placeholder.png" alt="Loading...">
+                </div>
+
+                <!-- Info Section -->
+                <div class="product-info">
+                    <span class="product-category" id="p-cat">Category</span>
+                    <h1 id="p-name">Loading Product...</h1>
+                    <span class="product-price" id="p-price">₹0</span>
+
+                    <!-- Size Selection -->
+                    <label class="selector-label">Select Poster Size</label>
+                    <div class="size-options">
+                        <div class="size-btn active" data-size="A4">
+                            A4
+                            <span class="size-desc">8.3 x 11.7 in</span>
+                        </div>
+                        <div class="size-btn" data-size="A3">
+                            A3
+                            <span class="size-desc">11.7 x 16.5 in</span>
+                        </div>
+                        <div class="size-btn" data-size="12x18">
+                            12x18
+                            <span class="size-desc">30 x 45 cm</span>
+                        </div>
+                    </div>
+
+                    <!-- Quantity Selector -->
+                    <label class="selector-label">Quantity</label>
+                    <div class="quantity-wrapper">
+                        <div class="qty-controls">
+                            <button class="qty-btn" id="qty-minus"><i data-lucide="minus"></i></button>
+                            <span id="qty-val">1</span>
+                            <button class="qty-btn" id="qty-plus"><i data-lucide="plus"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Buy Actions -->
+                    <div class="buy-actions">
+                        <button class="btn-buy" id="buy-now-btn">BUY IT NOW</button>
+                        <button class="btn-cart" id="add-to-cart-btn">ADD TO CART</button>
+                    </div>
+
+                    <!-- Meta Cards -->
+                    <div class="product-meta-grid">
+                        <div class="meta-card">
+                            <i data-lucide="award"></i>
+                            <span>Premium 300GSM<br>Matte Finish Paper</span>
+                        </div>
+                        <div class="meta-card">
+                            <i data-lucide="truck"></i>
+                            <span>Free Shipping<br>Above ₹499</span>
+                        </div>
+                        <div class="meta-card">
+                            <i data-lucide="shield-check"></i>
+                            <span>Damage-Free<br>Toughened Tube</span>
+                        </div>
+                        <div class="meta-card">
+                            <i data-lucide="zap"></i>
+                            <span>Dispatched in<br>24-48 Hours</span>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="product-description" style="margin-top: 3rem;">
+                        <h3 style="color:#fff; font-family:'Outfit'; margin-bottom:1rem;">Product Description</h3>
+                        <p id="p-desc" style="color:#aaa; line-height:1.8;">
+                            Transform your space with our premium wall art. Printed on gallery-grade archival paper,
+                            this poster features vibrant colors and sharp details that will last for decades.
+                            Perfect for your bedroom, office, or studio.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="cms.js"></script>
+    <script>
+        lucide.createIcons();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        let selectedSize = 'A4';
+        let quantity = 1;
+
+        // Quantity logic
+        const qtyVal = document.getElementById('qty-val');
+        if (qtyVal) {
+            document.getElementById('qty-plus').addEventListener('click', () => {
+                quantity++;
+                qtyVal.textContent = quantity;
+            });
+            document.getElementById('qty-minus').addEventListener('click', () => {
+                if (quantity > 1) {
+                    quantity--;
+                    qtyVal.textContent = quantity;
+                }
+            });
+        }
+
+        function loadProduct() {
+            if (!productId) { window.location.href = 'collection.html'; return; }
+
+            const p = KlaizCMS.getById(productId);
+
+            if (!p) {
+                document.getElementById('p-name').textContent = 'Product Not Found';
+                document.getElementById('p-price').textContent = '';
+                document.getElementById('p-img').src = 'photos/white blue.png';
+                return;
+            }
+
+            document.getElementById('p-cat').textContent = p.category;
+            document.getElementById('p-name').textContent = p.name;
+            document.getElementById('p-price').textContent = `₹${p.priceA4 || p.price}`;
+            document.getElementById('p-img').src = p.image;
+            document.getElementById('p-img').alt = p.name;
+            document.getElementById('p-desc').textContent = p.description || "Transform your space with our premium wall art. Printed on gallery-grade archival paper, this poster features vibrant colors and sharp details that will last for decades.";
+            
+            document.title = `${p.name} | Klaiz Designs`;
+
+            // Size selection logic with dynamic pricing
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    selectedSize = btn.getAttribute('data-size');
+                    
+                    // Update price based on size
+                    if (selectedSize === 'A4') document.getElementById('p-price').textContent = `₹${p.priceA4 || p.price}`;
+                    if (selectedSize === 'A3') document.getElementById('p-price').textContent = `₹${p.priceA3 || 449}`;
+                    if (selectedSize === '12x18') document.getElementById('p-price').textContent = `₹${p.price12x18 || 599}`;
+                });
+            });
+
+            lucide.createIcons();
+        }
+
+        function addToCart(redirectToCart = false) {
+            const user = JSON.parse(localStorage.getItem('klaiz_user') || 'null');
+            if (!user) {
+                alert("Please login to continue with your purchase.");
+                window.location.href = `login.html?redirect=product.html?id=${productId}`;
+                return;
+            }
+
+            const p = KlaizCMS.getById(productId);
+            if (!p) return;
+
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            
+            // Determine the price for the selected size
+            let currentPrice = p.priceA4 || p.price;
+            if (selectedSize === 'A3') currentPrice = p.priceA3 || 449;
+            if (selectedSize === '12x18') currentPrice = p.price12x18 || 599;
+
+            // Cart item includes size
+            const itemKey = `${productId}_${selectedSize}`;
+            const existing = cart.find(item => item.cartId === itemKey);
+
+            if (existing) {
+                existing.quantity += quantity;
+            } else {
+                cart.push({
+                    cartId: itemKey,
+                    id: productId,
+                    name: p.name,
+                    price: currentPrice,
+                    image: p.image,
+                    size: selectedSize,
+                    quantity: quantity
+                });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Notification
+            if (window.updateCartBadge) window.updateCartBadge();
+            
+            if (redirectToCart) {
+                window.location.href = 'cart.html';
+            } else {
+                const btn = document.getElementById('add-to-cart-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ ADDED';
+                btn.style.color = '#10b981';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.color = '#fff';
+                }, 2000);
+            }
+        }
+
+        document.getElementById('add-to-cart-btn').addEventListener('click', () => addToCart(false));
+        document.getElementById('buy-now-btn').addEventListener('click', () => addToCart(true));
+
+        loadProduct();
+    </script>
+</body>
+
+</html>

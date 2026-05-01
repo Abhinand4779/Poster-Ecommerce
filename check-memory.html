@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Klaiz Memory Diagnostic</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: monospace; padding: 20px; }
+        .success { color: #0f0; }
+        .error { color: #f00; }
+        .item { border-bottom: 1px solid #333; padding: 10px 0; }
+        img { max-width: 100px; display: block; margin-top: 10px; border: 1px solid #333; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. MOBILE MENU DRAWER -->
+    
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR -->
+    
+
+    <!-- 3. BOTTOM SHEET OVERLAY -->
+    
+
+    <h1>Klaiz Designs - Memory Diagnostic</h1>
+    <div id="results">Checking memory...</div>
+
+    <script>
+        const results = document.getElementById('results');
+        const products = localStorage.getItem('klaiz_products');
+        
+        if (!products) {
+            results.innerHTML = '<p class="error">❌ NO PRODUCTS FOUND IN MEMORY.</p><p>Please go to admin-direct.html and add a product first.</p>';
+        } else {
+            const list = JSON.parse(products);
+            let html = `<p class="success">✅ FOUND ${list.length} PRODUCTS IN MEMORY:</p>`;
+            
+            list.forEach((p, i) => {
+                html += `
+                    <div class="item">
+                        <strong>#${i+1} Name:</strong> ${p.name}<br>
+                        <strong>Category:</strong> ${p.category}<br>
+                        <strong>Price:</strong> ₹${p.price}<br>
+                        <strong>Image Status:</strong> ${p.image.startsWith('data:') ? '✅ Base64 OK' : '⚠️ Raw Path'}<br>
+                        <img src="${p.image}">
+                    </div>
+                `;
+            });
+            results.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klaiz Designs | Premium Wall Art & Custom Posters</title>
+    <meta name="description"
+        content="Shop the best wall posters online. Custom posters, Superhero, Cars, Movies, and more. Transform your space with Klaiz Designs.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="icon" type="image/png" href="photos/black blue.png">
+</head>
+
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs"
+                    class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                </svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links"
+                style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item custom">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-menu">
+                        <line x1="4" x2="20" y1="12" y2="12" />
+                        <line x1="4" x2="20" y1="6" y2="6" />
+                        <line x1="4" x2="20" y1="18" y2="18" />
+                    </svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs"
+                        class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <!-- 3. HERO SECTION -->
+        <section class="hero">
+            <div class="slider" id="hero-slider">
+                <!-- Slide 1 -->
+                <div class="slide active">
+                    <img src="photos/hero_slide_1_1777291339894.png" alt="Transform Your Walls">
+                    <div class="slide-overlay">
+                        <div class="container">
+                            <div class="slide-content">
+                                <h1 class="reveal-text">Transform Your Walls</h1>
+                                <p class="reveal-text-delay">Premium matte-finish posters for every aesthetic.</p>
+                                <a href="#" class="btn btn-primary reveal-text-delay-2">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="photos/hero_slide_2_1777291568402.png" alt="Make It Yours">
+                    <div class="slide-overlay">
+                        <div class="container">
+                            <div class="slide-content">
+                                <h1>Make It Yours</h1>
+                                <p>Upload your designs and create high-quality custom posters.</p>
+                                <a href="#" class="btn btn-primary">Custom Poster</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="photos/hero_slide_3_1777291582739.png" alt="Bulk Orders">
+                    <div class="slide-overlay">
+                        <div class="container">
+                            <div class="slide-content">
+                                <h1>Bulk Orders for Events</h1>
+                                <p>Special pricing for offices, events, and giftings.</p>
+                                <a href="#" class="btn btn-primary">Get Quote</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-controls">
+                <button class="slider-prev"><i data-lucide="chevron-left"></i></button>
+                <div class="slider-dots"></div>
+                <button class="slider-next"><i data-lucide="chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- 4. CATEGORY CIRCLES ROW -->
+        <section class="section categories-section">
+            <div class="container">
+                <div class="horizontal-scroll-container no-scrollbar" id="category-scroll">
+                    <a href="custom-builder.html" class="category-item">
+                        <div class="circle-img"><img src="photos/hero_slide_2_1777291568402.png" alt="Custom"></div>
+                        <span>Custom</span>
+                    </a>
+                    <a href="collection-superhero.html" class="category-item">
+                        <div class="circle-img"><img src="photos/category_superhero_1777291640908.png" alt="Superhero">
+                        </div>
+                        <span>Superhero</span>
+                    </a>
+                    <a href="collection-cars.html" class="category-item">
+                        <div class="circle-img"><img src="photos/hero_slide_1_1777291339894.png" alt="Cars"></div>
+                        <span>Cars</span>
+                    </a>
+                    <a href="collection-movies.html" class="category-item">
+                        <div class="circle-img"><img src="photos/product_poster_1_1777291679013.png" alt="Movies"></div>
+                        <span>Movies</span>
+                    </a>
+                    <a href="collection-tvseries.html" class="category-item">
+                        <div class="circle-img"><img src="photos/hero_slide_1_1777291339894.png" alt="TV Series"></div>
+                        <span>TV Series</span>
+                    </a>
+                    <a href="collection-music.html" class="category-item">
+                        <div class="circle-img"><img src="photos/design_your_own_custom_1777291662169.png" alt="Music">
+                        </div>
+                        <span>Music</span>
+                    </a>
+                    <a href="collection-games.html" class="category-item">
+                        <div class="circle-img"><img src="photos/category_superhero_1777291640908.png" alt="Games">
+                        </div>
+                        <span>Games</span>
+                    </a>
+                    <a href="collection-motivational.html" class="category-item">
+                        <div class="circle-img"><img src="photos/hero_slide_3_1777291582739.png" alt="Motivational">
+                        </div>
+                        <span>Motivational</span>
+                    </a>
+                    <a href="collection-cricket.html" class="category-item">
+                        <div class="circle-img"><img src="photos/product_poster_1_1777291679013.png" alt="Cricket">
+                        </div>
+                        <span>Cricket</span>
+                    </a>
+                    <a href="collection-football.html" class="category-item">
+                        <div class="circle-img"><img src="photos/hero_slide_1_1777291339894.png" alt="Football"></div>
+                        <span>Football</span>
+                    </a>
+                    <a href="collection-f1.html" class="category-item">
+                        <div class="circle-img"><img src="photos/hero_slide_2_1777291568402.png" alt="F1"></div>
+                        <span>F1</span>
+                    </a>
+                    <a href="collection.html" class="category-item">
+                        <div class="circle-img">
+                            <div class="explore-more-icon"><i data-lucide="plus"></i></div>
+                        </div>
+                        <span>Explore More</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. DESIGN YOUR OWN SECTION -->
+        <section class="section design-own-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Design Your Own</h2>
+                </div>
+                <div class="horizontal-scroll-container no-scrollbar">
+                    <div class="custom-card">
+                        <img src="photos/design_your_own_custom_1777291662169.png" alt="Custom Poster">
+                        <div class="card-label">Custom Poster</div>
+                    </div>
+                    <div class="custom-card">
+                        <img src="photos/hero_slide_2_1777291568402.png" alt="3-Piece Split">
+                        <div class="card-label">3-Piece Split</div>
+                    </div>
+                    <div class="custom-card">
+                        <img src="photos/design_your_own_custom_1777291662169.png" alt="Retro Prints">
+                        <div class="card-label">Retro Prints</div>
+                    </div>
+                    <div class="custom-card">
+                        <img src="photos/product_poster_1_1777291679013.png" alt="Canvas Wrap">
+                        <div class="card-label">Canvas Wrap</div>
+                    </div>
+                    <div class="custom-card">
+                        <img src="photos/hero_slide_1_1777291339894.png" alt="Framed Prints">
+                        <div class="card-label">Framed Prints</div>
+                    </div>
+                    <div class="custom-card">
+                        <img src="photos/design_your_own_custom_1777291662169.png" alt="Metal Posters">
+                        <div class="card-label">Metal Posters</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. BEST SELLING PRODUCTS -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Best Selling Products</h2>
+                    <a href="collection.html" class="view-all">View All</a>
+                </div>
+                <div class="horizontal-scroll-container no-scrollbar product-grid" id="product-grid">
+                    <!-- Dynamic products will be loaded here by main.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. TRENDING NOW -->
+        <section class="section alternate-bg">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Trending Now</h2>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+                <div class="horizontal-scroll-container no-scrollbar product-grid" id="trending-grid">
+                    <!-- Dynamic products loaded by home script -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. CUSTOMER REVIEWS CAROUSEL -->
+        <section class="section reviews-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Happy Customers</h2>
+                </div>
+                <div class="reviews-marquee marquee-slow" id="reviews-container">
+                    <div class="review-item" data-full="photos/hero_slide_1_1777291339894.png"
+                        data-text="Absolutely loved the quality! The colors are so vibrant and it looks amazing on my wall.">
+                        <img src="photos/hero_slide_1_1777291339894.png" alt="Review 1">
+                    </div>
+                    <div class="review-item" data-full="photos/hero_slide_2_1777291568402.png"
+                        data-text="The custom poster came out perfectly. High resolution and fast delivery. Highly recommended!">
+                        <img src="photos/hero_slide_2_1777291568402.png" alt="Review 2">
+                    </div>
+                    <div class="review-item" data-full="photos/hero_slide_3_1777291582739.png"
+                        data-text="Ordered in bulk for our office. The team was very helpful and the pricing was great.">
+                        <img src="photos/hero_slide_3_1777291582739.png" alt="Review 3">
+                    </div>
+                    <div class="review-item" data-full="photos/product_poster_1_1777291679013.png"
+                        data-text="Great experience! The packaging was secure and the poster arrived without any damage.">
+                        <img src="photos/product_poster_1_1777291679013.png" alt="Review 4">
+                    </div>
+                    <div class="review-item" data-full="photos/design_your_own_custom_1777291662169.png"
+                        data-text="Best place for F1 posters in India. Will definitely buy more.">
+                        <img src="photos/design_your_own_custom_1777291662169.png" alt="Review 5">
+                    </div>
+                    <!-- Duplicate for infinite marquee effect -->
+                    <div class="review-item" data-full="photos/hero_slide_1_1777291339894.png"
+                        data-text="Absolutely loved the quality! The colors are so vibrant and it looks amazing on my wall.">
+                        <img src="photos/hero_slide_1_1777291339894.png" alt="Review 1">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="review-lightbox">
+            <div class="lightbox-content">
+                <button class="lightbox-close"><i data-lucide="x"></i></button>
+                <div class="lightbox-inner">
+                    <div class="lightbox-img">
+                        <img src="" alt="Full Review Image" id="lightbox-img">
+                    </div>
+                    <div class="lightbox-details">
+                        <div class="stars">
+                            <i data-lucide="star" class="filled"></i>
+                            <i data-lucide="star" class="filled"></i>
+                            <i data-lucide="star" class="filled"></i>
+                            <i data-lucide="star" class="filled"></i>
+                            <i data-lucide="star" class="filled"></i>
+                        </div>
+                        <p id="lightbox-text">Review text goes here...</p>
+                        <span class="reviewer-name">- Verified Customer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 9. FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col about">
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs"
+                        class="nav-logo-img"></a>
+                <p>Curating the finest wall art for the modern space. High-quality prints, custom designs, and worldwide
+                    shipping.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/klaizdesigns.in"><i data-lucide="instagram"></i></a>
+                    <a href="https://twitter.com"><i data-lucide="twitter"></i></a>
+                    <a href="https://facebook.com"><i data-lucide="facebook"></i></a>
+                    <a href="https://youtube.com"><i data-lucide="youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <a href="collection.html">Shop All</a>
+                <a href="collection.html">Best Sellers</a>
+                <a href="custom-builder.html">Custom Posters</a>
+                <a href="collection-new.html">New Arrivals</a>
+                <a href="collection.html">Sale</a>
+            </div>
+            <div class="footer-col">
+                <h3>Customer Policy</h3>
+                <a href="policies.html">Shipping Policy</a>
+                <a href="policies.html">Refund & Return</a>
+                <a href="policies.html">Privacy Policy</a>
+                <a href="policies.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: support@klaizdesigns.in</p>
+                <p>WhatsApp: +91 7034219758</p>
+                <p>Address: Kerala,India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; 2026 Klaiz Designs. All rights reserved.</p>
+                <div class="payment-icons">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/000000/upi.png" alt="UPI">
+                    <span class="razorpay-logo">Razorpay</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cms.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

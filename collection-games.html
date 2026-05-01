@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Posters | Klaiz Designs</title>
+    <meta name="description" content="Shop premium car posters. High-quality prints for enthusiasts.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="icon" type="image/png" href="photos/black blue.png">
+</head>
+
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links" style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item custom">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <main class="collection-page">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a>
+                <i data-lucide="chevron-right"></i>
+                <a href="#">Shop Posters</a>
+                <i data-lucide="chevron-right"></i>
+                <span>Games</span>
+            </nav>
+
+            <!-- Page Title -->
+            <div class="collection-header">
+                <h1 class="page-title">Gaming Posters</h1>
+                <span class="product-count">Level up your room</span>
+            </div>
+
+            <div class="collection-layout">
+                <!-- 3. LEFT SIDEBAR FILTERS -->
+                <aside class="filters-sidebar" id="filters-sidebar">
+                    <div class="sidebar-header mobile-only">
+                        <h3>Filters</h3>
+                        <button id="close-filters"><i data-lucide="x"></i></button>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4 class="filter-title">Categories</h4>
+                        <div class="category-links">
+                            <a href="#" class="cat-link active" data-category="Gaming">All Products</a>
+                            <a href="#" class="cat-link" data-category="Anime">Anime</a>
+                            <a href="#" class="cat-link" data-category="Bikes">Bikes</a>
+                            <a href="#" class="cat-link" data-category="Cars">Cars</a>
+                            <a href="#" class="cat-link" data-category="Comics">Comics</a>
+                            <a href="#" class="cat-link" data-category="Movies">Movies</a>
+                            <a href="#" class="cat-link" data-category="Music">Music</a>
+                            <a href="#" class="cat-link" data-category="Sports">Sports</a>
+                            <a href="#" class="cat-link" data-category="Superhero">Superhero</a>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4 class="filter-title">Price Range</h4>
+                        <div class="price-range-container">
+                            <input type="range" min="0" max="2000" value="2000" class="slider" id="price-slider">
+                            <div class="price-labels">
+                                <span>â‚¹0</span>
+                                <span id="price-val">â‚¹2000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4 class="filter-title">Size</h4>
+                        <div class="filter-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="size" value="A4"> A4 (8.3 x 11.7 in)
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="size" value="A3"> A3 (11.7 x 16.5 in)
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="size" value="12x18"> 12 x 18 in
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline full-width clear-filters" onclick="resetFilters()">Reset All Filters</button>
+                </aside>
+
+                <div class="collection-content">
+                    <!-- 4. TOP BAR -->
+                    <div class="collection-toolbar">
+                        <div class="results-count">Showing 1â€“12 of 48 products</div>
+
+                        <div class="toolbar-actions">
+                            <button class="mobile-filter-trigger mobile-only" id="open-filters">
+                                <i data-lucide="sliders-horizontal"></i> Filters
+                            </button>
+
+                            <div class="sort-dropdown">
+                                <label for="sort-by" class="desktop-only">Sort by:</label>
+                                <select id="sort-by">
+                                    <option>New Arrivals</option>
+                                    <option>Best Selling</option>
+                                    <option>Price: Low to High</option>
+                                    <option>Price: High to Low</option>
+                                    <option>Sale Items</option>
+                                </select>
+                            </div>
+
+                            <div class="view-toggles desktop-only">
+                                <button class="view-btn active"><i data-lucide="layout-grid"></i></button>
+                                <button class="view-btn"><i data-lucide="list"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. PRODUCT GRID -->
+                    <div class="product-listing-grid" id="product-grid">
+                        <!-- Products loaded dynamically by cms.js -->
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col about">
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs"
+                        class="nav-logo-img"></a>
+                <p>Curating the finest wall art for the modern space. High-quality prints, custom designs, and worldwide
+                    shipping.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/klaizdesigns.in"><i data-lucide="instagram"></i></a>
+                    <a href="https://twitter.com"><i data-lucide="twitter"></i></a>
+                    <a href="https://facebook.com"><i data-lucide="facebook"></i></a>
+                    <a href="https://youtube.com"><i data-lucide="youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <a href="collection.html">Shop All</a>
+                <a href="collection.html">Best Sellers</a>
+                <a href="custom-builder.html">Custom Posters</a>
+                <a href="collection-new.html">New Arrivals</a>
+                <a href="collection.html">Sale</a>
+            </div>
+            <div class="footer-col">
+                <h3>Customer Policy</h3>
+                <a href="policies.html">Shipping Policy</a>
+                <a href="policies.html">Refund & Return</a>
+                <a href="policies.html">Privacy Policy</a>
+                <a href="policies.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: support@klaizdesigns.in</p>
+                <p>WhatsApp: +91 7034219758</p>
+                <p>Address: Kerala,India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; 2026 Klaiz Designs. All rights reserved.</p>
+                <div class="payment-icons">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/000000/upi.png" alt="UPI">
+                    <span class="razorpay-logo">Razorpay</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cms.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results | Klaiz Designs</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="icon" type="image/png" href="photos/black blue.png">
+</head>
+
+<body class="dark-theme">
+    <!-- 1. MOBILE MENU DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <!-- Dynamic Links via cms.js -->
+        </ul>
+        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
+            <div class="drawer-help-links" style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
+                <a href="policies.html">Shipping</a>
+                <a href="policies.html">Returns</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM NAVIGATION BAR (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="collection.html" class="bottom-nav-item">
+            <i data-lucide="grid"></i>
+            <span>Shop</span>
+        </a>
+        <a href="custom-builder.html" class="bottom-nav-item custom">
+            <i data-lucide="palette"></i>
+            <span>Custom</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i data-lucide="user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+                <span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STICKY NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+
+            <div class="nav-center desktop-only">
+                <ul class="nav-links">
+                    <!-- Dynamic Navbar Links are loaded here via cms.js -->
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <section class="search-header">
+            <div class="container">
+                <div class="search-input-wrapper">
+                    <div class="main-search-bar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search" style="display: block;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        <input type="text" value="batman poster" placeholder="Search posters, categories, themes..."
+                            id="search-input-main">
+                        <button class="search-clear-btn"><i data-lucide="x"></i></button>
+                    </div>
+
+                    <!-- Autocomplete Dropdown -->
+                    <div class="search-suggestions" id="search-suggestions">
+                        <div class="suggestion-group">
+                            <h4>Matching Products</h4>
+                            <div class="suggestion-item" tabindex="0">
+                                <i data-lucide="image"></i>
+                                <span>The Batman (2022) Minimalist Poster</span>
+                            </div>
+                            <div class="suggestion-item" tabindex="0">
+                                <i data-lucide="image"></i>
+                                <span>Batman: Arkham Knight City View</span>
+                            </div>
+                        </div>
+                        <div class="suggestion-group">
+                            <h4>Categories</h4>
+                            <div class="suggestion-item" tabindex="0">
+                                <i data-lucide="layers"></i>
+                                <span>Superheroes > <strong>Batman</strong></span>
+                            </div>
+                        </div>
+                        <div class="suggestion-group">
+                            <h4>Recent Searches</h4>
+                            <div class="suggestion-item" tabindex="0">
+                                <i data-lucide="history"></i>
+                                <span>f1 poster</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-meta mt-2">
+                    <p>Showing 34 results for <strong>"batman poster"</strong></p>
+                    <div class="did-you-mean">Did you mean: <a href="#">batman posters</a>, <a href="#">batman wall
+                            art</a></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter & Sort -->
+        <section class="search-tools">
+            <div class="container">
+                <div class="tools-row">
+                    <div class="filter-pills">
+                        <button class="pill active">All (34)</button>
+                        <button class="pill">Posters (28)</button>
+                        <button class="pill">Multi-sets (4)</button>
+                        <button class="pill">Custom (2)</button>
+                    </div>
+                    <div class="sort-box">
+                        <span>Sort by:</span>
+                        <select class="sort-select">
+                            <option>Relevance</option>
+                            <option>New Arrivals</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Best Selling</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Grid -->
+        <section class="section search-results-section" id="results-container">
+            <div class="container">
+                <!-- Exact Matches -->
+                <div class="results-grid">
+                    <!-- Product Card 1 -->
+                    <div class="product-card">
+                        <div class="p-img">
+                            <img src="photos/category_superhero_1777291640908.png" alt="Poster">
+                            <div class="p-badge sale">SALE</div>
+                        </div>
+                        <div class="p-details">
+                            <h3>The Batman Noir Edition</h3>
+                            <p class="price">₹499 <span>₹799</span></p>
+                        </div>
+                    </div>
+                    <!-- Product Card 2 -->
+                    <div class="product-card">
+                        <div class="p-img">
+                            <img src="photos/category_superhero_1777291640908.png" alt="Poster">
+                        </div>
+                        <div class="p-details">
+                            <h3>Classic Batman Comic Art</h3>
+                            <p class="price">₹549</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Section Divider -->
+                <div class="related-divider">
+                    <span>Related Results</span>
+                </div>
+
+                <div class="results-grid">
+                    <!-- Related Card -->
+                    <div class="product-card">
+                        <div class="p-img">
+                            <img src="photos/category_superhero_1777291640908.png" alt="Poster">
+                        </div>
+                        <div class="p-details">
+                            <h3>Justice League Minimalist</h3>
+                            <p class="price">₹599</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- No Results State (Hidden by default) -->
+        <section class="section no-results-section" id="no-results" style="display: none;">
+            <div class="container text-center">
+                <div class="no-results-content">
+                    <div class="empty-illustration">
+                        <i data-lucide="search-x" size="80"></i>
+                    </div>
+                    <h2>No results found for <span id="query-term">"xyz"</span></h2>
+                    <p>Don't give up! Try these tips:</p>
+                    <ul class="tips-list">
+                        <li>Check your spelling for typos</li>
+                        <li>Try more general keywords</li>
+                        <li>Search for themes like "Cars" or "Anime"</li>
+                    </ul>
+
+                    <div class="popular-searches mt-4">
+                        <h3>Popular Searches</h3>
+                        <div class="pill-group">
+                            <a href="#" class="pill">batman</a>
+                            <a href="#" class="pill">f1 poster</a>
+                            <a href="#" class="pill">custom 3 piece</a>
+                            <a href="#" class="pill">mclaren</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col about">
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs"
+                        class="nav-logo-img"></a>
+                <p>Curating the finest wall art for the modern space. High-quality prints, custom designs, and worldwide
+                    shipping.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/klaizdesigns.in"><i data-lucide="instagram"></i></a>
+                    <a href="https://twitter.com"><i data-lucide="twitter"></i></a>
+                    <a href="https://facebook.com"><i data-lucide="facebook"></i></a>
+                    <a href="https://youtube.com"><i data-lucide="youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <a href="collection.html">Shop All</a>
+                <a href="collection.html">Best Sellers</a>
+                <a href="custom-builder.html">Custom Posters</a>
+                <a href="collection-new.html">New Arrivals</a>
+                <a href="collection.html">Sale</a>
+            </div>
+            <div class="footer-col">
+                <h3>Customer Policy</h3>
+                <a href="policies.html">Shipping Policy</a>
+                <a href="policies.html">Refund & Return</a>
+                <a href="policies.html">Privacy Policy</a>
+                <a href="policies.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: support@klaizdesigns.in</p>
+                <p>WhatsApp: +91 7034219758</p>
+                <p>Address: Kerala,India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; 2026 Klaiz Designs. All rights reserved.</p>
+                <div class="payment-icons">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/000000/upi.png" alt="UPI">
+                    <span class="razorpay-logo">Razorpay</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
