@@ -86,14 +86,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    catLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            catLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            applyFilters();
+    const sortBy = document.getElementById('sort-by');
+    if (sortBy) {
+        sortBy.addEventListener('change', applyFilters);
+    }
+
+    const viewBtns = document.querySelectorAll('.view-btn');
+    viewBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            viewBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            // Toggle list view if needed
+            if (productGrid) {
+                if (btn.querySelector('.lucide-list')) {
+                    productGrid.classList.add('list-view');
+                } else {
+                    productGrid.classList.remove('list-view');
+                }
+            }
         });
     });
+
+    // Use event delegation for dynamically generated category links
+    const sidebarCats = document.querySelector('.category-links');
+    if (sidebarCats) {
+        sidebarCats.addEventListener('click', (e) => {
+            const link = e.target.closest('.cat-link');
+            if (!link) return;
+            
+            e.preventDefault();
+            document.querySelectorAll('.cat-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            const category = link.getAttribute('data-category');
+            const newUrl = new URL(window.location.href);
+            if (category === 'all') newUrl.searchParams.delete('cat');
+            else newUrl.searchParams.set('cat', category);
+            window.history.pushState({}, '', newUrl);
+
+            // Update breadcrumb and title
+            const pageTitle = document.querySelector('.page-title');
+            const breadcrumb = document.querySelector('.breadcrumb span');
+            if (pageTitle) pageTitle.textContent = (category === 'all' ? 'Our Full' : category) + ' Collection';
+            if (breadcrumb) breadcrumb.textContent = (category === 'all' ? 'All Products' : category);
+
+            applyFilters();
+            
+            // Close mobile sidebar if open
+            if (window.innerWidth <= 1024) closeAllModals();
+        });
+    }
 
     function applyFilters() {
         if (!productGrid || !window.KlaizCMS) return;
@@ -101,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeCat = document.querySelector('.cat-link.active');
         const category = activeCat ? activeCat.getAttribute('data-category') : 'all';
         const maxPrice = priceSlider ? parseFloat(priceSlider.value) : 99999;
+        const sortType = sortBy ? sortBy.value : 'New Arrivals';
 
         const allProducts = KlaizCMS.getAll();
         let filtered = (category === 'all') 
@@ -109,15 +152,36 @@ document.addEventListener('DOMContentLoaded', () => {
         
         filtered = filtered.filter(p => parseFloat(p.price) <= maxPrice);
 
+        // Sort logic
+        if (sortType === 'Price: Low to High') {
+            filtered.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        } else if (sortType === 'Price: High to Low') {
+            filtered.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        } else if (sortType === 'New Arrivals') {
+            filtered.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+        }
+
         KlaizCMS.renderGrid(productGrid, filtered);
+
+        // Update counts
+        const countEl = document.querySelector('.product-count');
+        const resultsCount = document.querySelector('.results-count');
+        if (countEl) countEl.textContent = `${filtered.length} products`;
+        if (resultsCount) resultsCount.textContent = `Showing ${filtered.length} products`;
     }
 
     window.resetFilters = () => {
         if (priceSlider) priceSlider.value = 2000;
         if (priceVal) priceVal.textContent = '₹2000';
+        if (sortBy) sortBy.selectedIndex = 0;
         catLinks.forEach(l => l.classList.remove('active'));
         const allBtn = document.querySelector('[data-category="all"]');
         if (allBtn) allBtn.classList.add('active');
+        
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.delete('cat');
+        window.history.pushState({}, '', newUrl);
+
         applyFilters();
     };
 
@@ -226,5 +290,37 @@ document.addEventListener('DOMContentLoaded', () => {
             toast.style.opacity = '0';
             toast.style.bottom = '30px';
         }, 3000);
+    }
+
+    // 6. Review Lightbox Logic
+    const reviewItems = document.querySelectorAll('.review-item');
+    const lightbox = document.getElementById('review-lightbox');
+    if (lightbox) {
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxText = document.getElementById('lightbox-text');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        reviewItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgUrl = item.getAttribute('data-full');
+                const text = item.getAttribute('data-text');
+                
+                if (imgUrl && text) {
+                    lightboxImg.src = imgUrl;
+                    lightboxText.textContent = `"${text}"`;
+                    lightbox.classList.add('active');
+                }
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+        };
+
+        if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
     }
 });

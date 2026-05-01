@@ -309,6 +309,25 @@ const KlaizCMS = {
             // Apply settings first
             this.applySettingsToUI();
 
+            // Seed initial custom products if missing
+            const currentProducts = this.getAll();
+            if (!currentProducts.find(p => p.name === 'Customized Baleno 1')) {
+                this.add({
+                    name: 'Customized Baleno 1',
+                    category: 'Cars',
+                    price: 1499,
+                    image: 'photos/customized baleno 1.jpeg'
+                });
+            }
+            if (!currentProducts.find(p => p.name === 'Customized Baleno 2')) {
+                this.add({
+                    name: 'Customized Baleno 2',
+                    category: 'Cars',
+                    price: 1499,
+                    image: 'photos/customized baleno 2.jpeg'
+                });
+            }
+
             // --- SMART CATEGORY DETECTION ---
             const urlParams = new URLSearchParams(window.location.search);
             const urlCat = urlParams.get('cat');

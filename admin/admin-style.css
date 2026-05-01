@@ -31,6 +31,15 @@ body.admin-body {
     min-height: 100vh;
 }
 
+.mobile-logo {
+    display: none;
+}
+
+.mobile-logo img {
+    height: 30px;
+    width: auto;
+}
+
 /* Sidebar */
 .admin-sidebar {
     width: var(--sidebar-width);
@@ -47,7 +56,7 @@ body.admin-body {
 }
 
 .admin-logo {
-    height: 40px;
+    height: 65px;
 }
 
 .sidebar-nav {
@@ -135,6 +144,7 @@ body.admin-body {
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin-left: auto;
 }
 
 .profile-info {
@@ -350,17 +360,31 @@ h2 {
 }
 
 /* --- Mobile Responsiveness --- */
+@media (max-width: 1024px) {
+    .header-search {
+        width: 300px;
+    }
+}
+
 @media (max-width: 992px) {
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
+    :root {
+        --sidebar-width: 280px;
+    }
+
     .admin-sidebar {
         transform: translateX(-100%);
-        z-index: 1000;
-        transition: transform 0.3s ease;
+        z-index: 2000;
+        box-shadow: 20px 0 50px rgba(0,0,0,0.5);
     }
     
     .admin-sidebar.active {
@@ -369,27 +393,134 @@ h2 {
     
     .admin-main {
         margin-left: 0;
-        padding: 1rem;
+        padding: 1.5rem;
+        padding-top: 5rem; /* Space for mobile header */
+    }
+
+    /* Mobile Header/Bar */
+    .admin-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: var(--admin-surface);
+        padding: 1rem 1.5rem;
+        margin-bottom: 0;
+        border-bottom: 1px solid var(--admin-border);
+        z-index: 1500;
+    }
+
+    .header-search {
+        display: none; /* Hide search on mobile header to save space */
+    }
+
+    .mobile-menu-trigger {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid var(--admin-border);
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .mobile-logo {
+        display: block;
+        margin: 0 auto;
     }
     
+    .mobile-logo img {
+        height: 40px;
+    }
+    
+    /* Hide search on mobile */
+    .header-search {
+        display: none;
+    }
+    
+    .header-profile .profile-info {
+        display: none;
+    }
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
     
-    .header-search {
-        width: auto;
-        flex: 1;
-        margin-right: 1rem;
+    .stat-card {
+        padding: 1.25rem;
+    }
+
+    /* Table Responsiveness */
+    .admin-card {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
+    .admin-table {
+        min-width: 700px; /* Force scroll for better detail */
+    }
+
+    .admin-table th, .admin-table td {
+        padding: 0.75rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Page Header */
     .page-header {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-start !important;
+        gap: 0.5rem;
+        margin-bottom: 2rem !important;
+    }
+
+    .section-title {
+        font-size: 1.75rem !important;
+        margin: 0 !important;
+        line-height: 1.2;
+    }
+
+    .btn-primary .btn-text {
+        display: none;
+    }
+    
+    .btn-primary {
+        padding: 10px !important;
+    }
+
+    .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         gap: 1rem;
     }
-    
-    .modal-content {
-        width: 95%;
-        padding: 1.5rem;
+
+    .profile-info {
+        display: none; /* Hide name text on mobile header */
     }
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 1900;
+    display: none;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* Helper to show menu trigger on desktop */
+.mobile-menu-trigger {
+    display: none;
 }
