@@ -184,6 +184,21 @@ const KlaizCMS = {
                 { label: "Design Your Own", url: "custom-builder.html" },
                 { label: "About", url: "about.html" },
                 { label: "Contact", url: "contact.html" }
+            ],
+            // Hero Marquee Images
+            heroMarqueeRow1: [
+                "photos/product_poster_1_1777291679013.png", "photos/category_superhero_1777291640908.png", "photos/design_your_own_custom_1777291662169.png",
+                "photos/hero_slide_1_1777291339894.png", "photos/hero_slide_2_1777291568402.png", "photos/hero_slide_3_1777291582739.png"
+            ],
+            heroMarqueeRow2: [
+                "photos/customized baleno 1.jpeg", "photos/customized baleno 2.jpeg", "photos/customized domi.jpeg",
+                "photos/hero_slide_1_1777291339894.png", "photos/hero_slide_2_1777291568402.png", "photos/hero_slide_3_1777291582739.png"
+            ],
+            // Customer Review Videos
+            customerVideos: [
+                { url: "https://www.w3schools.com/html/mov_bbb.mp4" },
+                { url: "https://www.w3schools.com/html/mov_bbb.mp4" },
+                { url: "https://www.w3schools.com/html/mov_bbb.mp4" }
             ]
         };
         const saved = JSON.parse(localStorage.getItem('klaiz_settings') || '{}');
@@ -256,6 +271,15 @@ const KlaizCMS = {
         if (hTitle && s.heroTitle) hTitle.textContent = s.heroTitle;
         if (hSub && s.heroSubtitle) hSub.textContent = s.heroSubtitle;
 
+        // Hero Marquee Dynamic Injection
+        const marqueeRows = document.querySelectorAll('.marquee-row');
+        if (marqueeRows.length >= 2 && s.heroMarqueeRow1 && s.heroMarqueeRow2) {
+            marqueeRows[0].innerHTML = s.heroMarqueeRow1.map(img => `<div class="marquee-item"><img src="${img}" alt="Gallery Image"></div>`).join('') + 
+                                       s.heroMarqueeRow1.map(img => `<div class="marquee-item"><img src="${img}" alt="Gallery Image"></div>`).join('');
+            marqueeRows[1].innerHTML = s.heroMarqueeRow2.map(img => `<div class="marquee-item"><img src="${img}" alt="Gallery Image"></div>`).join('') + 
+                                       s.heroMarqueeRow2.map(img => `<div class="marquee-item"><img src="${img}" alt="Gallery Image"></div>`).join('');
+        }
+
         // Category Circles (Home)
         const catScroll = document.getElementById('category-scroll');
         if (catScroll && s.categories) {
@@ -270,6 +294,16 @@ const KlaizCMS = {
                     <span>Explore More</span>
                 </a>
             `;
+        }
+
+        // Customer Videos (Home)
+        const videoCarousel = document.getElementById('video-reviews-container');
+        if (videoCarousel && s.customerVideos) {
+            videoCarousel.innerHTML = s.customerVideos.map(v => `
+                <div class="custom-card" style="width: 250px; flex-shrink: 0;">
+                    <video src="${v.url}" controls style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px;"></video>
+                </div>
+            `).join('');
         }
 
         // About Page

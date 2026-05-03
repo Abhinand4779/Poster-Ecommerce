@@ -15,7 +15,7 @@
         rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=4">
     <link rel="icon" type="image/png" href="photos/black blue.png">
 </head>
 
@@ -35,12 +35,16 @@
         <ul class="mobile-nav-links">
             <!-- Dynamic Links via cms.js -->
         </ul>
-        <div class="drawer-footer" style="margin-top:auto; padding: 2rem 0; border-top: 1px solid #222;">
-            <div class="drawer-help-links"
-                style="display:flex; gap:15px; margin-bottom:1rem; font-size:0.8rem; color:#666;">
-                <a href="policies.html">Shipping</a>
-                <a href="policies.html">Returns</a>
-                <a href="about.html">About</a>
+        <div class="drawer-footer">
+            <div class="drawer-help-links">
+                <a href="shipping.html" class="drawer-help-btn">
+                    <i data-lucide="truck" style="width:14px; height:14px;"></i>
+                    Shipping
+                </a>
+                <a href="policies.html" class="drawer-help-btn">
+                    <i data-lucide="refresh-ccw" style="width:14px; height:14px;"></i>
+                    Returns
+                </a>
             </div>
         </div>
     </div>
@@ -119,54 +123,52 @@
         </div>
     </nav>
     <main>
-        <!-- 3. HERO SECTION -->
-        <section class="hero">
-            <div class="slider" id="hero-slider">
-                <!-- Slide 1 -->
-                <div class="slide active">
-                    <img src="photos/hero_slide_1_1777291339894.png" alt="Transform Your Walls">
-                    <div class="slide-overlay">
-                        <div class="container">
-                            <div class="slide-content">
-                                <h1 class="reveal-text">Transform Your Walls</h1>
-                                <p class="reveal-text-delay">Premium matte-finish posters for every aesthetic.</p>
-                                <a href="#" class="btn btn-primary reveal-text-delay-2">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
+            <!-- 3. DUAL MARQUEE HERO SECTION -->
+        <section class="hero-marquee-section" style="position: relative; overflow: hidden; padding: 2rem 0; background: #0a0a0a; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            
+            <!-- Gradient Background for Readability -->
+            <div style="position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.1) 100%); z-index: 5; pointer-events: none;"></div>
+
+            <!-- Background Marquee Rows -->
+            <div style="position: relative; z-index: 1; width: 100%; opacity: 0.5;">
+                <div class="marquee-row" style="display: flex; width: max-content; animation: scroll-left 40s linear infinite;">
+                    <div class="marquee-item"><img src="photos/Alameen.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/abhinand.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/adhil.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/akshay.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/giri.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/nabeel.png" alt="Gallery Image"></div>
+                    <!-- Duplicate for infinite scroll -->
+                    <div class="marquee-item"><img src="photos/Alameen.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/abhinand.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/adhil.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/akshay.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/giri.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/nabeel.png" alt="Gallery Image"></div>
                 </div>
-                <!-- Slide 2 -->
-                <div class="slide">
-                    <img src="photos/hero_slide_2_1777291568402.png" alt="Make It Yours">
-                    <div class="slide-overlay">
-                        <div class="container">
-                            <div class="slide-content">
-                                <h1>Make It Yours</h1>
-                                <p>Upload your designs and create high-quality custom posters.</p>
-                                <a href="#" class="btn btn-primary">Custom Poster</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="slide">
-                    <img src="photos/hero_slide_3_1777291582739.png" alt="Bulk Orders">
-                    <div class="slide-overlay">
-                        <div class="container">
-                            <div class="slide-content">
-                                <h1>Bulk Orders for Events</h1>
-                                <p>Special pricing for offices, events, and giftings.</p>
-                                <a href="#" class="btn btn-primary">Get Quote</a>
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="marquee-row" style="display: flex; width: max-content; animation: scroll-right 40s linear infinite; margin-top: 15px;">
+                    <div class="marquee-item"><img src="photos/customized baleno 1.jpeg" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/customized baleno 2.jpeg" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/customized domi.jpeg" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/hero_slide_1_1777291339894.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/hero_slide_2_1777291568402.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/hero_slide_3_1777291582739.png" alt="Gallery Image"></div>
+                    <!-- Duplicate for infinite scroll -->
+                    <div class="marquee-item"><img src="photos/customized baleno 1.jpeg" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/customized baleno 2.jpeg" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/customized domi.jpeg" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/hero_slide_1_1777291339894.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/hero_slide_2_1777291568402.png" alt="Gallery Image"></div>
+                    <div class="marquee-item"><img src="photos/hero_slide_3_1777291582739.png" alt="Gallery Image"></div>
                 </div>
             </div>
 
-            <div class="slider-controls">
-                <button class="slider-prev"><i data-lucide="chevron-left"></i></button>
-                <div class="slider-dots"></div>
-                <button class="slider-next"><i data-lucide="chevron-right"></i></button>
+            <!-- Foreground Floating Content -->
+            <div class="hero-overlay-content" style="position: absolute; z-index: 10; text-align: center; width: 100%; padding: 0 1.5rem; pointer-events: none;">
+                <h1 style="font-family: 'Outfit', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); color: #fff; text-transform: uppercase; letter-spacing: 2px; margin: 0; text-shadow: 0 4px 20px rgba(0,0,0,0.8);">Transform Your Walls</h1>
+                <p style="color: var(--accent-color); font-weight: 700; font-size: clamp(1rem, 2vw, 1.3rem); margin-top: 0.5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Premium Custom Posters</p>
+                <a href="collection.html" class="btn btn-primary" style="padding: 1.2rem 3rem; font-size: 1.1rem; border-radius: 50px; pointer-events: auto; box-shadow: 0 10px 30px rgba(46, 167, 215, 0.4);">Shop Collection</a>
             </div>
         </section>
 
@@ -239,30 +241,13 @@
                 <div class="section-header">
                     <h2 class="section-title">Design Your Own</h2>
                 </div>
-                <div class="horizontal-scroll-container no-scrollbar">
-                    <div class="custom-card">
-                        <img src="photos/design_your_own_custom_1777291662169.png" alt="Custom Poster">
-                        <div class="card-label">Custom Poster</div>
-                    </div>
-                    <div class="custom-card">
-                        <img src="photos/hero_slide_2_1777291568402.png" alt="3-Piece Split">
-                        <div class="card-label">3-Piece Split</div>
-                    </div>
-                    <div class="custom-card">
-                        <img src="photos/design_your_own_custom_1777291662169.png" alt="Retro Prints">
-                        <div class="card-label">Retro Prints</div>
-                    </div>
-                    <div class="custom-card">
-                        <img src="photos/product_poster_1_1777291679013.png" alt="Canvas Wrap">
-                        <div class="card-label">Canvas Wrap</div>
-                    </div>
-                    <div class="custom-card">
-                        <img src="photos/hero_slide_1_1777291339894.png" alt="Framed Prints">
-                        <div class="card-label">Framed Prints</div>
-                    </div>
-                    <div class="custom-card">
-                        <img src="photos/design_your_own_custom_1777291662169.png" alt="Metal Posters">
-                        <div class="card-label">Metal Posters</div>
+                <div class="custom-hero-banner">
+                    <img src="photos/custom_hero.jpg" alt="Design Your Own Custom Poster" class="custom-hero-bg">
+                    <div class="banner-overlay"></div>
+                    <div class="banner-content">
+                        <h3>Bring Your Vision to Life</h3>
+                        <p>Upload your own memories, designs, or digital art. We'll bring it to life on our premium matte-finish paper.</p>
+                        <a href="custom-builder.html" class="btn btn-primary">Start Designing</a>
                     </div>
                 </div>
             </div>
@@ -281,50 +266,106 @@
             </div>
         </section>
 
-        <!-- 7. TRENDING NOW -->
-        <section class="section alternate-bg">
+        <!-- 7. WHY CHOOSE US -->
+        <section class="section why-choose-us-section" style="padding: 4rem 0; text-align: center;">
             <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Trending Now</h2>
-                    <a href="#" class="view-all">View All</a>
+                <div class="section-header" style="justify-content: center; margin-bottom: 3.5rem;">
+                    <h2 class="section-title" style="font-size: clamp(1.8rem, 4vw, 2.5rem); text-transform: uppercase; letter-spacing: 1px;">Why Choose Us?</h2>
                 </div>
-                <div class="horizontal-scroll-container no-scrollbar product-grid" id="trending-grid">
-                    <!-- Dynamic products loaded by home script -->
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; align-items: stretch;">
+                    <!-- Quality -->
+                    <div style="border: 2px solid var(--accent-color); border-radius: 15px; padding: 2.5rem 1.5rem; background: rgba(46, 167, 215, 0.05); display: flex; flex-direction: column; align-items: center;">
+                        <i data-lucide="award" style="width: 45px; height: 45px; margin-bottom: 1.2rem; color: var(--accent-color);"></i>
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600; color: #fff;">Quality Guaranteed</h4>
+                        <p style="font-size: 0.9rem; color: #ccc; line-height: 1.6; margin: 0;">Quality is our top priority. Each poster is meticulously crafted using premium materials.</p>
+                    </div>
+
+                    <!-- Custom -->
+                    <div style="border: 2px solid var(--accent-color); border-radius: 15px; padding: 2.5rem 1.5rem; background: rgba(46, 167, 215, 0.05); display: flex; flex-direction: column; align-items: center;">
+                        <i data-lucide="image-plus" style="width: 45px; height: 45px; margin-bottom: 1.2rem; color: var(--accent-color);"></i>
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600; color: #fff;">Custom Creations</h4>
+                        <p style="font-size: 0.9rem; color: #ccc; line-height: 1.6; margin: 0;">Upload your own images or designs and create personalized posters that reflect your personality.</p>
+                    </div>
+
+                    <!-- Offers -->
+                    <div style="border: 2px solid var(--accent-color); border-radius: 15px; padding: 2.5rem 1.5rem; background: rgba(46, 167, 215, 0.05); display: flex; flex-direction: column; align-items: center;">
+                        <i data-lucide="badge-percent" style="width: 45px; height: 45px; margin-bottom: 1.2rem; color: var(--accent-color);"></i>
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600; color: #fff;">Exclusive Offers</h4>
+                        <p style="font-size: 0.9rem; color: #ccc; line-height: 1.6; margin: 0;">We're constantly rolling out exciting offers to help you save big on your favorite designs.</p>
+                    </div>
+
+                    <!-- Shipping -->
+                    <div style="border: 2px solid var(--accent-color); border-radius: 15px; padding: 2.5rem 1.5rem; background: rgba(46, 167, 215, 0.05); display: flex; flex-direction: column; align-items: center;">
+                        <i data-lucide="star" style="width: 45px; height: 45px; margin-bottom: 1.2rem; color: var(--accent-color);"></i>
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600; color: #fff;">Free Shipping</h4>
+                        <p style="font-size: 0.9rem; color: #ccc; line-height: 1.6; margin: 0;">Enjoy free delivery on prepaid orders—no shipping fees mean more savings and convenience for you!</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 8. CUSTOMER REVIEWS CAROUSEL -->
+        <!-- 8. CUSTOMER VIDEO REVIEWS -->
         <section class="section reviews-section">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Happy Customers</h2>
                 </div>
-                <div class="reviews-marquee marquee-slow" id="reviews-container">
-                    <div class="review-item" data-full="photos/hero_slide_1_1777291339894.png"
-                        data-text="Absolutely loved the quality! The colors are so vibrant and it looks amazing on my wall.">
-                        <img src="photos/hero_slide_1_1777291339894.png" alt="Review 1">
+                <div class="horizontal-scroll-container no-scrollbar" id="video-reviews-container" style="display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px;">
+                    <!-- Dynamic videos will be loaded here by cms.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. FAQ SECTION -->
+        <section class="section faq-section" style="padding: 5rem 0; background: var(--bg-color);">
+            <div class="container" style="max-width: 860px;">
+                <div class="section-header" style="margin-bottom: 3rem;">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span class="faq-icon"><i data-lucide="package"></i></span>
+                            <span>Is it possible to order posters in bulk for my outlet or any other setting?</span>
+                            <i data-lucide="chevron-down" class="faq-chevron"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! We cater to bulk orders, especially for businesses. Simply drop us a message on WhatsApp for special rates and assistance.</p>
+                        </div>
                     </div>
-                    <div class="review-item" data-full="photos/hero_slide_2_1777291568402.png"
-                        data-text="The custom poster came out perfectly. High resolution and fast delivery. Highly recommended!">
-                        <img src="photos/hero_slide_2_1777291568402.png" alt="Review 2">
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span class="faq-icon"><i data-lucide="user"></i></span>
+                            <span style="text-decoration: underline;">how can I order my own design as a print?</span>
+                            <i data-lucide="chevron-down" class="faq-chevron"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolutely! We offer a custom print option, conveniently located in the menu tab. Simply upload your artwork for a poster and leave the rest to us. We'll ensure your design is beautifully printed and delivered to your doorstep.</p>
+                        </div>
                     </div>
-                    <div class="review-item" data-full="photos/hero_slide_3_1777291582739.png"
-                        data-text="Ordered in bulk for our office. The team was very helpful and the pricing was great.">
-                        <img src="photos/hero_slide_3_1777291582739.png" alt="Review 3">
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span class="faq-icon"><i data-lucide="clock"></i></span>
+                            <span>How many days taken for delivery?</span>
+                            <i data-lucide="chevron-down" class="faq-chevron"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Delivery typically takes 5–7 days, depending on your location.</p>
+                        </div>
                     </div>
-                    <div class="review-item" data-full="photos/product_poster_1_1777291679013.png"
-                        data-text="Great experience! The packaging was secure and the poster arrived without any damage.">
-                        <img src="photos/product_poster_1_1777291679013.png" alt="Review 4">
-                    </div>
-                    <div class="review-item" data-full="photos/design_your_own_custom_1777291662169.png"
-                        data-text="Best place for F1 posters in India. Will definitely buy more.">
-                        <img src="photos/design_your_own_custom_1777291662169.png" alt="Review 5">
-                    </div>
-                    <!-- Duplicate for infinite marquee effect -->
-                    <div class="review-item" data-full="photos/hero_slide_1_1777291339894.png"
-                        data-text="Absolutely loved the quality! The colors are so vibrant and it looks amazing on my wall.">
-                        <img src="photos/hero_slide_1_1777291339894.png" alt="Review 1">
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span class="faq-icon"><i data-lucide="truck"></i></span>
+                            <span>How can I check the status of my order?</span>
+                            <i data-lucide="chevron-down" class="faq-chevron"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Tracking your order is easy! Once your order is placed, you'll receive both a WhatsApp notification and an email confirming your purchase, complete with a tracking ID. Keep an eye on your WhatsApp and email for regular updates on your order's progress!</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -380,7 +421,7 @@
             </div>
             <div class="footer-col">
                 <h3>Customer Policy</h3>
-                <a href="policies.html">Shipping Policy</a>
+                <a href="shipping.html">Shipping Policy</a>
                 <a href="policies.html">Refund & Return</a>
                 <a href="policies.html">Privacy Policy</a>
                 <a href="policies.html">Terms of Service</a>
@@ -393,21 +434,25 @@
                 <p>Address: Kerala,India</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div class="container footer-bottom-inner">
-                <p>&copy; 2026 Klaiz Designs. All rights reserved.</p>
-                <div class="payment-icons">
-                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
-                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
-                    <img src="https://img.icons8.com/color/48/000000/upi.png" alt="UPI">
-                    <span class="razorpay-logo">Razorpay</span>
+        <div class="footer-disclaimer" style="background: var(--accent-color); padding: 3rem 0; color: #fff; text-align: center;">
+            <div class="container" style="max-width: 900px;">
+                <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.9;">Artwork displayed on this website is created and shared by fans. Unless specifically mentioned, it is not affiliated with or represented as official merchandise. For any questions, concerns, or copyright-related matters, please contact us at <a href="mailto:support@klaizdesigns.in" style="text-decoration: underline; color: #fff;">support@klaizdesigns.in</a>.</p>
+                <div class="footer-copyright" style="font-weight: 700; border-top: 1px solid rgba(255,255,255,0.2); pt: 1.5rem; margin-top: 1.5rem;">
+                    © Copyright — <a href="https://klaizdesigns.in" style="color: #fff;">klaizdesigns.in</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="cms.js"></script>
-    <script src="main.js"></script>
-</body>
+    <script src="cms.js?v=4"></script>
+    <script src="main.js?v=4"></script>
 
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/917034219758" target="_blank" style="position: fixed; bottom: 80px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 9999; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="Chat on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.525.146-.18.194-.3.297-.495.098-.195.046-.375-.028-.525-.075-.15-.673-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.285-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.21 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.195-.572-.345z"/>
+            <path d="M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.895c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652c1.746.943 3.71 1.444 5.704 1.445h.004c6.58 0 11.939-5.335 11.943-11.895 0-3.18-1.24-6.165-3.466-8.449zM12.049 21.84c-1.775 0-3.51-.475-5.035-1.375l-.36-.214-3.74.975.996-3.626-.235-.373c-.99-1.57-1.512-3.39-1.51-5.26 0-5.46 4.46-9.905 9.932-9.905 2.65 0 5.14 1.03 7.01 2.9 1.87 1.87 2.9 4.35 2.9 6.99-.004 5.46-4.469 9.904-9.944 9.904z"/>
+        </svg>
+    </a>
+</body>
 </html>

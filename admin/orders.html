@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,120 +7,104 @@
     <script src="guard.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="../style.css?v=2">
-    <link rel="stylesheet" href="admin-style.css">
     <link rel="stylesheet" href="admin-style.css">
     <style>
-        /* Order Specific Styles */
-        .order-id {
-            font-family: monospace;
-            color: var(--admin-accent);
-            font-weight: 700;
-        }
+        .order-id { font-family: monospace; color: var(--accent); font-weight: 700; }
+        .customer-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
 
-        .customer-info h4 {
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-
-        .customer-info p {
-            font-size: 0.8rem;
-            color: var(--admin-text-secondary);
-        }
-
-        /* Modal Details */
-        .detail-group h5 {
-            color: #666;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .detail-group p {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .item-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--admin-border);
-        }
-
-        .item-row img {
-            width: 40px;
-            height: 55px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
+        /* Modal */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.5); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; padding: 1rem; }
+        .modal.active { display: flex; }
+        .modal-content { background: #fff; border-radius: 16px; padding: 2rem; width: 100%; max-width: 620px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.2); }
+        .modal-title { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--text-primary); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--card-border); }
+        .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .modal-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 0.4rem; }
+        .modal-value { font-size: 0.95rem; color: var(--text-primary); font-weight: 600; line-height: 1.5; }
+        .item-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--card-border); }
+        .item-row img { width: 40px; height: 55px; object-fit: cover; border-radius: 6px; border: 1px solid var(--card-border); }
+        .item-row-name { font-weight: 600; font-size: 0.9rem; color: var(--text-primary); }
+        .item-row-meta { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+        .modal-total { text-align: right; margin-top: 1rem; font-size: 1.1rem; font-weight: 800; color: var(--accent); }
+        .modal-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--card-border); }
+        @media (max-width: 576px) { .modal-grid { grid-template-columns: 1fr; gap: 1rem; } }
     </style>
 </head>
-
-<body>
-    <aside class="admin-sidebar">
-        <div class="sidebar-header">
-            <img src="../photos/white blue.png" alt="Klaiz Designs" class="admin-logo">
-        </div>
-        <nav class="sidebar-nav">
-            <a href="index.html" class="nav-item"><i data-lucide="layout-dashboard"></i> Dashboard</a>
-            <a href="products.html" class="nav-item"><i data-lucide="package"></i> Products</a>
-            <a href="orders.html" class="nav-item active"><i data-lucide="shopping-cart"></i> Orders</a>
-            <a href="customers.html" class="nav-item"><i data-lucide="users"></i> Customers</a>
-            <a href="settings.html" class="nav-item"><i data-lucide="settings"></i> Settings</a>
-        </nav>
-        <div class="sidebar-footer">
-            <a href="#" onclick="adminLogout(event)" class="nav-item logout"><i data-lucide="log-out"></i> Logout</a>
-        </div>
-    </aside>
-
-    <main class="admin-main">
-        <header class="admin-header">
-            <button class="mobile-menu-trigger"><i data-lucide="menu"></i></button>
-            <div class="mobile-logo"><img src="../photos/white blue.png" alt="Logo"></div>
-            <div id="order-stats-header" style="font-size: 0.8rem; color: #666; display: none;"></div>
-        </header>
-
-        <div class="page-header">
-            <h1 class="section-title">Order Management</h1>
-            <div id="order-stats" style="font-size: 0.9rem; color: #666;">
-                Loading order statistics...
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="../photos/black blue.png" alt="Klaiz Designs" class="admin-logo">
             </div>
-        </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+                <a href="products.html" class="nav-item"><i data-lucide="package"></i> Products</a>
+                <a href="orders.html" class="nav-item active"><i data-lucide="shopping-cart"></i> Orders</a>
+                <a href="customers.html" class="nav-item"><i data-lucide="users"></i> Customers</a>
+                <a href="settings.html" class="nav-item"><i data-lucide="settings"></i> Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" onclick="adminLogout(event)" class="nav-item logout"><i data-lucide="log-out"></i> Logout</a>
+            </div>
+        </aside>
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-        <div class="admin-card">
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="orders-tbody">
-                    <!-- Orders will load here -->
-                </tbody>
-            </table>
-        </div>
-    </main>
+        <!-- Main -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <button class="mobile-menu-trigger" id="mobile-toggle"><i data-lucide="menu"></i></button>
+                <div class="mobile-logo"><img src="../photos/black blue.png" alt="Logo"></div>
+                <div class="header-search">
+                    <i data-lucide="search"></i>
+                    <input type="text" placeholder="Search orders...">
+                </div>
+                <div class="header-profile">
+                    <div class="profile-info">
+                        <span class="profile-name">Admin</span>
+                        <span class="profile-role">Master Access</span>
+                    </div>
+                    <div class="profile-avatar">AD</div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="section-title">Order Management</h1>
+                        <p id="order-stats" style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.25rem;">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <div class="table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <!-- Order Detail Modal -->
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <div id="modal-body">
-                <!-- Details will load here -->
-            </div>
-            <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-                <button class="btn-action" style="flex:1; background: var(--accent-color); border:none; padding:12px;"
-                    onclick="updateStatus('Shipped')">Mark as Shipped</button>
-                <button class="btn-action" style="flex:1; padding:12px;" onclick="closeModal()">Close</button>
+            <div id="modal-body"></div>
+            <div class="modal-actions">
+                <button class="btn-primary" style="flex:1;" onclick="updateStatus('Shipped')"><i data-lucide="truck" style="width:16px;height:16px;"></i> Mark as Shipped</button>
+                <button class="btn-secondary" style="flex:1;" onclick="closeModal()">Close</button>
             </div>
         </div>
     </div>
@@ -129,43 +112,41 @@
     <script src="../cms.js"></script>
     <script>
         lucide.createIcons();
-
         let currentOrderId = null;
+
+        function getStatusClass(status) {
+            if (status === 'Paid') return 'paid';
+            if (status === 'Shipped') return 'shipped';
+            if (status === 'Cancelled') return 'cancelled';
+            return 'processing';
+        }
 
         function renderOrders() {
             const orders = JSON.parse(localStorage.getItem('klaiz_orders') || '[]');
             const tbody = document.getElementById('orders-tbody');
             const stats = document.getElementById('order-stats');
-
-            stats.textContent = `${orders.length} Total Orders | â‚¹${orders.reduce((acc, o) => acc + parseFloat(o.total.replace('â‚¹', '')), 0)} Revenue`;
+            const total = orders.reduce((acc, o) => acc + (parseFloat(String(o.total).replace(/[^0-9.]/g, '')) || 0), 0);
+            stats.textContent = `${orders.length} Total Orders  •  ₹${total.toLocaleString()} Revenue`;
 
             if (orders.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:4rem; color:#666;">No orders found.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:3rem;color:var(--text-muted);">No orders found.</td></tr>';
                 return;
             }
 
-            tbody.innerHTML = orders.reverse().map(o => `
+            tbody.innerHTML = [...orders].reverse().map(o => `
                 <tr>
                     <td><span class="order-id">#${o.id.substring(3, 11)}</span></td>
                     <td>
-                        <div class="customer-info">
-                            <div class="customer-name" style="font-weight:700; color:#fff;">${o.customerName || 'Guest'}</div>
-                            <div class="customer-meta" style="font-size:0.8rem; color:#666;">${o.email || 'No Email'}</div>
-                        </div>
+                        <div style="font-weight:600;color:var(--text-primary);">${o.customerName || 'Guest'}</div>
+                        <div class="customer-meta">${o.email || 'No Email'}</div>
                     </td>
-                    <td><span style="font-weight:800; font-size:1.1rem; color:#fff;">${o.total}</span></td>
-                    <td>${new Date(o.date).toLocaleDateString()}</td>
+                    <td style="font-weight:800;color:var(--text-primary);">${o.total}</td>
+                    <td style="color:var(--text-muted);">${new Date(o.date).toLocaleDateString()}</td>
                     <td><span class="status-badge ${getStatusClass(o.status)}">${o.status}</span></td>
-                    <td><button class="btn-action" onclick="viewOrder('${o.id}')">View Details</button></td>
+                    <td><button class="btn-secondary" style="padding:0.4rem 0.9rem;font-size:0.8rem;" onclick="viewOrder('${o.id}')">View Details</button></td>
                 </tr>
             `).join('');
             lucide.createIcons();
-        }
-
-        function getStatusClass(status) {
-            if (status === 'Paid') return 'status-paid';
-            if (status === 'Shipped') return 'status-shipped';
-            return 'status-processing';
         }
 
         window.viewOrder = (id) => {
@@ -173,79 +154,53 @@
             const orders = JSON.parse(localStorage.getItem('klaiz_orders') || '[]');
             const o = orders.find(x => x.id === id);
             if (!o) return;
-
-            const modalBody = document.getElementById('modal-body');
-            modalBody.innerHTML = `
-                <h2 style="font-family:'Outfit'; margin-bottom:1.5rem; border-bottom:1px solid #1a1a1a; padding-bottom:1rem;">Order Details: #${o.id.substring(3, 11)}</h2>
-                
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem;">
+            document.getElementById('modal-body').innerHTML = `
+                <div class="modal-title">Order #${o.id.substring(3, 11)}</div>
+                <div class="modal-grid">
                     <div>
-                        <h5 style="color:#666; font-size:0.75rem; text-transform:uppercase; margin-bottom:10px;">Customer Info</h5>
-                        <p style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">${o.customerName || 'N/A'}</p>
-                        <p style="color:#2EA7D7; font-size:0.9rem;">${o.email || 'N/A'}</p>
+                        <div class="modal-label">Customer</div>
+                        <div class="modal-value">${o.customerName || 'N/A'}<br><span style="color:var(--accent);font-weight:500;font-size:0.85rem;">${o.email || 'N/A'}</span></div>
                     </div>
                     <div>
-                        <h5 style="color:#666; font-size:0.75rem; text-transform:uppercase; margin-bottom:10px;">Shipping Address</h5>
-                        <p style="font-weight:600; line-height:1.6;">
-                            ${o.address || 'Address Not Found'}<br>
-                            ${o.city || ''}, ${o.pincode || ''}
-                        </p>
+                        <div class="modal-label">Shipping Address</div>
+                        <div class="modal-value">${o.address || 'N/A'}<br>${o.city || ''} ${o.pincode || ''}</div>
+                    </div>
+                    <div>
+                        <div class="modal-label">Status</div>
+                        <div class="modal-value"><span class="status-badge ${getStatusClass(o.status)}">${o.status}</span></div>
+                    </div>
+                    <div>
+                        <div class="modal-label">Order Date</div>
+                        <div class="modal-value">${new Date(o.date).toLocaleString()}</div>
                     </div>
                 </div>
-
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
-                    <div class="detail-group">
-                        <h5>Payment Status</h5>
-                        <p><span class="status-badge ${getStatusClass(o.status)}">${o.status}</span></p>
-                        <p style="font-size:0.8rem; color:#666; margin-top:5px;">ID: ${o.paymentId}</p>
-                    </div>
-                    <div class="detail-group">
-                        <h5>Order Date</h5>
-                        <p>${new Date(o.date).toLocaleString()}</p>
-                    </div>
-                </div>
-                
-                <div style="margin-top:2rem;">
-                    <h5>Items Ordered</h5>
-                    ${o.items.map(item => `
-                        <div class="item-row">
-                            <img src="${item.image}" alt="">
-                            <div style="flex:1;">
-                                <div style="font-weight:600;">${item.name}</div>
-                                <div style="font-size:0.75rem; color:#666;">Size: ${item.size} | Qty: ${item.quantity}</div>
-                            </div>
-                            <div style="font-weight:700;">â‚¹${item.price * item.quantity}</div>
+                <div class="modal-label" style="margin-bottom:0.75rem;">Items Ordered</div>
+                ${(o.items || []).map(item => `
+                    <div class="item-row">
+                        <img src="${item.image || ''}" alt="${item.name}" onerror="this.style.display='none'">
+                        <div style="flex:1;">
+                            <div class="item-row-name">${item.name}</div>
+                            <div class="item-row-meta">Size: ${item.size || 'N/A'} &nbsp;|&nbsp; Qty: ${item.quantity}</div>
                         </div>
-                    `).join('')}
-                    <div style="text-align:right; margin-top:1rem; font-size:1.2rem; font-weight:800; color:var(--accent-color);">
-                        Total: ${o.total}
+                        <div style="font-weight:700;color:var(--text-primary);">₹${item.price * item.quantity}</div>
                     </div>
-                </div>
+                `).join('')}
+                <div class="modal-total">Total: ${o.total}</div>
             `;
-
             document.getElementById('orderModal').classList.add('active');
             lucide.createIcons();
         };
 
-        window.closeModal = () => {
-            document.getElementById('orderModal').classList.remove('active');
-        };
+        window.closeModal = () => document.getElementById('orderModal').classList.remove('active');
 
         window.updateStatus = (newStatus) => {
             const orders = JSON.parse(localStorage.getItem('klaiz_orders') || '[]');
-            const index = orders.findIndex(x => x.id === currentOrderId);
-            if (index !== -1) {
-                orders[index].status = newStatus;
-                localStorage.setItem('klaiz_orders', JSON.stringify(orders));
-                renderOrders();
-                closeModal();
-            }
+            const i = orders.findIndex(x => x.id === currentOrderId);
+            if (i !== -1) { orders[i].status = newStatus; localStorage.setItem('klaiz_orders', JSON.stringify(orders)); renderOrders(); closeModal(); }
         };
 
         renderOrders();
     </script>
     <script src="admin-main.js"></script>
 </body>
-
 </html>
-

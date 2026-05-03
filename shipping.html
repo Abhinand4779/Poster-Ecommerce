@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Policy | Klaiz Designs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="icon" type="image/png" href="photos/black blue.png">
+    <style>
+        .policy-hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #0d1a24 100%);
+            padding: 5rem 0 3rem;
+            border-bottom: 1px solid rgba(46,167,215,0.2);
+            text-align: center;
+        }
+        .policy-hero .icon-wrap {
+            width: 70px; height: 70px;
+            background: rgba(46,167,215,0.1);
+            border: 1px solid rgba(46,167,215,0.3);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .policy-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        .policy-hero p {
+            color: #aaa;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        .policy-body {
+            padding: 4rem 0 6rem;
+            background: #050505;
+        }
+        .policy-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .policy-card {
+            background: #0f0f0f;
+            border: 1px solid #1c1c1c;
+            border-left: 3px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 2rem 2rem 2rem 1.8rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .policy-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 30px rgba(46,167,215,0.08);
+        }
+        .policy-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .policy-card-icon {
+            width: 42px; height: 42px;
+            background: rgba(46,167,215,0.1);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent-color);
+        }
+        .policy-card h2 {
+            font-size: 1.1rem;
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .policy-card p, .policy-card li {
+            color: #aaa;
+            font-size: 0.92rem;
+            line-height: 1.75;
+            margin-bottom: 0.5rem;
+        }
+        .policy-card ul, .policy-card ol {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .policy-card li { margin-bottom: 0.6rem; }
+        .delivery-table {
+            width: 100%; border-collapse: collapse; margin-top: 1rem;
+        }
+        .delivery-table th {
+            background: rgba(46,167,215,0.12);
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.7rem 1rem;
+            text-align: left;
+        }
+        .delivery-table td {
+            padding: 0.7rem 1rem;
+            color: #bbb;
+            font-size: 0.88rem;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .delivery-table tr:last-child td { border-bottom: none; }
+        .contact-cta {
+            max-width: 860px;
+            margin: 2rem auto 0;
+            background: rgba(46,167,215,0.07);
+            border: 1px solid rgba(46,167,215,0.25);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .contact-cta p { color: #aaa; font-size: 0.92rem; margin: 0.3rem 0 0; }
+        .contact-cta h3 { color: #fff; font-size: 1rem; font-family: 'Outfit', sans-serif; }
+        .contact-cta a.cta-btn {
+            background: var(--accent-color);
+            color: #fff;
+            padding: 0.7rem 1.6rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s ease;
+        }
+        .contact-cta a.cta-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        @media (max-width: 600px) {
+            .policy-card { padding: 1.5rem 1rem; }
+            .contact-cta { flex-direction: column; text-align: center; }
+            .policy-hero { padding: 3.5rem 0 2rem; }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            <button class="nav-icon-btn" id="mobile-menu-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </div>
+        <ul class="mobile-nav-links"><!-- Dynamic via cms.js --></ul>
+        <div class="drawer-footer">
+            <div class="drawer-help-links">
+                <a href="shipping.html" class="drawer-help-btn"><i data-lucide="truck" style="width:14px;height:14px;"></i> Shipping</a>
+                <a href="policies.html" class="drawer-help-btn"><i data-lucide="refresh-ccw" style="width:14px;height:14px;"></i> Returns</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item"><i data-lucide="home"></i><span>Home</span></a>
+        <a href="collection.html" class="bottom-nav-item"><i data-lucide="grid"></i><span>Shop</span></a>
+        <a href="custom-builder.html" class="bottom-nav-item custom"><i data-lucide="palette"></i><span>Custom</span></a>
+        <a href="login.html" class="bottom-nav-item"><i data-lucide="heart"></i><span>Wishlist</span></a>
+        <a href="login.html" class="bottom-nav-item"><i data-lucide="user"></i><span>Account</span></a>
+    </nav>
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        <div class="marquee-wrapper">
+            <div class="marquee"><span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span><span>FREE SHIPPING on orders above ₹499 | COD Available | 10,000+ Happy Customers</span></div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="container navbar-inner">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobile-menu-open"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+            </div>
+            <div class="nav-center desktop-only"><ul class="nav-links"><!-- Dynamic via cms.js --></ul></div>
+            <div class="nav-right">
+                <a href="search.html" class="nav-icon-btn"><i data-lucide="search"></i></a>
+                <a href="login.html" class="nav-icon-btn"><i data-lucide="user"></i></a>
+                <a href="cart.html" class="nav-icon-btn cart-btn"><i data-lucide="shopping-bag"></i><span class="cart-count">0</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="policy-hero">
+        <div class="container">
+            <div class="icon-wrap"><i data-lucide="truck" style="width:30px;height:30px;color:var(--accent-color);"></i></div>
+            <h1>Shipping Policy</h1>
+            <p>At Klaiz Designs, we understand that the anticipation of receiving your order is part of the excitement. We prioritize swift and reliable shipping for all our online poster purchases.</p>
+        </div>
+    </div>
+
+    <!-- POLICY BODY -->
+    <main class="policy-body">
+        <div class="container">
+            <div class="policy-grid">
+
+                <!-- 1. Order Processing -->
+                <div class="policy-card">
+                    <div class="policy-card-header">
+                        <div class="policy-card-icon"><i data-lucide="clock" style="width:20px;height:20px;"></i></div>
+                        <h2>1. Order Processing Time</h2>
+                    </div>
+                    <ul>
+                        <li>Orders are processed within <strong style="color:#fff;">2 business days.</strong></li>
+                        <li>For custom posters, processing time may vary based on design complexity and current order volume.</li>
+                    </ul>
+                </div>
+
+                <!-- 2. Shipping Time -->
+                <div class="policy-card">
+                    <div class="policy-card-header">
+                        <div class="policy-card-icon"><i data-lucide="map-pin" style="width:20px;height:20px;"></i></div>
+                        <h2>2. Shipping Time</h2>
+                    </div>
+                    <table class="delivery-table">
+                        <thead><tr><th>Destination</th><th>Delivery Time</th></tr></thead>
+                        <tbody>
+                            <tr><td>🇮🇳 Domestic (India)</td><td>5–10 Business Days</td></tr>
+                            <tr><td>🌍 International</td><td>15–20 Business Days (varies by location)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 3. Delivery -->
+                <div class="policy-card">
+                    <div class="policy-card-header">
+                        <div class="policy-card-icon"><i data-lucide="package" style="width:20px;height:20px;"></i></div>
+                        <h2>3. Delivery</h2>
+                    </div>
+                    <ul>
+                        <li>We ensure <strong style="color:#fff;">doorstep delivery</strong> for all orders.</li>
+                        <li>If courier services are unavailable in your location, you may need to collect the package from the nearest courier office.</li>
+                        <li>A <strong style="color:#fff;">tracking ID</strong> will be shared via WhatsApp and email once the order is shipped.</li>
+                    </ul>
+                </div>
+
+                <!-- 4. Shipping Delays -->
+                <div class="policy-card">
+                    <div class="policy-card-header">
+                        <div class="policy-card-icon"><i data-lucide="alert-circle" style="width:20px;height:20px;"></i></div>
+                        <h2>4. Shipping Delays</h2>
+                    </div>
+                    <p>While we strive for timely delivery, shipping delays caused by courier services are beyond our control. In such cases, we appreciate your patience and understanding.</p>
+                </div>
+
+                <!-- 5. International Shipping -->
+                <div class="policy-card">
+                    <div class="policy-card-header">
+                        <div class="policy-card-icon"><i data-lucide="globe" style="width:20px;height:20px;"></i></div>
+                        <h2>5. International Shipping</h2>
+                    </div>
+                    <p>Shipping rates, delivery times, and applicable taxes or duties for international shipments are the <strong style="color:#fff;">buyer's responsibility.</strong></p>
+                </div>
+
+                <!-- 6. Damaged or Lost -->
+                <div class="policy-card">
+                    <div class="policy-card-header">
+                        <div class="policy-card-icon"><i data-lucide="shield-alert" style="width:20px;height:20px;"></i></div>
+                        <h2>6. Damaged or Lost Shipments</h2>
+                    </div>
+                    <p>If a shipment is damaged or lost in transit, contact us <strong style="color:#fff;">immediately</strong> with photos or videos as proof. We will resolve the issue as quickly as possible.</p>
+                </div>
+
+            </div>
+
+            <!-- Contact CTA -->
+            <div class="contact-cta">
+                <div>
+                    <h3>Have a question about your shipment?</h3>
+                    <p>WhatsApp us at +91 7034219758 or email support@klaizdesigns.in</p>
+                </div>
+                <a href="https://wa.me/917034219758" target="_blank" class="cta-btn">
+                    <i data-lucide="message-circle" style="width:16px;height:16px;"></i>
+                    Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col about">
+                <a href="index.html" class="logo"><img src="photos/white blue.png" alt="Klaiz Designs" class="nav-logo-img"></a>
+                <p>Curating the finest wall art for the modern space. High-quality prints, custom designs, and worldwide shipping.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/klaizdesigns.in"><i data-lucide="instagram"></i></a>
+                    <a href="https://twitter.com"><i data-lucide="twitter"></i></a>
+                    <a href="https://facebook.com"><i data-lucide="facebook"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <a href="collection.html">Shop All</a>
+                <a href="collection.html">Best Sellers</a>
+                <a href="custom-builder.html">Custom Posters</a>
+            </div>
+            <div class="footer-col">
+                <h3>Customer Policy</h3>
+                <a href="shipping.html">Shipping Policy</a>
+                <a href="policies.html">Refund &amp; Return</a>
+                <a href="policies.html">Privacy Policy</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>Email: support@klaizdesigns.in</p>
+                <p>WhatsApp: +91 7034219758</p>
+                <p>Address: Kerala, India</p>
+            </div>
+        </div>
+        <div class="footer-disclaimer" style="background:var(--accent-color);padding:2rem 0;color:#fff;text-align:center;">
+            <div class="container" style="max-width:900px;">
+                <div class="footer-copyright" style="font-weight:700;">© Copyright — <a href="https://klaizdesigns.in" style="color:#fff;">klaizdesigns.in</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cms.js?v=4"></script>
+    <script src="main.js?v=4"></script>
+</body>
+</html>

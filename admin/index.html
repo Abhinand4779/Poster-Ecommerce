@@ -1,181 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Klaiz Designs</title>
+    <title>Dashboard | Klaiz Designs Admin</title>
     <script src="guard.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="admin-style.css">
 </head>
-
 <body class="admin-body">
     <div class="admin-container">
         <!-- Sidebar -->
-        <aside class="admin-sidebar">
+        <aside class="admin-sidebar" id="admin-sidebar">
             <div class="sidebar-header">
-                <img src="../photos/white blue.png" alt="Klaiz Designs" class="admin-logo">
+                <img src="../photos/black blue.png" alt="Klaiz Designs" class="admin-logo">
             </div>
             <nav class="sidebar-nav">
-                <a href="index.html" class="nav-item active"><i data-lucide="layout-dashboard"></i> Dashboard</a>
-                <a href="products.html" class="nav-item"><i data-lucide="package"></i> Products</a>
-                <a href="orders.html" class="nav-item"><i data-lucide="shopping-cart"></i> Orders</a>
-                <a href="customers.html" class="nav-item"><i data-lucide="users"></i> Customers</a>
-                <a href="settings.html" class="nav-item"><i data-lucide="settings"></i> Settings</a>
+                <a href="index.html" class="nav-item active"><i data-lucide="layout-dashboard"></i> <span>Dashboard</span></a>
+                <a href="products.html" class="nav-item"><i data-lucide="package"></i> <span>Products</span></a>
+                <a href="orders.html" class="nav-item"><i data-lucide="shopping-cart"></i> <span>Orders</span></a>
+                <a href="customers.html" class="nav-item"><i data-lucide="users"></i> <span>Customers</span></a>
+                <a href="settings.html" class="nav-item"><i data-lucide="settings"></i> <span>Settings</span></a>
             </nav>
             <div class="sidebar-footer">
-                <a href="#" onclick="adminLogout(event)" class="nav-item logout"><i data-lucide="log-out"></i> Logout</a>
+                <a href="#" onclick="adminLogout(event)" class="nav-item logout"><i data-lucide="log-out"></i> <span>Logout</span></a>
             </div>
         </aside>
+
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
         <!-- Main Content -->
         <main class="admin-main">
             <header class="admin-header">
-                <button class="mobile-menu-trigger"><i data-lucide="menu"></i></button>
-                <div class="mobile-logo"><img src="../photos/white blue.png" alt="Logo"></div>
+                <button class="mobile-menu-trigger" id="mobile-toggle"><i data-lucide="menu"></i></button>
+                <div class="mobile-logo"><img src="../photos/black blue.png" alt="Logo"></div>
                 <div class="header-search">
                     <i data-lucide="search"></i>
-                    <input type="text" placeholder="Search orders, products...">
+                    <input type="text" placeholder="Search for anything...">
                 </div>
                 <div class="header-profile">
                     <div class="profile-info">
-                        <span class="profile-name">Admin User</span>
-                        <span class="profile-role">Store Manager</span>
+                        <span class="profile-name">Admin</span>
+                        <span class="profile-role">Master Access</span>
                     </div>
-                    <div class="profile-avatar">A</div>
+                    <div class="profile-avatar">AD</div>
                 </div>
             </header>
 
-            <section class="dashboard-overview">
-                <h1 class="section-title">Dashboard Overview</h1>
+            <div class="page-content">
+                <div class="page-header">
+                    <h1 class="section-title">Dashboard Overview</h1>
+                    <button class="btn-primary" onclick="location.href='products.html'"><i data-lucide="plus"></i> New Product</button>
+                </div>
 
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-icon sales"><i data-lucide="indian-rupee"></i></div>
-                        <div class="stat-details">
-                            <span class="stat-label">Total Sales</span>
+                        <div>
+                            <span class="stat-label">Total Revenue</span>
                             <span class="stat-value" id="total-sales">₹0</span>
-                            <span class="stat-trend positive" id="sales-trend">All Time</span>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon orders"><i data-lucide="shopping-bag"></i></div>
-                        <div class="stat-details">
+                        <div>
                             <span class="stat-label">Total Orders</span>
                             <span class="stat-value" id="total-orders">0</span>
-                            <span class="stat-trend positive" id="orders-trend">All Time</span>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon customers"><i data-lucide="users"></i></div>
-                        <div class="stat-details">
+                        <div>
                             <span class="stat-label">Total Customers</span>
                             <span class="stat-value" id="total-customers">0</span>
-                            <span class="stat-trend neutral" id="customers-trend">All Time</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="dashboard-grid">
-                    <!-- Recent Orders -->
-                    <div class="recent-orders-card">
+                    <div class="admin-card">
                         <div class="card-header">
                             <h2>Recent Orders</h2>
                             <a href="orders.html" class="view-all">View All</a>
                         </div>
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer</th>
-                                    <th>Status</th>
-                                    <th>Total</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody id="recent-orders-tbody">
-                                <!-- Recent orders will load dynamically -->
-                            </tbody>
-                        </table>
+                        <div class="table-wrapper">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-orders-tbody">
+                                    <!-- Dynamic content -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <!-- Quick Actions -->
-                    <div class="quick-actions-card">
-                        <h2>Quick Actions</h2>
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h2>Quick Actions</h2>
+                        </div>
                         <div class="actions-grid">
                             <a href="products.html" class="action-btn">
                                 <i data-lucide="plus-circle"></i>
-                                <span>Add Product</span>
+                                <span>Add New Product</span>
                             </a>
                             <a href="settings.html" class="action-btn">
                                 <i data-lucide="megaphone"></i>
                                 <span>Update Marquee</span>
                             </a>
                             <a href="settings.html" class="action-btn">
-                                <i data-lucide="link"></i>
-                                <span>Edit Navbar</span>
+                                <i data-lucide="palette"></i>
+                                <span>Site Appearance</span>
                             </a>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </main>
     </div>
 
+    <script src="../cms.js"></script>
     <script>
         lucide.createIcons();
 
-        function renderDashboard() {
+        // Load stats from localStorage
+        function loadStats() {
             const orders = JSON.parse(localStorage.getItem('klaiz_orders') || '[]');
+            const totalRevenue = orders.reduce((acc, o) => acc + (parseFloat(String(o.total).replace(/[^0-9.]/g, '')) || 0), 0);
             
-            // Calculate Stats
-            let totalSales = 0;
-            let uniqueCustomers = new Set();
-            
-            orders.forEach(o => {
-                totalSales += parseFloat(String(o.total).replace(/[^0-9.]/g, '')) || 0;
-                if (o.email) uniqueCustomers.add(o.email);
-            });
-
-            document.getElementById('total-sales').textContent = `₹${totalSales.toLocaleString()}`;
+            document.getElementById('total-sales').textContent = '₹' + totalRevenue.toLocaleString();
             document.getElementById('total-orders').textContent = orders.length;
-            document.getElementById('total-customers').textContent = uniqueCustomers.size;
+            
+            // Unique customers
+            const customers = new Set(orders.map(o => o.email || 'guest@example.com'));
+            document.getElementById('total-customers').textContent = customers.size;
 
-            // Render Recent Orders (Top 4)
-            const recentOrders = [...orders].reverse().slice(0, 4);
+            // Load recent 5 orders
+            const recentOrders = orders.reverse().slice(0, 5);
             const tbody = document.getElementById('recent-orders-tbody');
-
+            
             if (recentOrders.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:2rem; color:#666;">No recent orders.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;">No orders yet.</td></tr>';
                 return;
             }
 
-            tbody.innerHTML = recentOrders.map(o => {
-                let statusClass = 'processing';
-                if (o.status === 'Paid') statusClass = 'paid';
-                if (o.status === 'Shipped') statusClass = 'shipped';
-                
-                return `
-                    <tr>
-                        <td style="font-family:monospace; color:var(--admin-accent); font-weight:700;">#${o.id.substring(3, 11)}</td>
-                        <td style="font-weight:600;">${o.customerName || 'Guest'}</td>
-                        <td><span class="status-badge ${statusClass}">${o.status}</span></td>
-                        <td style="font-weight:700;">${o.total}</td>
-                        <td style="color:var(--admin-text-secondary);">${new Date(o.date || new Date()).toLocaleDateString()}</td>
-                    </tr>
-                `;
-            }).join('');
+            tbody.innerHTML = recentOrders.map(o => `
+                <tr>
+                    <td style="font-family:monospace; font-weight:700;">#${o.id.substring(3, 11)}</td>
+                    <td>${o.customerName || 'Guest'}</td>
+                    <td><span class="status-badge ${o.status.toLowerCase()}">${o.status}</span></td>
+                    <td style="font-weight:700;">${o.total}</td>
+                    <td style="color:#64748b; font-size:0.8rem;">${new Date(o.date).toLocaleDateString()}</td>
+                </tr>
+            `).join('');
         }
 
-        renderDashboard();
-    </script>
-    <script src="admin-main.js"></script>
-</body>
+        loadStats();
 
+        // Mobile Menu Toggle
+        const toggle = document.getElementById('mobile-toggle');
+        const sidebar = document.getElementById('admin-sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        toggle.onclick = () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        };
+
+        overlay.onclick = () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        };
+    </script>
+</body>
 </html>

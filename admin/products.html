@@ -4,41 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Klaiz Designs</title>
+    <title>Manage Products | Klaiz Designs Admin</title>
     <script src="guard.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="../style.css?v=2">
     <link rel="stylesheet" href="admin-style.css">
     <style>
         /* Product Specific Styles (Non-global) */
         .admin-products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.25rem;
         }
-
         .admin-product-card {
-            background: var(--admin-surface);
-            border: 1px solid var(--admin-border);
-            border-radius: 15px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
             overflow: hidden;
-            transition: 0.3s;
+            transition: 0.25s ease;
+            box-shadow: var(--shadow-sm);
         }
-
         .admin-product-card:hover {
-            border-color: var(--admin-accent);
-            transform: translateY(-5px);
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
 
         .admin-product-img {
             width: 100%;
             height: 180px;
             object-fit: cover;
-            border-bottom: 1px solid var(--admin-border);
+            border-bottom: 1px solid var(--card-border);
         }
 
         .admin-product-info {
@@ -50,7 +48,7 @@
             justify-content: space-between;
             margin-bottom: 8px;
             font-size: 0.8rem;
-            color: var(--admin-text-secondary);
+            color: var(--text-secondary);
         }
 
         .admin-category {
@@ -89,7 +87,7 @@
 
         .btn-icon:hover {
             background: #333;
-            color: var(--admin-accent);
+            color: var(--accent);
         }
 
         .btn-icon.danger:hover {
@@ -117,7 +115,7 @@
 
         .modal-content {
             background: #0f0f0f;
-            border: 1px solid var(--admin-border);
+            border: 1px solid var(--card-border);
             border-radius: 20px;
             padding: 2rem;
             width: 100%;
@@ -134,7 +132,7 @@
             display: block;
             margin-bottom: 0.5rem;
             font-size: 0.85rem;
-            color: var(--admin-text-secondary);
+            color: var(--text-secondary);
         }
 
         .form-input {
@@ -154,7 +152,7 @@
         }
 
         .btn-primary {
-            background: var(--admin-accent);
+            background: var(--accent);
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
@@ -179,41 +177,61 @@
     </style>
 </head>
 
-<body>
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="../photos/black blue.png" alt="Klaiz Designs" class="admin-logo">
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+                <a href="products.html" class="nav-item active"><i data-lucide="package"></i> Products</a>
+                <a href="orders.html" class="nav-item"><i data-lucide="shopping-cart"></i> Orders</a>
+                <a href="customers.html" class="nav-item"><i data-lucide="users"></i> Customers</a>
+                <a href="settings.html" class="nav-item"><i data-lucide="settings"></i> Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" onclick="adminLogout(event)" class="nav-item logout"><i data-lucide="log-out"></i> Logout</a>
+            </div>
+        </aside>
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-    <aside class="admin-sidebar">
-        <div class="sidebar-header">
-            <img src="../photos/white blue.png" alt="Klaiz Designs" class="admin-logo">
-        </div>
-        <nav class="sidebar-nav">
-            <a href="index.html" class="nav-item"><i data-lucide="layout-dashboard"></i> Dashboard</a>
-            <a href="products.html" class="nav-item active"><i data-lucide="package"></i> Products</a>
-            <a href="orders.html" class="nav-item"><i data-lucide="shopping-cart"></i> Orders</a>
-            <a href="customers.html" class="nav-item"><i data-lucide="users"></i> Customers</a>
-            <a href="settings.html" class="nav-item"><i data-lucide="settings"></i> Settings</a>
-        </nav>
-        <div class="sidebar-footer">
-            <a href="#" onclick="adminLogout(event)" class="nav-item logout"><i data-lucide="log-out"></i> Logout</a>
-        </div>
-    </aside>
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <button class="mobile-menu-trigger" id="mobile-toggle"><i data-lucide="menu"></i></button>
+                <div class="mobile-logo"><img src="../photos/black blue.png" alt="Logo"></div>
+                <div class="header-search">
+                    <i data-lucide="search"></i>
+                    <input type="text" placeholder="Search products...">
+                </div>
+                <div class="header-profile">
+                    <div class="profile-info">
+                        <span class="profile-name">Admin</span>
+                        <span class="profile-role">Master Access</span>
+                    </div>
+                    <div class="profile-avatar">AD</div>
+                </div>
+            </header>
 
-    <main class="admin-main">
-        <header class="admin-header">
-            <button class="mobile-menu-trigger"><i data-lucide="menu"></i></button>
-            <div class="mobile-logo"><img src="../photos/white blue.png" alt="Logo"></div>
-            <button class="btn-primary" onclick="openAddModal()">
-                <i data-lucide="plus"></i> <span class="btn-text">Add Product</span>
-            </button>
-        </header>
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="section-title">Product Management</h1>
+                        <p id="product-count" style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.25rem;">Managing your store collection</p>
+                    </div>
+                    <button class="btn-primary" onclick="openAddModal()">
+                        <i data-lucide="plus"></i> <span class="btn-text">Add New Product</span>
+                    </button>
+                </div>
 
-        <div class="page-header">
-            <h1 class="section-title">Product Management</h1>
-        </div>
-
-        <div class="admin-products-grid" id="products-grid">
-            <!-- Loading indicator or products here -->
-        </div>
-    </main>
+                <div class="admin-products-grid" id="products-grid">
+                    <!-- Products will load dynamically -->
+                </div>
+            </div>
+        </main>
+    </div>
 
     <!-- ADD Product Modal -->
     <div class="modal" id="addProductModal">
@@ -462,7 +480,7 @@
 
             try {
                 const file = document.getElementById('prodImage').files[0];
-                const imageUrl = file ? await KlaizCMS.compressImage(file) : '../photos/white blue.png';
+                const imageUrl = file ? await KlaizCMS.compressImage(file) : '../photos/black blue.png';
 
                 KlaizCMS.add({
                     name: document.getElementById('prodName').value.trim(),

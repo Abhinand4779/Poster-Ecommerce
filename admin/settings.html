@@ -7,7 +7,7 @@
     <script src="guard.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="admin-style.css">
     <style>
@@ -15,44 +15,64 @@
         .settings-tabs { 
             display: flex; 
             gap: 10px; 
-            background: var(--admin-surface); 
-            padding: 10px; 
+            background: var(--card-bg); 
+            padding: 8px; 
             border-radius: 12px; 
-            border: 1px solid var(--admin-border); 
+            border: 1px solid var(--card-border); 
             margin-bottom: 2rem; 
             overflow-x: auto; 
+            box-shadow: var(--shadow-sm);
         }
         
         .tab-btn { 
             background: none; 
             border: none; 
-            color: var(--admin-text-secondary); 
+            color: var(--text-secondary); 
             padding: 10px 20px; 
             border-radius: 8px; 
             cursor: pointer; 
             font-weight: 700; 
-            transition: 0.3s; 
+            transition: var(--transition); 
             display: flex; 
             align-items: center; 
             gap: 8px; 
             white-space: nowrap; 
+            font-family: inherit;
         }
         
+        .tab-btn:hover {
+            background: #f8fafc;
+            color: var(--text-primary);
+        }
+
         .tab-btn.active { 
-            background: rgba(255, 255, 255, 0.05); 
-            color: var(--admin-accent); 
+            background: var(--accent); 
+            color: #fff; 
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
         }
 
         .tab-panel { display: none; }
         .tab-panel.active { display: block; animation: fadeIn 0.4s ease; }
         
         .editor-card { 
-            background: var(--admin-surface); 
-            border: 1px solid var(--admin-border); 
-            border-radius: 15px; 
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border); 
+            border-radius: 16px; 
             padding: 2rem; 
-            max-width: 900px; 
+            max-width: 1000px; 
             margin-bottom: 2rem; 
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .form-group { margin-bottom: 1.5rem; }
@@ -60,186 +80,302 @@
             display: block; 
             font-size: 0.75rem; 
             font-weight: 700; 
-            color: var(--admin-text-secondary); 
+            color: var(--text-secondary); 
             margin-bottom: 8px; 
             text-transform: uppercase; 
+            letter-spacing: 0.5px;
         }
 
         .form-control { 
             width: 100%; 
-            background: #1a1a1a; 
-            border: 1px solid #333; 
-            border-radius: 8px; 
+            background: #fff; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 10px; 
             padding: 12px 15px; 
-            color: #fff; 
+            color: var(--text-primary); 
             font-family: inherit; 
+            font-size: 0.95rem;
             outline: none;
+            transition: var(--transition);
+        }
+        .form-control::placeholder {
+            color: #94a3b8;
+        }
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
         }
 
         .manager-item { 
-            background: rgba(255, 255, 255, 0.02); 
-            border: 1px solid var(--admin-border); 
+            background: #f8fafc; 
+            border: 1px solid var(--card-border); 
             padding: 1.5rem; 
             border-radius: 12px; 
-            margin-bottom: 1rem; 
+            margin-bottom: 1.25rem; 
             position: relative; 
+            transition: var(--transition);
+        }
+        .manager-item:hover {
+            border-color: var(--accent);
         }
 
         .manager-top { display: flex; gap: 20px; align-items: center; }
-        .manager-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; background: #111; }
+        .manager-avatar { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; background: #fff; border: 1px solid var(--card-border); }
         
         .btn-save-large { 
-            background: var(--admin-accent); 
+            background: var(--accent); 
             color: #fff; 
             border: none; 
-            padding: 15px; 
+            padding: 14px 24px; 
             border-radius: 10px; 
-            font-weight: 800; 
+            font-weight: 700; 
             width: 100%; 
             cursor: pointer; 
-            transition: 0.3s; 
+            transition: var(--transition); 
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
+        .btn-save-large:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-upload-sm {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+        }
+        .btn-upload-sm:hover {
+            background: #f8fafc;
+            border-color: var(--accent);
+        }
+
+        .btn-remove {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fee2e2;
+            color: #ef4444;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-remove:hover { background: #ef4444; color: #fff; }
+
+        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
 
         @media (max-width: 768px) {
             .manager-top { flex-direction: column; text-align: center; }
+            .editor-card { padding: 1.5rem 1rem; }
         }
     </style>
 </head>
 <body class="admin-body">
     <div class="admin-container">
         <!-- Sidebar -->
-        <aside class="admin-sidebar">
+        <aside class="admin-sidebar" id="admin-sidebar">
             <div class="sidebar-header">
-                <img src="../photos/white blue.png" alt="Klaiz Designs" class="admin-logo">
+                <img src="../photos/black blue.png" alt="Klaiz Designs" class="admin-logo">
             </div>
             <nav class="sidebar-nav">
-                <a href="index.html" class="nav-item"><i data-lucide="layout-dashboard"></i> Dashboard</a>
-                <a href="products.html" class="nav-item"><i data-lucide="package"></i> Products</a>
-                <a href="orders.html" class="nav-item"><i data-lucide="shopping-cart"></i> Orders</a>
-                <a href="customers.html" class="nav-item"><i data-lucide="users"></i> Customers</a>
-                <a href="settings.html" class="nav-item active"><i data-lucide="settings"></i> Settings</a>
+                <a href="index.html" class="nav-item"><i data-lucide="layout-dashboard"></i> <span>Dashboard</span></a>
+                <a href="products.html" class="nav-item"><i data-lucide="package"></i> <span>Products</span></a>
+                <a href="orders.html" class="nav-item"><i data-lucide="shopping-cart"></i> <span>Orders</span></a>
+                <a href="customers.html" class="nav-item"><i data-lucide="users"></i> <span>Customers</span></a>
+                <a href="settings.html" class="nav-item active"><i data-lucide="settings"></i> <span>Settings</span></a>
             </nav>
             <div class="sidebar-footer">
-                <a href="#" onclick="adminLogout(event)" class="nav-item logout"><i data-lucide="log-out"></i> Logout</a>
+                <a href="#" onclick="adminLogout(event)" class="nav-item logout"><i data-lucide="log-out"></i> <span>Logout</span></a>
             </div>
         </aside>
 
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Main Content -->
         <main class="admin-main">
             <header class="admin-header">
-                <button class="mobile-menu-trigger"><i data-lucide="menu"></i></button>
-                <div class="mobile-logo"><img src="../photos/white blue.png" alt="Logo"></div>
+                <button class="mobile-menu-trigger" id="mobile-toggle"><i data-lucide="menu"></i></button>
+                <div class="header-search">
+                    <i data-lucide="search"></i>
+                    <input type="text" placeholder="Search settings...">
+                </div>
                 <div class="header-profile">
-                    <div class="profile-avatar">A</div>
+                    <div class="profile-info">
+                        <span class="profile-name">Admin</span>
+                        <span class="profile-role">Master Access</span>
+                    </div>
+                    <div class="profile-avatar">AD</div>
                 </div>
             </header>
 
-            <div class="page-header">
-                <h1 class="section-title">Site Configuration</h1>
-            </div>
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="section-title">Site Settings</h1>
+                        <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.25rem;">Configure your store appearance and information</p>
+                    </div>
+                </div>
 
-        <nav class="settings-tabs">
-            <button class="tab-btn active" data-tab="home"><i data-lucide="home"></i> Homepage</button>
-            <button class="tab-btn" data-tab="nav"><i data-lucide="menu"></i> Navigation</button>
-            <button class="tab-btn" data-tab="about"><i data-lucide="info"></i> About Us</button>
-            <button class="tab-btn" data-tab="team"><i data-lucide="users"></i> Our Team</button>
-            <button class="tab-btn" data-tab="contact"><i data-lucide="phone"></i> Contact</button>
-            <button class="tab-btn" data-tab="advanced"><i data-lucide="shield"></i> Advanced</button>
-        </nav>
+                <div class="settings-tabs">
+                    <button class="tab-btn active" data-tab="home"><i data-lucide="home"></i> Homepage</button>
+                    <button class="tab-btn" data-tab="nav"><i data-lucide="menu"></i> Navigation</button>
+                    <button class="tab-btn" data-tab="about"><i data-lucide="info"></i> About Us</button>
+                    <button class="tab-btn" data-tab="team"><i data-lucide="users"></i> Our Team</button>
+                    <button class="tab-btn" data-tab="contact"><i data-lucide="phone"></i> Contact</button>
+                    <button class="tab-btn" data-tab="advanced"><i data-lucide="shield"></i> Advanced</button>
+                </div>
 
-        <!-- Homepage Panel -->
-        <div class="tab-panel active" id="panel-home">
-            <div class="editor-card">
-                <div class="card-header"><h2 style="margin-bottom:2rem;"><i data-lucide="layout"></i> Homepage Banner</h2></div>
-                <form class="cms-form">
-                    <div class="form-group"><label>Announcement Bar</label><textarea name="marquee" class="form-control" rows="2"></textarea></div>
-                    <div class="form-group"><label>Hero Title</label><input type="text" name="heroTitle" class="form-control"></div>
-                    <div class="form-group"><label>Hero Subtitle</label><textarea name="heroSubtitle" class="form-control" rows="2"></textarea></div>
-                    <button type="submit" class="btn-save-large">Update Home Banners</button>
-                </form>
-            </div>
+                <div class="tab-panels-container">
+                    <!-- Homepage Panel -->
+                    <div class="tab-panel active" id="panel-home">
+                        <div class="editor-card">
+                            <h2 class="card-title"><i data-lucide="layout"></i> Homepage Banner</h2>
+                            <form class="cms-form">
+                                <div class="form-group">
+                                    <label>Announcement Bar</label>
+                                    <textarea name="marquee" class="form-control" rows="2" placeholder="Text for the top moving bar..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hero Title</label>
+                                    <input type="text" name="heroTitle" class="form-control" placeholder="Main big title...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Hero Subtitle</label>
+                                    <textarea name="heroSubtitle" class="form-control" rows="2" placeholder="Smaller text below the title..."></textarea>
+                                </div>
+                                <button type="submit" class="btn-save-large">Update Home Banners</button>
+                            </form>
+                        </div>
 
-            <div class="editor-card">
-                <div class="card-header" style="margin-bottom:2rem;"><h2><i data-lucide="circle"></i> Homepage Categories (Circles)</h2></div>
-                <div id="cat-list"></div>
-                <button class="btn-upload-sm" style="width:100%; padding:15px; margin-top:1rem;" onclick="addCategoryItem()">+ Add New Category Circle</button>
-                <button class="btn-save-large" onclick="saveCategories()">Save All Categories</button>
-            </div>
-        </div>
+                        <div class="editor-card">
+                            <h2 class="card-title"><i data-lucide="image"></i> Hero Marquee (Row 1 - Top)</h2>
+                            <div id="marquee1-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-bottom: 1.5rem;"></div>
+                            <button class="btn-upload-sm" style="width:100%; padding:12px;" onclick="addMarqueeItem(1)"><i data-lucide="plus"></i> Add Photo to Row 1</button>
+                        </div>
 
-        <!-- Navigation Panel -->
-        <div class="tab-panel" id="panel-nav">
-            <div class="editor-card">
-                <div class="card-header" style="margin-bottom:2rem;"><h2><i data-lucide="menu"></i> Header Navigation Bar</h2></div>
-                <p style="color:#666; margin-bottom:2rem; font-size:0.9rem;">The "Shop By Category" menu is automatically managed by your categories. Here you can add custom links like "Home," "Best Sellers," etc.</p>
-                <div id="nav-list"></div>
-                <button class="btn-upload-sm" style="width:100%; padding:15px; margin-top:1rem;" onclick="addNavItem()">+ Add New Header Link</button>
-                <button class="btn-save-large" onclick="saveNavbar()">Save Navigation Bar</button>
-            </div>
-        </div>
+                        <div class="editor-card">
+                            <h2 class="card-title"><i data-lucide="image"></i> Hero Marquee (Row 2 - Bottom)</h2>
+                            <div id="marquee2-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-bottom: 1.5rem;"></div>
+                            <button class="btn-upload-sm" style="width:100%; padding:12px;" onclick="addMarqueeItem(2)"><i data-lucide="plus"></i> Add Photo to Row 2</button>
+                        </div>
+                        
+                        <button class="btn-save-large" style="margin-bottom: 2rem;" onclick="saveMarquees()">Save All Marquee Photos</button>
 
-        <!-- About Us Panel -->
-        <div class="tab-panel" id="panel-about">
-            <div class="editor-card">
-                <div class="card-header"><h2 style="margin-bottom:2rem;"><i data-lucide="info"></i> Brand Story</h2></div>
-                <form class="cms-form">
-                    <div class="form-group"><label>Mission</label><textarea name="aboutMission" class="form-control" rows="3"></textarea></div>
-                    <div class="form-group"><label>Story Title</label><input type="text" name="aboutStoryTitle" class="form-control"></div>
-                    <div class="form-group"><label>Story Text</label><textarea name="aboutStoryText" class="form-control" rows="5"></textarea></div>
-                    <button type="submit" class="btn-save-large">Update About Page</button>
-                </form>
-            </div>
-        </div>
+                        <div class="editor-card">
+                            <h2 class="card-title"><i data-lucide="video"></i> Customer Video Reviews</h2>
+                            <div id="reviews-list" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem;"></div>
+                            <button class="btn-upload-sm" style="width:100%; padding:12px;" onclick="addReviewItem()"><i data-lucide="plus"></i> Add Video Link (.mp4 URL)</button>
+                            <button class="btn-save-large" style="margin-top:1.5rem;" onclick="saveReviews()">Save Videos</button>
+                        </div>
 
-        <!-- Team Panel -->
-        <div class="tab-panel" id="panel-team">
-            <div class="editor-card">
-                <div class="card-header"><h2 style="margin-bottom:2rem;"><i data-lucide="users"></i> Team Directory</h2></div>
-                <div id="team-list"></div>
-                <button class="btn-upload-sm" style="width:100%; padding:15px; margin-top:1rem;" onclick="addTeamMember()">+ Add New Team Member</button>
-                <button class="btn-save-large" onclick="saveTeamData()">Save Team Changes</button>
-            </div>
-        </div>
+                        <div class="editor-card">
+                            <h2 class="card-title"><i data-lucide="circle"></i> Homepage Categories (Circles)</h2>
+                            <div id="cat-list" style="margin-bottom: 1.5rem;"></div>
+                            <button class="btn-upload-sm" style="width:100%; padding:12px; margin-bottom: 1.5rem;" onclick="addCategoryItem()"><i data-lucide="plus"></i> Add New Category Circle</button>
+                            <button class="btn-save-large" onclick="saveCategories()">Save All Categories</button>
+                        </div>
+                    </div>
 
-        <!-- Contact Panel -->
-        <div class="tab-panel" id="panel-contact">
-            <div class="editor-card">
-                <div class="card-header"><h2 style="margin-bottom:2rem;"><i data-lucide="phone"></i> Store Info</h2></div>
-                <form class="cms-form">
-                    <div class="form-group"><label>Support Email</label><input type="email" name="contactEmail" class="form-control"></div>
-                    <div class="form-group"><label>WhatsApp Number</label><input type="text" name="contactPhone" class="form-control"></div>
-                    <button type="submit" class="btn-save-large">Save Contact Details</button>
-                </form>
-            </div>
-        </div>
+                    <!-- Navigation Panel -->
+                    <div class="tab-panel" id="panel-nav">
+                        <div class="editor-card">
+                            <h2 class="card-title"><i data-lucide="menu"></i> Header Navigation Bar</h2>
+                            <p style="color: var(--text-muted); margin-bottom:2rem; font-size:0.9rem;">The "Shop By Category" menu is automatically managed by your categories. Here you can add custom links like "Home," "Best Sellers," etc.</p>
+                            <div id="nav-list" style="margin-bottom: 1.5rem;"></div>
+                            <button class="btn-upload-sm" style="width:100%; padding:12px; margin-bottom: 1.5rem;" onclick="addNavItem()"><i data-lucide="plus"></i> Add New Header Link</button>
+                            <button class="btn-save-large" onclick="saveNavbar()">Save Navigation Bar</button>
+                        </div>
+                    </div>
 
-        <!-- Advanced -->
-        <div class="tab-panel" id="panel-advanced">
-            <div class="editor-card" style="border-color:#311;">
-                <h2 style="color:#ef4444; margin-bottom:1.5rem;">Database Control</h2>
-                <button class="btn-save-large" style="background:#ef4444; margin-bottom:1rem;" onclick="if(confirm('Wipe orders?')) {localStorage.removeItem('klaiz_orders'); location.reload();}">Clear Order History</button>
-                <button class="btn-save-large" style="background:#333;" onclick="if(confirm('Reset products?')) {localStorage.removeItem('klaiz_products'); location.reload();}">Reset Products</button>
+                    <!-- About Us Panel -->
+                    <div class="tab-panel" id="panel-about">
+                        <div class="editor-card">
+                            <h2 class="card-title"><i data-lucide="info"></i> Brand Story</h2>
+                            <form class="cms-form">
+                                <div class="form-group"><label>Mission</label><textarea name="aboutMission" class="form-control" rows="3" placeholder="What is your mission?"></textarea></div>
+                                <div class="form-group"><label>Story Title</label><input type="text" name="aboutStoryTitle" class="form-control" placeholder="E.g. Our Journey"></div>
+                                <div class="form-group"><label>Story Text</label><textarea name="aboutStoryText" class="form-control" rows="5" placeholder="Write your brand story here..."></textarea></div>
+                                <button type="submit" class="btn-save-large">Update About Page</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Team Panel -->
+                    <div class="tab-panel" id="panel-team">
+                        <div class="editor-card">
+                            <h2 class="card-title"><i data-lucide="users"></i> Team Directory</h2>
+                            <div id="team-list" style="margin-bottom: 1.5rem;"></div>
+                            <button class="btn-upload-sm" style="width:100%; padding:12px; margin-bottom: 1.5rem;" onclick="addTeamMember()"><i data-lucide="plus"></i> Add New Team Member</button>
+                            <button class="btn-save-large" onclick="saveTeamData()">Save Team Changes</button>
+                        </div>
+                    </div>
+
+                    <!-- Contact Panel -->
+                    <div class="tab-panel" id="panel-contact">
+                        <div class="editor-card">
+                            <h2 class="card-title"><i data-lucide="phone"></i> Store Info</h2>
+                            <form class="cms-form">
+                                <div class="form-group"><label>Support Email</label><input type="email" name="contactEmail" class="form-control" placeholder="support@klaizdesigns.com"></div>
+                                <div class="form-group"><label>WhatsApp Number</label><input type="text" name="contactPhone" class="form-control" placeholder="+91 ..."></div>
+                                <button type="submit" class="btn-save-large">Save Contact Details</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Advanced -->
+                    <div class="tab-panel" id="panel-advanced">
+                        <div class="editor-card" style="border-color:#fee2e2;">
+                            <h2 class="card-title" style="color:#ef4444;"><i data-lucide="shield-alert"></i> Database Control</h2>
+                            <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.875rem;">Warning: These actions are permanent and cannot be undone.</p>
+                            <button class="btn-save-large" style="background:#ef4444; margin-bottom:1rem;" onclick="if(confirm('Wipe orders?')) {localStorage.removeItem('klaiz_orders'); location.reload();}">Clear Order History</button>
+                            <button class="btn-save-large" style="background:#334155;" onclick="if(confirm('Reset products?')) {localStorage.removeItem('klaiz_products'); location.reload();}">Reset Products to Default</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script src="../cms.js"></script>
     <script>
         lucide.createIcons();
 
         // Mobile Sidebar Toggle
-        const adminSidebar = document.querySelector('.admin-sidebar');
-        const adminToggle = document.getElementById('mobile-admin-toggle');
-        if(adminToggle) {
-            adminToggle.addEventListener('click', () => {
-                adminSidebar.classList.toggle('active');
-                const icon = adminToggle.querySelector('i');
-                if(adminSidebar.classList.contains('active')) {
-                    adminToggle.innerHTML = '<i data-lucide="x"></i>';
-                } else {
-                    adminToggle.innerHTML = '<i data-lucide="menu"></i>';
-                }
-                lucide.createIcons();
-            });
+        const toggle = document.getElementById('mobile-toggle');
+        const sidebar = document.getElementById('admin-sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        if(toggle) {
+            toggle.onclick = () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            };
+        }
+
+        if(overlay) {
+            overlay.onclick = () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            };
         }
 
         // Tabs
@@ -247,7 +383,8 @@
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.tab-btn, .tab-panel').forEach(el => el.classList.remove('active'));
                 btn.classList.add('active');
-                document.getElementById('panel-' + btn.getAttribute('data-tab')).classList.add('active');
+                const panel = document.getElementById('panel-' + btn.getAttribute('data-tab'));
+                if(panel) panel.classList.add('active');
             });
         });
 
@@ -270,9 +407,15 @@
             div.className = 'manager-item';
             div.innerHTML = `
                 <button class="btn-remove" onclick="this.closest('.manager-item').remove()"><i data-lucide="trash-2"></i></button>
-                <div style="display:flex; gap:10px;">
-                    <input type="text" class="form-control nav-label" placeholder="Link Label (e.g. FAQ)" value="${label}" style="flex:1">
-                    <input type="text" class="form-control nav-url" placeholder="URL (e.g. faq.html)" value="${url}" style="flex:2">
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                    <div class="form-group" style="margin-bottom:0">
+                        <label>Link Label</label>
+                        <input type="text" class="form-control nav-label" placeholder="e.g. FAQ" value="${label}">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0">
+                        <label>Target URL</label>
+                        <input type="text" class="form-control nav-url" placeholder="e.g. faq.html" value="${url}">
+                    </div>
                 </div>
             `;
             container.appendChild(div);
@@ -283,14 +426,23 @@
         function addCategoryItem(name = '', img = '') {
             const container = document.getElementById('cat-list');
             const id = 'cat-' + Date.now();
+
+            let displaySrc = img || '../photos/placeholder.png';
+            if (img && !img.startsWith('data:') && !img.startsWith('http') && !img.startsWith('../')) {
+                displaySrc = '../' + img;
+            }
+
             const div = document.createElement('div');
             div.className = 'manager-item';
             div.innerHTML = `
                 <button class="btn-remove" onclick="this.closest('.manager-item').remove()"><i data-lucide="x"></i></button>
                 <div class="manager-top">
-                    <img src="${img || '../photos/placeholder.png'}" class="manager-avatar" style="border-radius:50%">
+                    <img src="${displaySrc}" class="manager-avatar" style="border-radius:50%">
                     <div style="flex:1">
-                        <input type="text" class="form-control cat-name" placeholder="Name" value="${name}" style="margin-bottom:10px;">
+                        <div class="form-group" style="margin-bottom:10px;">
+                            <label>Category Name</label>
+                            <input type="text" class="form-control cat-name" placeholder="Name" value="${name}">
+                        </div>
                         <input type="hidden" class="cat-img-data" value="${img}">
                         <button type="button" class="btn-upload-sm" onclick="document.getElementById('file-${id}').click()"><i data-lucide="image"></i> Choose Photo</button>
                         <input type="file" id="file-${id}" hidden onchange="handleImg(this, '.cat-img-data', '.manager-avatar')">
@@ -305,16 +457,28 @@
         function addTeamMember(name = '', role = '', img = '') {
             const container = document.getElementById('team-list');
             const id = 'tm-' + Date.now();
+
+            let displaySrc = img || '../photos/placeholder.png';
+            if (img && !img.startsWith('data:') && !img.startsWith('http') && !img.startsWith('../')) {
+                displaySrc = '../' + img;
+            }
+
             const div = document.createElement('div');
             div.className = 'manager-item';
             div.innerHTML = `
                 <button class="btn-remove" onclick="this.closest('.manager-item').remove()"><i data-lucide="trash-2"></i></button>
                 <div class="manager-top">
-                    <img src="${img || '../photos/placeholder.png'}" class="manager-avatar">
+                    <img src="${displaySrc}" class="manager-avatar">
                     <div style="flex:1">
-                        <div style="display:flex; gap:10px; margin-bottom:10px;">
-                            <input type="text" class="form-control tm-name" placeholder="Name" value="${name}" style="flex:1">
-                            <input type="text" class="form-control tm-role" placeholder="Role" value="${role}" style="flex:1">
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+                            <div class="form-group" style="margin-bottom:0">
+                                <label>Full Name</label>
+                                <input type="text" class="form-control tm-name" placeholder="Name" value="${name}">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0">
+                                <label>Role</label>
+                                <input type="text" class="form-control tm-role" placeholder="Position" value="${role}">
+                            </div>
                         </div>
                         <input type="hidden" class="tm-img-data" value="${img}">
                         <button type="button" class="btn-upload-sm" onclick="document.getElementById('f-${id}').click()"><i data-lucide="camera"></i> Update Photo</button>
@@ -324,6 +488,64 @@
             `;
             container.appendChild(div);
             lucide.createIcons();
+        }
+
+        // Marquee Manager
+        function addMarqueeItem(rowNum, img = '') {
+            const container = document.getElementById('marquee' + rowNum + '-list');
+            const id = 'mq-' + Date.now() + Math.random().toString(36).substr(2, 5);
+            
+            let displaySrc = img || '../photos/placeholder.png';
+            if (img && !img.startsWith('data:') && !img.startsWith('http') && !img.startsWith('../')) {
+                displaySrc = '../' + img;
+            }
+
+            const div = document.createElement('div');
+            div.className = 'manager-item';
+            div.style.padding = '12px';
+            div.innerHTML = `
+                <button class="btn-remove" style="width:24px;height:24px;top:5px;right:5px;" onclick="this.closest('.manager-item').remove()"><i data-lucide="x" style="width:14px;height:14px;"></i></button>
+                <img src="${displaySrc}" class="manager-avatar" style="width:100%; height:90px; border-radius:8px; margin-bottom:10px; object-fit:cover;">
+                <input type="hidden" class="mq-img-data" value="${img}">
+                <button type="button" class="btn-upload-sm" style="width:100%; font-size:0.75rem; padding:6px;" onclick="document.getElementById('file-${id}').click()"><i data-lucide="image" style="width:14px;height:14px;"></i> Change</button>
+                <input type="file" id="file-${id}" hidden onchange="handleImg(this, '.mq-img-data', '.manager-avatar')">
+            `;
+            container.appendChild(div);
+            lucide.createIcons();
+        }
+
+        // Video Reviews Manager
+        function addReviewItem(url = '') {
+            const container = document.getElementById('reviews-list');
+            const id = 'vid-' + Date.now() + Math.random().toString(36).substr(2, 5);
+            const div = document.createElement('div');
+            div.className = 'manager-item';
+            div.innerHTML = `
+                <button class="btn-remove" onclick="this.closest('.manager-item').remove()"><i data-lucide="trash-2"></i></button>
+                <div style="display:flex; flex-direction: column; gap:10px; margin-top:5px;">
+                    <div style="display:flex; align-items:center; gap: 10px;">
+                        <div class="stat-icon" style="background:var(--accent-light); color:var(--accent); width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center;"><i data-lucide="video" style="width:18px;height:18px;"></i></div>
+                        <span style="flex:1; font-size: 0.875rem; color: var(--text-primary); font-weight:600; overflow:hidden; text-overflow:ellipsis;" class="vid-name-display">${url ? url : 'No video selected'}</span>
+                        <input type="hidden" class="review-url" value="${url}">
+                    </div>
+                    <button type="button" class="btn-upload-sm" style="width:100%;" onclick="document.getElementById('file-${id}').click()">
+                        <i data-lucide="folder-open"></i> Choose Video File
+                    </button>
+                    <input type="file" id="file-${id}" accept="video/mp4,video/webm" hidden onchange="handleVideoSelect(this)">
+                </div>
+            `;
+            container.appendChild(div);
+            lucide.createIcons();
+        }
+
+        function handleVideoSelect(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const container = input.closest('.manager-item');
+            const localPath = 'photos/' + file.name;
+            container.querySelector('.review-url').value = localPath;
+            container.querySelector('.vid-name-display').innerText = localPath;
+            alert("Video linked! Copy '" + file.name + "' to your 'photos' folder.");
         }
 
         function loadAll() {
@@ -340,13 +562,19 @@
             s.categories.forEach(c => addCategoryItem(c.name, c.img));
             document.getElementById('team-list').innerHTML = '';
             s.team.forEach(m => addTeamMember(m.name, m.role, m.img));
+            document.getElementById('marquee1-list').innerHTML = '';
+            (s.heroMarqueeRow1 || []).forEach(img => addMarqueeItem(1, img));
+            document.getElementById('marquee2-list').innerHTML = '';
+            (s.heroMarqueeRow2 || []).forEach(img => addMarqueeItem(2, img));
+            document.getElementById('reviews-list').innerHTML = '';
+            (s.customerVideos || []).forEach(v => addReviewItem(v.url));
         }
 
         document.querySelectorAll('.cms-form').forEach(form => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 KlaizCMS.updateSettings(Object.fromEntries(new FormData(form)));
-                alert('Saved!');
+                alert('Success: Homepage banners updated!');
             });
         });
 
@@ -356,7 +584,7 @@
                 navbar.push({ label: row.querySelector('.nav-label').value, url: row.querySelector('.nav-url').value });
             });
             KlaizCMS.updateSettings({ navbar });
-            alert('Navigation Bar synchronized!');
+            alert('Success: Navigation bar updated!');
         };
 
         window.saveCategories = () => {
@@ -366,7 +594,7 @@
                 categories.push({ name, img: row.querySelector('.cat-img-data').value, url: `collection.html?cat=${name}` });
             });
             KlaizCMS.updateSettings({ categories });
-            alert('Categories saved!');
+            alert('Success: Categories updated!');
         };
 
         window.saveTeamData = () => {
@@ -375,12 +603,32 @@
                 team.push({ name: row.querySelector('.tm-name').value, role: row.querySelector('.tm-role').value, img: row.querySelector('.tm-img-data').value });
             });
             KlaizCMS.updateSettings({ team });
-            alert('Team saved!');
+            alert('Success: Team members updated!');
+        };
+
+        window.saveMarquees = () => {
+            const heroMarqueeRow1 = [];
+            document.querySelectorAll('#marquee1-list .manager-item').forEach(row => {
+                heroMarqueeRow1.push(row.querySelector('.mq-img-data').value);
+            });
+            const heroMarqueeRow2 = [];
+            document.querySelectorAll('#marquee2-list .manager-item').forEach(row => {
+                heroMarqueeRow2.push(row.querySelector('.mq-img-data').value);
+            });
+            KlaizCMS.updateSettings({ heroMarqueeRow1, heroMarqueeRow2 });
+            alert('Success: Marquee photos saved!');
+        };
+
+        window.saveReviews = () => {
+            const customerVideos = [];
+            document.querySelectorAll('#reviews-list .manager-item').forEach(row => {
+                customerVideos.push({ url: row.querySelector('.review-url').value });
+            });
+            KlaizCMS.updateSettings({ customerVideos });
+            alert('Success: Customer videos updated!');
         };
 
         loadAll();
     </script>
-    <script src="admin-main.js"></script>
 </body>
 </html>
-

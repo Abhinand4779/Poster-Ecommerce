@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Customers | Klaiz Designs Admin</title>
+    <title>Customers | Klaiz Designs Admin</title>
     <script src="guard.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="admin-style.css">
+    <style>
+        .customer-avatar {
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.78rem; color: #fff;
+            flex-shrink: 0;
+        }
+        .customer-cell { display: flex; align-items: center; gap: 0.75rem; }
+        .spent-badge {
+            display: inline-flex; align-items: center;
+            background: rgba(16,185,129,0.1);
+            color: #10b981;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+    </style>
 </head>
-
 <body class="admin-body">
     <div class="admin-container">
         <!-- Sidebar -->
-        <aside class="admin-sidebar">
+        <aside class="admin-sidebar" id="admin-sidebar">
             <div class="sidebar-header">
-                <img src="../photos/white blue.png" alt="Klaiz Designs" class="admin-logo">
+                <img src="../photos/black blue.png" alt="Klaiz Designs" class="admin-logo">
             </div>
             <nav class="sidebar-nav">
                 <a href="index.html" class="nav-item"><i data-lucide="layout-dashboard"></i> Dashboard</a>
@@ -33,114 +48,113 @@
                 <a href="#" onclick="adminLogout(event)" class="nav-item logout"><i data-lucide="log-out"></i> Logout</a>
             </div>
         </aside>
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-        <!-- Main Content -->
+        <!-- Main -->
         <main class="admin-main">
             <header class="admin-header">
-                <button class="mobile-menu-trigger"><i data-lucide="menu"></i></button>
-                <div class="mobile-logo"><img src="../photos/white blue.png" alt="Logo"></div>
+                <button class="mobile-menu-trigger" id="mobile-toggle"><i data-lucide="menu"></i></button>
+                <div class="mobile-logo"><img src="../photos/black blue.png" alt="Logo"></div>
                 <div class="header-search">
                     <i data-lucide="search"></i>
-                    <input type="text" placeholder="Search customers...">
+                    <input type="text" id="search-input" placeholder="Search customers..." oninput="filterCustomers()">
                 </div>
                 <div class="header-profile">
                     <div class="profile-info">
-                        <span class="profile-name">Admin User</span>
-                        <span class="profile-role">Store Manager</span>
+                        <span class="profile-name">Admin</span>
+                        <span class="profile-role">Master Access</span>
                     </div>
-                    <div class="profile-avatar">A</div>
+                    <div class="profile-avatar">AD</div>
                 </div>
             </header>
-            <div class="page-header" style="margin-bottom: 2rem;">
-                <h1 class="section-title">Customer Directory</h1>
-            </div>
 
-            <div class="admin-card">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Customer Name</th>
-                            <th>Email Address</th>
-                            <th>Total Orders</th>
-                            <th>Total Spent</th>
-                            <th>Last Active</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="customers-tbody">
-                        <!-- Dynamic Customers will load here -->
-                    </tbody>
-                </table>
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1 class="section-title">Customer Directory</h1>
+                        <p id="customer-count" style="color:var(--text-muted);font-size:0.875rem;margin-top:0.25rem;">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <div class="table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Email</th>
+                                    <th>Total Orders</th>
+                                    <th>Total Spent</th>
+                                    <th>Last Active</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customers-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
-    
+
     <script>
         lucide.createIcons();
+        let allCustomers = [];
 
         function renderCustomers() {
             const orders = JSON.parse(localStorage.getItem('klaiz_orders') || '[]');
-            const customersMap = {};
-
+            const map = {};
             orders.forEach(o => {
                 const email = o.email || 'guest@example.com';
-                if (!customersMap[email]) {
-                    customersMap[email] = {
-                        name: o.customerName || 'Guest',
-                        email: email,
-                        totalOrders: 0,
-                        totalSpent: 0,
-                        lastActive: new Date(o.date || new Date())
-                    };
+                if (!map[email]) {
+                    map[email] = { name: o.customerName || 'Guest', email, totalOrders: 0, totalSpent: 0, lastActive: new Date(o.date || new Date()) };
                 }
-                customersMap[email].totalOrders++;
-                customersMap[email].totalSpent += parseFloat(String(o.total).replace(/[^0-9.]/g, '')) || 0;
-                
-                const orderDate = new Date(o.date || new Date());
-                if (orderDate > customersMap[email].lastActive) {
-                    customersMap[email].lastActive = orderDate;
-                }
+                map[email].totalOrders++;
+                map[email].totalSpent += parseFloat(String(o.total).replace(/[^0-9.]/g, '')) || 0;
+                const d = new Date(o.date || new Date());
+                if (d > map[email].lastActive) map[email].lastActive = d;
             });
 
-            const customers = Object.values(customersMap).sort((a, b) => b.lastActive - a.lastActive);
-            const tbody = document.getElementById('customers-tbody');
+            allCustomers = Object.values(map).sort((a, b) => b.lastActive - a.lastActive);
+            document.getElementById('customer-count').textContent = `${allCustomers.length} registered customers`;
+            displayCustomers(allCustomers);
+        }
 
+        function displayCustomers(customers) {
+            const colors = ['#6366f1','#10b981','#f59e0b','#ef4444','#8b5cf6','#3b82f6','#f97316'];
+            const tbody = document.getElementById('customers-tbody');
             if (customers.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:4rem; color:#666;">No customers found.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:3rem;color:var(--text-muted);">No customers found.</td></tr>';
                 return;
             }
-
             tbody.innerHTML = customers.map(c => {
                 const initials = c.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase() || 'GU';
-                const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
-                const bgColor = colors[initials.charCodeAt(0) % colors.length] || colors[0];
-                
+                const bg = colors[initials.charCodeAt(0) % colors.length];
                 return `
                     <tr>
                         <td>
-                            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <div style="width: 32px; height: 32px; font-size: 0.75rem; background: ${bgColor}; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">
-                                    ${initials}
-                                </div>
-                                <span style="font-weight: 600;">${c.name}</span>
+                            <div class="customer-cell">
+                                <div class="customer-avatar" style="background:${bg};">${initials}</div>
+                                <span style="font-weight:600;color:var(--text-primary);">${c.name}</span>
                             </div>
                         </td>
-                        <td style="color:var(--admin-text-secondary);">${c.email}</td>
+                        <td style="color:var(--text-muted);">${c.email}</td>
                         <td style="font-weight:700;">${c.totalOrders}</td>
-                        <td style="font-weight:700;">₹${c.totalSpent.toLocaleString()}</td>
-                        <td style="color:var(--admin-text-secondary);">${c.lastActive.toLocaleDateString()}</td>
-                        <td>
-                            <button style="background:var(--admin-surface); border:1px solid var(--admin-border); color:white; padding:6px 12px; border-radius:6px; font-size:0.8rem; cursor:pointer;" onclick="alert('Profile view coming soon!')">View Profile</button>
-                        </td>
+                        <td><span class="spent-badge">₹${c.totalSpent.toLocaleString()}</span></td>
+                        <td style="color:var(--text-muted);">${c.lastActive.toLocaleDateString()}</td>
+                        <td><button class="btn-secondary" style="padding:0.35rem 0.9rem;font-size:0.8rem;" onclick="alert('Profile view coming soon!')">View</button></td>
                     </tr>
                 `;
             }).join('');
+        }
+
+        function filterCustomers() {
+            const q = document.getElementById('search-input').value.toLowerCase();
+            displayCustomers(allCustomers.filter(c => c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q)));
         }
 
         renderCustomers();
     </script>
     <script src="admin-main.js"></script>
 </body>
-
 </html>
-

@@ -197,17 +197,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. QUICK ADD TO CART
     window.quickAddToCart = (productId) => {
         const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        const existing = cart.find(item => String(item.id) === String(productId));
+        
+        // Lookup the full product details from the CMS
+        const s = typeof KlaizCMS !== 'undefined' ? KlaizCMS.getSettings() : { products: [] };
+        const product = s.products ? s.products.find(p => String(p.id) === String(productId)) : null;
+        
+        if (!product) {
+            console.error("Product not found in CMS database");
+            return;
+        }
+
+        const cartId = productId + '_A4'; // default size for quick add
+        const existing = cart.find(item => item.cartId === cartId || String(item.id) === String(productId));
         
         if (existing) {
             existing.quantity = (existing.quantity || 1) + 1;
         } else {
-            cart.push({ id: productId, quantity: 1, addedAt: new Date().toISOString() });
+            cart.push({ 
+                cartId: cartId,
+                id: productId, 
+                name: product.name,
+                price: parseFloat(product.price) || 0,
+                image: product.image,
+                size: 'A4',
+                quantity: 1, 
+                addedAt: new Date().toISOString() 
+            });
         }
         
         localStorage.setItem('cart', JSON.stringify(cart));
         window.updateCartBadge();
-        showToast("Added to cart!");
+        if(typeof showToast !== 'undefined') {
+            showToast("Added to cart!");
+        } else {
+            alert("Added to cart!");
+        }
     };
 
     // 8. AUTHENTICATION LOGIC (Login/Signup)
@@ -318,9 +342,21 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-        
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
     }
+
+    // FAQ Accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', (e) => {
+            e.preventDefault();
+            const item = question.closest('.faq-item');
+            const isActive = item.classList.contains('active');
+            
+            // Close all other items
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            
+            // Toggle current item
+            if (!isActive) item.classList.add('active');
+        });
+    });
 });
