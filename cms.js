@@ -182,6 +182,8 @@ const KlaizCMS = {
                 { label: "Best Sellers", url: "collection.html" },
                 { label: "New Arrivals", url: "collection.html" },
                 { label: "Design Your Own", url: "custom-builder.html" },
+                { label: "Bulk Posters", url: "bulk-posters.html" },
+                { label: "Our Services", url: "services.html" },
                 { label: "About", url: "about.html" },
                 { label: "Contact", url: "contact.html" }
             ],
